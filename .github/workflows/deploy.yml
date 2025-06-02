@@ -23,26 +23,22 @@ jobs:
       - name: Build site
         run: npm run build
 
-      - name: Setup SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.GENMATCHA_DEPLOY_KEY }}" > ~/.ssh/genmatcha_deployer
-          chmod 600 ~/.ssh/genmatcha_deployer
-          if [ -n "${{ secrets.SERVER_HOST }}" ]; then
-            ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
-          fi
-
       - name: Deploy to server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}
           port: ${{ secrets.SERVER_PORT }}
           username: ${{ secrets.SERVER_USER }}
-          key_path: ~/.ssh/genmatcha_deployer
+          key: ${{ secrets.GENMATCHA_DEPLOY_KEY }}
           script: |
-            set -e
-            echo "Starting deployment..."
+            echo "Current directory: $(pwd)"
+            echo "Listing directory contents:"
+            ls -la
+            echo "Changing to deployment directory..."
             cd /var/www/newmooncloud
+            echo "Current directory: $(pwd)"
+            echo "Listing directory contents:"
+            ls -la
             echo "Pulling latest changes..."
             git pull origin main
             echo "Installing dependencies..."
