@@ -28,7 +28,9 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.GENMATCHA_DEPLOY_KEY }}" > ~/.ssh/genmatcha_deployer
           chmod 600 ~/.ssh/genmatcha_deployer
-          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+          if [ -n "${{ secrets.SERVER_HOST }}" ]; then
+            ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+          fi
 
       - name: Deploy to server
         uses: appleboy/ssh-action@master
