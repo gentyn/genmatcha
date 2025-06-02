@@ -23,4 +23,8 @@ rsync -avz --delete -e "ssh -p 12202 -i /home/genesis/.ssh/id_ed25519" \
     dist/ \
     newmoonadmin@newmooncloud.com:/var/www/newmooncloud/
 
+# Restart Apache
+echo "🔄 Restarting Apache..."
+ssh -p 12202 -i /home/genesis/.ssh/id_ed25519 newmoonadmin@newmooncloud.com "sudo systemctl restart apache2"
+
 echo "✅ Deployment complete!"
