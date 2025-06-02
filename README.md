@@ -1,4 +1,86 @@
-# Astro Starter Kit: Minimal
+# Genesis Tyndall - Personal Portfolio
+
+A modern, responsive personal portfolio website built with Astro and Tailwind CSS. This portfolio showcases my experience in embedded systems, test automation, and systems integration, with a focus on my work at Boeing Commercial Airplanes.
+
+## 🚀 Features
+
+- **Modern Design**: Clean, professional interface with dark mode support
+- **Responsive Layout**: Optimized for all device sizes
+- **Performance**: Built with Astro for optimal performance
+- **Styling**: Tailwind CSS for modern, utility-first styling
+- **Sections**:
+  - Hero section with introduction
+  - About section detailing experience and skills
+  - Projects showcase
+  - Contact form
+
+## 🛠️ Tech Stack
+
+- [Astro](https://astro.build) - Static Site Generator
+- [Tailwind CSS](https://tailwindcss.com) - Utility-first CSS framework
+- TypeScript - For type safety
+- Node.js - Runtime environment
+
+## 🏗️ Project Structure
+
+```text
+/
+├── public/          # Static assets
+├── src/
+│   ├── layouts/     # Page layouts
+│   ├── pages/       # Astro pages
+│   └── styles/      # Global styles
+├── astro.config.mjs # Astro configuration
+├── tailwind.config.mjs # Tailwind configuration
+└── package.json     # Project dependencies
+```
+
+## 🚀 Getting Started
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/gentyn/genmatcha.git
+   cd genmatcha
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Build for production**
+   ```bash
+   npm run build
+   ```
+
+## 📝 Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build |
+| `npm run astro check` | Check for TypeScript errors |
+
+## 🔧 Configuration
+
+- `astro.config.mjs` - Astro configuration
+- `tailwind.config.mjs` - Tailwind CSS configuration
+- `tsconfig.json` - TypeScript configuration
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 👤 Contact
+
+- GitHub: [@gentyn](https://github.com/gentyn)
+- Portfolio: [genesis-tyndall.com](https://genesis-tyndall.com)
 
 ```sh
 npm create astro@latest -- --template minimal
