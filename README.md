@@ -13,7 +13,7 @@ A modern, responsive personal portfolio website built with Astro and Tailwind CS
   - About section detailing experience and skills
   - Projects showcase
   - Contact form
-- **Automated Deployment**: Continuous deployment via GitHub Actions with secure deploy keys
+- **Automated Deployment**: Continuous deployment via GitHub Actions with secure deploy keys and automated testing
 
 ## 🛠️ Tech Stack
 
