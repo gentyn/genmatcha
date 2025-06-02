@@ -5,9 +5,16 @@ set -e
 
 echo "🚀 Starting deployment..."
 
+# Pull latest changes
+echo "📥 Pulling latest changes from GitHub..."
+git pull origin main
+
+# Install dependencies
+echo "📦 Installing dependencies..."
+npm install
+
 # Build the site
-echo "📦 Building site..."
-cd genmatcha-astro
+echo "🏗️ Building site..."
 npm run build
 
 # Sync to server
