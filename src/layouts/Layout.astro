@@ -12,12 +12,12 @@ const { title, theme = 'default' } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={theme === 'matcha' ? '/matcha-favicon.svg' : '/favicon.svg'} />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content="GenMatcha" />
     <title>{title}</title>
   </head>
-  <body class={theme === 'matcha' ? 'min-h-screen bg-gradient-to-br from-pink-200 via-white to-green-200' : 'min-h-screen bg-gray-50 dark:bg-gray-900'}>
+  <body class={theme === 'matcha' ? 'min-h-screen bg-gradient-to-br from-pink-200 via-white to-green-200 overflow-x-hidden' : 'min-h-screen bg-gray-50 dark:bg-gray-900 overflow-x-hidden'}>
     <!-- Navigation -->
     <header class={theme === 'matcha' ? 'bg-gradient-to-r from-pink-200 via-white to-green-200 py-4 shadow-lg' : 'bg-blue-600 text-white py-4'}>
       <nav class="container mx-auto px-4">
