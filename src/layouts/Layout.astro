@@ -65,21 +65,40 @@ const { title, theme = 'default' } = Astro.props;
 
   .font-cute {
     font-family: 'Cherry Bomb One', cursive;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  /* text-shadow: 
+      3px 3px 0 rgba(255, 255, 255, 0.8),
+      -3px -3px 0 rgba(255, 255, 255, 0.8),
+      3px -3px 0 rgba(255, 255, 255, 0.8),
+      -3px 3px 0 rgba(255, 255, 255, 0.8); */
   }
 
   .text-pastel-green {
     color: #98D8AA;
+    text-shadow: 
+      1px 1px 0 rgba(255, 255, 255, 0.8),
+      -1px -1px 0 rgba(255, 255, 255, 0.8),
+      1px -1px 0 rgba(255, 255, 255, 0.8),
+      -1px 1px 0 rgba(255, 255, 255, 0.8);
   }
 
   /* Add hover animations for nav links */
   nav a {
     position: relative;
     transition: all 0.3s ease;
+    text-shadow: 
+      1px 1px 0 rgba(255, 255, 255, 0.8),
+      -1px -1px 0 rgba(255, 255, 255, 0.8),
+      1px -1px 0 rgba(255, 255, 255, 0.8),
+      -1px 1px 0 rgba(255, 255, 255, 0.8);
   }
 
   nav a:hover {
     transform: translateY(-2px);
+    text-shadow: 
+      1px 1px 0 rgba(255, 255, 255, 0.9),
+      -1px -1px 0 rgba(255, 255, 255, 0.9),
+      1px -1px 0 rgba(255, 255, 255, 0.9),
+      -1px 1px 0 rgba(255, 255, 255, 0.9);
   }
 
   nav a::after {
