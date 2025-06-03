@@ -1,0 +1,224 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Get all images from the matcha directory
+const images = [
+	's-l960.webp',
+	'PXL_20250531_220509851.jpg',
+	'PXL_20250530_203218645.png',
+	'PXL_20250530_194640510.jpg',
+	'PXL_20250529_205414879.jpg',
+	'PXL_20250506_200225579.jpg',
+	'PXL_20250505_200625410.jpg',
+	'PXL_20250505_200558431.jpg',
+	'PXL_20250419_183852785.jpg',
+	'PXL_20250411_193327647.jpg',
+	'PXL_20250410_180754746.jpg',
+	'PXL_20250322_193233236.jpg',
+	'IMG_2485.webp.jpg',
+	'IMG_2051.png.jpg',
+	'IMG_1949.png.jpg',
+	'd5bb5487-6df7-4ef3-97b7-8d27782d9f20.jpg',
+	'among-us-talking.gif',
+	'1377402494165979228remix-1748468776629.png'
+].filter(filename => filename !== 'favicon.svg');
+---
+
+<Layout title="Genny Matcha" theme="matcha">
+	<main class="min-h-screen bg-gradient-to-br from-pink-200 via-white to-green-200">
+		<div class="container mx-auto px-4 py-16">
+			<h1 class="text-6xl font-bold text-center mb-12 text-pastel-green animate-bounce font-cute">
+				—⁺˖°ʚ Genny Matcha !!! ɞ°⁺˖—
+				<br />
+				<span class="text-4xl">⋆˚✿˖°</span>
+			</h1>
+
+			<!-- Vine Boom Sound Embed -->
+			<div class="fixed bottom-4 right-4 z-50">
+				<iframe width="110" height="200" src="https://www.myinstants.com/instant/vine-boom-sound-70972/embed/" frameborder="0" scrolling="no"></iframe>
+			</div>
+
+			<!-- Image and Video Gallery Section -->
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+				{images.slice(0, 6).map((image, index) => (
+					<div class={`matcha-image-container ${index % 2 === 0 ? 'animate-float' : ''}`}>
+						<img
+							src={`/images/matcha/${image}`}
+							alt="Matcha related image"
+							class="matcha-image w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+							style={`animation-delay: ${index * 0.2}s`}
+							data-src={`/images/matcha/${image}`}
+						/>
+					</div>
+				))}
+			</div>
+
+			<!-- Video Section -->
+			<div class="my-16">
+				<div class="max-w-xl mx-auto matcha-image-container animate-float">
+					<div class="relative pb-[177.77%] h-0 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+						<iframe
+							class="absolute top-0 left-0 w-full h-full"
+							src="https://www.youtube.com/embed/Fmw3xjS9hPs?autoplay=1"
+							title="Matcha Video"
+							frameborder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+							allowfullscreen
+						></iframe>
+					</div>
+				</div>
+			</div>
+
+			<!-- Remaining Images -->
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+				{images.slice(6).map((image, index) => (
+					<div class={`matcha-image-container ${index % 2 === 0 ? 'animate-float' : ''}`}>
+						<img
+							src={`/images/matcha/${image}`}
+							alt="Matcha related image"
+							class="matcha-image w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+							style={`animation-delay: ${index * 0.2}s`}
+							data-src={`/images/matcha/${image}`}
+						/>
+					</div>
+				))}
+			</div>
+		</div>
+
+		<!-- Modal for expanded images -->
+		<div id="imageModal" class="fixed inset-0 bg-black bg-opacity-75 hidden items-center justify-center z-50">
+			<img id="expandedImage" class="max-w-[90vw] max-h-[90vh] object-contain" src="" alt="Expanded image">
+		</div>
+	</main>
+
+	<style>
+		/* Add some fun animations */
+		@keyframes float {
+			0% { transform: translateY(0px) rotate(0deg); }
+			50% { transform: translateY(-20px) rotate(5deg); }
+			100% { transform: translateY(0px) rotate(0deg); }
+		}
+
+		.animate-float {
+			animation: float 6s ease-in-out infinite;
+		}
+
+		.matcha-image-container {
+			transition: transform 0.3s ease;
+		}
+
+		.matcha-image-container:hover {
+			transform: scale(1.05);
+		}
+
+		.matcha-image {
+			transition: all 0.3s ease;
+		}
+
+		.matcha-image:hover {
+			filter: brightness(1.1);
+		}
+
+		#imageModal {
+			transition: opacity 0.3s ease;
+		}
+
+		#imageModal.hidden {
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		/* Background with pattern */
+		main {
+			position: relative;
+		}
+
+		main::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-image: url('/patterns/texture-pattern.svg');
+			background-repeat: repeat;
+			background-size: 400px;
+			mix-blend-mode: multiply;
+			opacity: 0.1;
+			pointer-events: none;
+		}
+
+		.container {
+			position: relative;
+			z-index: 1;
+		}
+
+		.art-credit {
+			position: fixed;
+			bottom: 4px;
+			left: 4px;
+			font-size: 0.75rem;
+			color: rgba(0, 0, 0, 0.5);
+			z-index: 10;
+		}
+	</style>
+
+	<script>
+		// This script will be used to add random rotations and animations to images
+		document.addEventListener('DOMContentLoaded', () => {
+			const images = document.querySelectorAll<HTMLImageElement>('.matcha-image');
+			images.forEach(img => {
+				// Random rotation between -15 and 15 degrees
+				const rotation = Math.random() * 30 - 15;
+				img.style.transform = `rotate(${rotation}deg)`;
+				
+				// Add hover effect
+				img.addEventListener('mouseover', () => {
+					img.style.transform = `rotate(${rotation + 10}deg) scale(1.1)`;
+					img.style.transition = 'transform 0.3s ease';
+				});
+				
+				img.addEventListener('mouseout', () => {
+					img.style.transform = `rotate(${rotation}deg)`;
+				});
+
+				// Add click handler for expansion
+				img.addEventListener('click', () => {
+					const modal = document.getElementById('imageModal');
+					const expandedImg = document.getElementById('expandedImage') as HTMLImageElement;
+					
+					if (modal && expandedImg) {
+						expandedImg.src = img.getAttribute('data-src') || '';
+						modal.classList.remove('hidden');
+						modal.classList.add('flex');
+					}
+				});
+			});
+
+			// Add click handler to close modal
+			const modal = document.getElementById('imageModal');
+			if (modal) {
+				modal.addEventListener('click', () => {
+					modal.classList.add('hidden');
+					modal.classList.remove('flex');
+				});
+			}
+
+			// Close modal with Escape key
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape') {
+					const modal = document.getElementById('imageModal');
+					if (modal) {
+						modal.classList.add('hidden');
+						modal.classList.remove('flex');
+					}
+				}
+			});
+		});
+	</script>
+</Layout>
+
+<!-- Add art credit -->
+<div class="art-credit">
+	Background pattern by <a href="https://bsky.app/profile/3lizard.bsky.social" target="_blank" rel="noopener noreferrer" class="underline hover:text-pastel-green">@3lizard.bsky.social</a>
+</div>
