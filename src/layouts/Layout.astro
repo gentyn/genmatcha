@@ -19,15 +19,15 @@ const { title, theme = 'default' } = Astro.props;
   </head>
   <body class={theme === 'matcha' ? 'min-h-screen bg-gradient-to-br from-pink-200 via-white to-green-200 overflow-x-hidden' : 'min-h-screen bg-gray-50 dark:bg-gray-900 overflow-x-hidden'}>
     <!-- Navigation -->
-    <header class={theme === 'matcha' ? 'bg-gradient-to-r from-pink-200 via-white to-green-200 py-4 shadow-lg' : 'bg-blue-600 text-white py-4'}>
+    <header class={theme === 'matcha' ? 'bg-gradient-to-r from-green-100 via-white to-green-50 py-4 shadow-lg' : 'bg-blue-600 text-white py-4'}>
       <nav class="container mx-auto px-4">
         <div class="flex justify-between items-center">
-          <a href="/" class={theme === 'matcha' ? 'text-2xl font-cute text-pastel-green hover:text-pink-300 transition-colors' : 'text-2xl font-bold hover:text-blue-200'}>
-            {theme === 'matcha' ? '⋆˚✿˖° GenMatcha °˖✿˚⋆' : 'GenMatcha'}
+          <a href="/" class={theme === 'matcha' ? 'text-lg sm:text-xl md:text-2xl font-cute text-pastel-green hover:text-pink-300 transition-colors whitespace-nowrap' : 'text-2xl font-bold hover:text-blue-200'}>
+            {theme === 'matcha' ? '⋆˚✿˖° GenMatcha!! °˖✿˚⋆' : 'GenMatcha'}
           </a>
-          <div class="space-x-6">
-            <a href="/" class={theme === 'matcha' ? 'font-cute text-pastel-green hover:text-pink-300 transition-colors' : 'hover:text-blue-200'}>Home</a>
-            <a href="/matcha" class={theme === 'matcha' ? 'font-cute text-pink-300 hover:text-pastel-green transition-colors' : 'hover:text-blue-200'}>Matcha</a>
+          <div class="space-x-2 sm:space-x-4 md:space-x-6">
+            <a href="/" class={theme === 'matcha' ? 'text-sm sm:text-base md:text-lg font-cute text-pastel-green hover:text-pink-300 transition-colors whitespace-nowrap' : 'hover:text-blue-200'}>Home</a>
+            <a href="/matcha" class={theme === 'matcha' ? 'text-sm sm:text-base md:text-lg font-cute text-pink-300 hover:text-pastel-green transition-colors whitespace-nowrap' : 'hover:text-blue-200'}>Matcha</a>
           </div>
         </div>
       </nav>
@@ -39,7 +39,7 @@ const { title, theme = 'default' } = Astro.props;
     </main>
 
     <!-- Footer -->
-    <footer class={theme === 'matcha' ? 'bg-gradient-to-r from-pink-200 via-white to-green-200 py-3 shadow-lg' : 'bg-blue-600 text-white py-6'}>
+    <footer class={theme === 'matcha' ? 'bg-gradient-to-r from-pink-100 via-white to-pink-200 py-3 shadow-lg' : 'bg-blue-600 text-white py-6'}>
       <div class="container mx-auto px-4 text-center">
         <p class={theme === 'matcha' ? 'font-cute text-pastel-green' : ''}>
           {theme === 'matcha' ? '⋆˚✿˖°  Thanks for sippin\' with me!!   °˖✿˚⋆' : ''}

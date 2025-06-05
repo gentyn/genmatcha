@@ -3,34 +3,34 @@ import Layout from '../../layouts/Layout.astro';
 
 // Get all images from the matcha directory
 const images = [
-	's-l960.webp',
-	'PXL_20250531_220509851.jpg',
-	'PXL_20250530_203218645.png',
-	'PXL_20250530_194640510.jpg',
-	'PXL_20250529_205414879.jpg',
-	'PXL_20250506_200225579.jpg',
-	'PXL_20250505_200625410.jpg',
-	'PXL_20250505_200558431.jpg',
-	'PXL_20250419_183852785.jpg',
-	'PXL_20250411_193327647.jpg',
-	'PXL_20250410_180754746.jpg',
-	'PXL_20250322_193233236.jpg',
-	'IMG_2485.webp.jpg',
-	'IMG_2051.png.jpg',
-	'IMG_1949.png.jpg',
-	'd5bb5487-6df7-4ef3-97b7-8d27782d9f20.jpg',
-	'among-us-talking.gif',
-	'1377402494165979228remix-1748468776629.png'
-].filter(filename => filename !== 'favicon.svg');
+	{ filename: 's-l960.webp', alt: 'Matcha Miku Figurine in Box' },
+	{ filename: 'PXL_20250531_220509851.jpg', alt: 'Gen sipping pear lavender matcha latte from moonrise bakery' },
+	{ filename: 'PXL_20250530_203218645.png', alt: 'Gen after hitting a 180 50-50 grind, with matcha colored trees in the background' },
+	{ filename: 'PXL_20250530_194640510.jpg', alt: 'Gen\'s matcha colored bed and matcha colored smoothie' },
+	{ filename: 'PXL_20250529_205414879.jpg', alt: 'Gen\'s hand poised to dip her almond biscotti into a lavender matcha latte' },
+	{ filename: 'PXL_20250506_200225579.jpg', alt: 'Gorgeous blueberry lavender matcha latte, in striking layers' },
+	{ filename: 'PXL_20250505_200625410.jpg', alt: 'Gen\'s homemade drinks including blueberry smoothie, strawberry matcha latte, and lavendermatcha latte' },
+	{ filename: 'PXL_20250505_200558431.jpg', alt: 'INTIMIDATING angle of Gen\'s homemade drinks including blueberry smoothie, strawberry matcha latte, and lavendermatcha latte' },
+	{ filename: 'PXL_20250419_183852785.jpg', alt: 'Gen sipping that FREAKY matcha latte with MINT???' },
+	{ filename: 'PXL_20250411_193327647.jpg', alt: 'Gen skateboarding while holding kilavolt salted egg yolk matcha latte with cold foam' },
+	{ filename: 'PXL_20250410_180754746.jpg', alt: 'Gen holding matcha latte in her car that she was also sleeping in for fun' },
+	{ filename: 'PXL_20250322_193233236.jpg', alt: 'Gen\'s matcha latte at home' },
+	{ filename: 'IMG_2485.webp.jpg', alt: '21 Savage with the double styrofoam cup of matcha latte...' },
+	{ filename: 'IMG_2885.jpg', alt: 'Lebron taking the L... Lumpy asl...' },
+	{ filename: 'IMG_1949.png.jpg', alt: 'Matcha cat meme... this cat is matcha... yes he has opps...' },
+	{ filename: 'd5bb5487-6df7-4ef3-97b7-8d27782d9f20.jpg', alt: 'Gen\'sMatcha tools' },
+	{ filename: 'among-us-talking.gif', alt: 'Among Us matcha on chande' },
+	{ filename: '1377402494165979228remix-1748468776629.png', alt: 'Zain when they see you eatin on dat matcha cake' }
+].filter(img => img.filename !== 'favicon.svg');
 ---
 
 <Layout title="Genny Matcha" theme="matcha">
 	<main>
 		<div class="container mx-auto px-4 py-16">
-			<h1 class="text-6xl font-bold text-center mb-12 text-pastel-green animate-bounce font-cute">
+			<h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-12 text-pastel-green animate-bounce font-cute whitespace-nowrap max-w-screen overflow-hidden">
                 —⁺˖°ʚ Genny Matcha !!! ɞ°⁺˖—
 				<br />
-				<span class="text-4xl">⋆˚✿˖°</span>
+				<span class="text-xl sm:text-2xl md:text-3xl lg:text-4xl">⋆˚✿˖°</span>
 			</h1>
 
 			<!-- Vine Boom Sound Embed -->
@@ -43,11 +43,11 @@ const images = [
 				{images.slice(0, 6).map((image, index) => (
 					<div class={`matcha-image-container ${index % 2 === 0 ? 'animate-float' : ''}`}>
 						<img
-							src={`/images/matcha/${image}`}
-							alt="Matcha meme"
+							src={`/images/matcha/${image.filename}`}
+							alt={image.alt}
 							class="matcha-image w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
 							style={`animation-delay: ${index * 0.2}s`}
-							data-src={`/images/matcha/${image}`}
+							data-src={`/images/matcha/${image.filename}`}
 						/>
 					</div>
 				))}
@@ -74,11 +74,11 @@ const images = [
 				{images.slice(6).map((image, index) => (
 					<div class={`matcha-image-container ${index % 2 === 0 ? 'animate-float' : ''}`}>
 						<img
-							src={`/images/matcha/${image}`}
-							alt="Gen sipping dat matcha"
+							src={`/images/matcha/${image.filename}`}
+							alt={image.alt}
 							class="matcha-image w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
 							style={`animation-delay: ${index * 0.2}s`}
-							data-src={`/images/matcha/${image}`}
+							data-src={`/images/matcha/${image.filename}`}
 						/>
 					</div>
 				))}
@@ -194,35 +194,51 @@ const images = [
 	</style>
 
 	<script>
-		// This script will be used to add random rotations and animations to images
+		// Defer non-critical JavaScript
 		document.addEventListener('DOMContentLoaded', () => {
-			const images = document.querySelectorAll<HTMLImageElement>('.matcha-image');
-			images.forEach(img => {
-				// Random rotation between -15 and 15 degrees
-				const rotation = Math.random() * 30 - 15;
-				img.style.transform = `rotate(${rotation}deg)`;
-				
-				// Add hover effect
-				img.addEventListener('mouseover', () => {
-					img.style.transform = `rotate(${rotation + 10}deg) scale(1.1)`;
-					img.style.transition = 'transform 0.3s ease';
-				});
-				
-				img.addEventListener('mouseout', () => {
-					img.style.transform = `rotate(${rotation}deg)`;
-				});
+			// Use Intersection Observer for better performance
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						const img = entry.target as HTMLImageElement;
+						// Random rotation between -5 and 5 degrees (reduced from -15/15)
+						const rotation = Math.random() * 10 - 5;
+						img.style.transform = `rotate(${rotation}deg)`;
+						
+						// Add hover effect
+						img.addEventListener('mouseover', () => {
+							img.style.transform = `rotate(${rotation + 5}deg) scale(1.1)`;
+							img.style.transition = 'transform 0.3s ease';
+						});
+						
+						img.addEventListener('mouseout', () => {
+							img.style.transform = `rotate(${rotation}deg)`;
+						});
 
-				// Add click handler for expansion
-				img.addEventListener('click', () => {
-					const modal = document.getElementById('imageModal');
-					const expandedImg = document.getElementById('expandedImage') as HTMLImageElement;
-					
-					if (modal && expandedImg) {
-						expandedImg.src = img.getAttribute('data-src') || '';
-						modal.classList.remove('hidden');
-						modal.classList.add('flex');
+						// Add click handler for expansion
+						img.addEventListener('click', () => {
+							const modal = document.getElementById('imageModal');
+							const expandedImg = document.getElementById('expandedImage') as HTMLImageElement;
+							
+							if (modal && expandedImg) {
+								expandedImg.src = img.getAttribute('data-src') || '';
+								modal.classList.remove('hidden');
+								modal.classList.add('flex');
+							}
+						});
+
+						// Unobserve after processing
+						observer.unobserve(img);
 					}
 				});
+			}, {
+				rootMargin: '50px 0px',
+				threshold: 0.1
+			});
+
+			// Observe all images
+			document.querySelectorAll('.matcha-image').forEach(img => {
+				observer.observe(img);
 			});
 
 			// Add click handler to close modal
