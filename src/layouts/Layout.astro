@@ -1,7 +1,7 @@
 ---
 interface Props {
   title: string;
-  theme?: 'default' | 'matcha';
+  theme?: 'default' | 'matcha' | 'portfolio';
 }
 
 const { title, theme = 'default' } = Astro.props;
@@ -16,39 +16,147 @@ const { title, theme = 'default' } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content="GenMatcha" />
     <title>{title}</title>
+    <script is:inline>
+      // Prevent flash of wrong theme
+      document.documentElement.style.visibility = 'hidden';
+      
+      // Theme detection and application
+      function applyTheme(theme) {
+        console.log('Applying theme:', theme);
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+        document.documentElement.style.visibility = '';
+      }
+
+      // Check for saved theme preference first, then fall back to system preference
+      try {
+        const savedTheme = localStorage.getItem('theme');
+        console.log('Saved theme from localStorage:', savedTheme);
+        if (savedTheme) {
+          applyTheme(savedTheme);
+        } else {
+          // Use system preference
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          console.log('System prefers dark:', prefersDark);
+          applyTheme(prefersDark ? 'dark' : 'light');
+        }
+      } catch (e) {
+        console.error('Error accessing localStorage:', e);
+        // Fallback to system preference if localStorage is not available
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(prefersDark ? 'dark' : 'light');
+      }
+
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        console.log('System theme preference changed:', e.matches ? 'dark' : 'light');
+        if (!localStorage.getItem('theme')) {
+          applyTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+    </script>
   </head>
-  <body class={theme === 'matcha' ? 'min-h-screen bg-gradient-to-br from-pink-200 via-white to-green-200 overflow-x-hidden' : 'min-h-screen bg-gray-50 dark:bg-gray-900 overflow-x-hidden'}>
+  <body class={theme === 'matcha' ? 'min-h-screen bg-gradient-to-br from-pink-200 via-white to-green-200 overflow-x-hidden' : theme === 'portfolio' ? 'min-h-screen bg-[#FAFAF5] dark:bg-[#1B1D1A] overflow-x-hidden' : 'min-h-screen bg-[#FAFAF5] dark:bg-[#1B1D1A] overflow-x-hidden'}>
     <!-- Navigation -->
-    <header class={theme === 'matcha' ? 'bg-gradient-to-r from-green-100 via-white to-green-50 py-4 shadow-lg' : 'bg-blue-600 text-white py-4'}>
+    <header class={theme === 'matcha' ? 'bg-gradient-to-r from-green-100 via-white to-green-50 py-4 shadow-lg' : theme === 'portfolio' ? 'bg-[#F0F0E8] dark:bg-[#262926] text-[#1F1F1F] dark:text-[#EDEDE6] py-4 border-b border-[#DCDCD0] dark:border-[#3A3E38]' : 'bg-[#F0F0E8] dark:bg-[#262926] text-[#1F1F1F] dark:text-[#EDEDE6] py-4 border-b border-[#DCDCD0] dark:border-[#3A3E38]'}>
       <nav class="container mx-auto px-4">
         <div class="flex justify-between items-center">
-          <a href="/" class={theme === 'matcha' ? 'text-lg sm:text-xl md:text-2xl font-cute text-pastel-green hover:text-pink-300 transition-colors whitespace-nowrap' : 'text-2xl font-bold hover:text-blue-200'}>
-            {theme === 'matcha' ? '⋆˚✿˖° GenMatcha!! °˖✿˚⋆' : 'GenMatcha'}
+          <a href="/" class={theme === 'matcha' ? 'text-lg sm:text-xl md:text-2xl font-cute text-pastel-green hover:text-pink-300 transition-colors whitespace-nowrap' : theme === 'portfolio' ? 'text-2xl font-bold text-[#1F1F1F] dark:text-[#EDEDE6] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors' : 'text-2xl font-bold text-[#1F1F1F] dark:text-[#EDEDE6] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors'}>
+            {theme === 'matcha' ? '⋆˚✿˖° GenMatcha!! °˖✿˚⋆' : 'Genesis Tyndall'}
           </a>
-          <div class="space-x-2 sm:space-x-4 md:space-x-6">
-            <a href="/" class={theme === 'matcha' ? 'text-sm sm:text-base md:text-lg font-cute text-pastel-green hover:text-pink-300 transition-colors whitespace-nowrap' : 'hover:text-blue-200'}>Home</a>
-            <a href="/matcha" class={theme === 'matcha' ? 'text-sm sm:text-base md:text-lg font-cute text-pink-300 hover:text-pastel-green transition-colors whitespace-nowrap' : 'hover:text-blue-200'}>Matcha</a>
+          <div class="flex items-center space-x-2 sm:space-x-4 md:space-x-6">
+            <a href="/" class={theme === 'matcha' ? 'text-sm sm:text-base md:text-lg font-cute text-pastel-green hover:text-pink-300 transition-colors whitespace-nowrap' : theme === 'portfolio' ? 'text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors' : 'text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors'}>Home</a>
+            <a href="/matcha" class={theme === 'matcha' ? 'text-sm sm:text-base md:text-lg font-cute text-pink-300 hover:text-pastel-green transition-colors whitespace-nowrap' : theme === 'portfolio' ? 'text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors' : 'text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors'}>Matcha</a>
           </div>
         </div>
       </nav>
     </header>
 
     <!-- Main Content -->
-    <main>
+    <main class={theme === 'matcha' ? '' : 'bg-[#FAFAF5] dark:bg-[#1B1D1A]'}>
       <slot />
     </main>
 
     <!-- Footer -->
-    <footer class={theme === 'matcha' ? 'bg-gradient-to-r from-pink-100 via-white to-pink-200 py-3 shadow-lg' : 'bg-blue-600 text-white py-6'}>
+    <footer class={theme === 'matcha' ? 'bg-gradient-to-r from-pink-100 via-white to-pink-200 py-3 shadow-lg' : theme === 'portfolio' ? 'bg-[#F0F0E8] dark:bg-[#262926] text-[#1F1F1F] dark:text-[#EDEDE6] py-6 border-t border-[#DCDCD0] dark:border-[#3A3E38]' : 'bg-[#F0F0E8] dark:bg-[#262926] text-[#1F1F1F] dark:text-[#EDEDE6] py-6 border-t border-[#DCDCD0] dark:border-[#3A3E38]'}>
       <div class="container mx-auto px-4 text-center">
         <p class={theme === 'matcha' ? 'font-cute text-pastel-green' : ''}>
           {theme === 'matcha' ? '⋆˚✿˖°  Thanks for sippin\' with me!!   °˖✿˚⋆' : ''}
         </p>
-        <p class={theme === 'matcha' ? 'text-sm text-gray-600 mt-1' : 'text-sm text-blue-200 mt-2'}>
+        <p class={theme === 'matcha' ? 'text-sm text-gray-600 mt-1' : theme === 'portfolio' ? 'text-sm text-[#4C4C4C] dark:text-[#B0B0A8] mt-2' : 'text-sm text-[#4C4C4C] dark:text-[#B0B0A8] mt-2'}>
           © 2025 Genesis Tyndall
         </p>
       </div>
     </footer>
+
+    <!-- Theme Toggle Button - Always show except for matcha theme -->
+    {theme !== 'matcha' && (
+      <button
+        id="theme-toggle"
+        class="fixed bottom-6 right-6 p-3 rounded-full bg-[#F0F0E8] dark:bg-[#262926] text-[#4C4C4C] dark:text-[#B0B0A8] hover:bg-[#91B77F]/10 dark:hover:bg-[#A1C28F]/10 focus:outline-none focus:ring-2 focus:ring-[#91B77F] dark:focus:ring-[#A1C28F] shadow-lg border border-[#DCDCD0] dark:border-[#3A3E38] transition-all duration-300 hover:scale-110 z-50"
+        aria-label="Toggle dark mode"
+      >
+        <!-- Sun icon -->
+        <svg
+          class="w-6 h-6 hidden dark:block"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+        <!-- Moon icon -->
+        <svg
+          class="w-6 h-6 block dark:hidden"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+        </svg>
+      </button>
+    )}
+
+    <script>
+      // Theme toggle functionality with error handling and transitions
+      document.addEventListener('DOMContentLoaded', () => {
+        const themeToggle = document.getElementById('theme-toggle');
+        console.log('DOM loaded, theme toggle element:', themeToggle);
+
+        if (themeToggle) {
+          themeToggle.addEventListener('click', () => {
+            console.log('Theme toggle clicked');
+            const isDark = document.documentElement.classList.contains('dark');
+            console.log('Current theme is dark:', isDark);
+            
+            try {
+              if (isDark) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                console.log('Switched to light theme');
+                console.log('Current classes:', document.documentElement.classList.toString());
+              } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                console.log('Switched to dark theme');
+                console.log('Current classes:', document.documentElement.classList.toString());
+              }
+            } catch (e) {
+              console.error('Failed to save theme preference:', e);
+            }
+          });
+        } else {
+          console.error('Theme toggle button not found');
+        }
+      });
+    </script>
   </body>
 </html>
 
@@ -56,20 +164,81 @@ const { title, theme = 'default' } = Astro.props;
   @import '../styles/global.css';
   @import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap');
 
+  /* Add smooth transitions for theme changes */
   :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
-    --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), rgb(var(--accent-light)) 30%, white 60%);
+    --accent: 145, 183, 127; /* #91B77F */
+    --accent-hover: 125, 168, 103; /* #7DA867 */
+    --secondary-accent: 201, 142, 111; /* #C98E6F */
+    --background: 250, 250, 245; /* #FAFAF5 */
+    --surface: 240, 240, 232; /* #F0F0E8 */
+    --text-primary: 31, 31, 31; /* #1F1F1F */
+    --text-secondary: 76, 76, 76; /* #4C4C4C */
+    --border: 220, 220, 208; /* #DCDCD0 */
+  }
+
+  .dark {
+    --accent: 161, 194, 143; /* #A1C28F */
+    --accent-hover: 140, 175, 120; /* #8CAF78 */
+    --secondary-accent: 212, 164, 138; /* #D4A48A */
+    --background: 27, 29, 26; /* #1B1D1A */
+    --surface: 38, 41, 38; /* #262926 */
+    --text-primary: 237, 237, 230; /* #EDEDE6 */
+    --text-secondary: 176, 176, 168; /* #B0B0A8 */
+    --border: 58, 62, 56; /* #3A3E38 */
+  }
+
+  /* Add smooth transitions for theme changes */
+  * {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+
+  /* Force background color updates */
+  body {
+    background-color: rgb(var(--background));
+  }
+
+  .bg-\[\#FAFAF5\] {
+    background-color: rgb(var(--background));
+  }
+
+  .dark .bg-\[\#1B1D1A\] {
+    background-color: rgb(var(--background));
+  }
+
+  .bg-\[\#F0F0E8\] {
+    background-color: rgb(var(--surface));
+  }
+
+  .dark .bg-\[\#262926\] {
+    background-color: rgb(var(--surface));
+  }
+
+  .text-\[\#1F1F1F\] {
+    color: rgb(var(--text-primary));
+  }
+
+  .dark .text-\[\#EDEDE6\] {
+    color: rgb(var(--text-primary));
+  }
+
+  .text-\[\#4C4C4C\] {
+    color: rgb(var(--text-secondary));
+  }
+
+  .dark .text-\[\#B0B0A8\] {
+    color: rgb(var(--text-secondary));
+  }
+
+  .border-\[\#DCDCD0\] {
+    border-color: rgb(var(--border));
+  }
+
+  .dark .border-\[\#3A3E38\] {
+    border-color: rgb(var(--border));
   }
 
   .font-cute {
     font-family: 'Cherry Bomb One', cursive;
-  /* text-shadow: 
-      3px 3px 0 rgba(255, 255, 255, 0.8),
-      -3px -3px 0 rgba(255, 255, 255, 0.8),
-      3px -3px 0 rgba(255, 255, 255, 0.8),
-      -3px 3px 0 rgba(255, 255, 255, 0.8); */
   }
 
   .text-pastel-green {
@@ -85,34 +254,23 @@ const { title, theme = 'default' } = Astro.props;
   nav a {
     position: relative;
     transition: all 0.3s ease;
-    text-shadow: 
-      1px 1px 0 rgba(255, 255, 255, 0.8),
-      -1px -1px 0 rgba(255, 255, 255, 0.8),
-      1px -1px 0 rgba(255, 255, 255, 0.8),
-      -1px 1px 0 rgba(255, 255, 255, 0.8);
   }
 
   nav a:hover {
     transform: translateY(-2px);
-    text-shadow: 
-      1px 1px 0 rgba(255, 255, 255, 0.9),
-      -1px -1px 0 rgba(255, 255, 255, 0.9),
-      1px -1px 0 rgba(255, 255, 255, 0.9),
-      -1px 1px 0 rgba(255, 255, 255, 0.9);
   }
 
-  nav a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -2px;
-    left: 0;
-    background: linear-gradient(to right, #98D8AA, #FFB6C1);
-    transition: width 0.3s ease;
+  /* Theme toggle button styles */
+  #theme-toggle {
+    z-index: 50;
   }
 
-  nav a:hover::after {
-    width: 100%;
+  #theme-toggle:hover {
+    transform: scale(1.1);
+  }
+
+  #theme-toggle:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgb(var(--accent));
   }
 </style> 
