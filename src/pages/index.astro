@@ -3,6 +3,9 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Genesis Tyndall" theme="portfolio">
+	<!-- Add Pageclip stylesheet to head -->
+	<link rel="stylesheet" href="https://s.pageclip.co/v1/pageclip.css" media="screen">
+	
 	<!-- Hero Section -->
 	<section id="home" class="min-h-screen flex items-center justify-center">
 		<div class="container mx-auto px-4 py-16">
@@ -143,10 +146,21 @@ import Layout from '../layouts/Layout.astro';
 		<div class="container mx-auto px-4">
 			<h2 class="text-4xl font-bold text-[#1F1F1F] dark:text-[#EDEDE6] mb-8">Contact Me</h2>
 			<div class="max-w-2xl mx-auto">
+				<!-- Success Message -->
+				<div id="success-message" class="hidden mb-6 p-4 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-md">
+					<p>Thank you for your message! I'll get back to you soon.</p>
+				</div>
+
+				<!-- Error Message -->
+				<div id="error-message" class="hidden mb-6 p-4 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-md">
+					<p>Sorry, there was an error sending your message. Please try again.</p>
+				</div>
+
 				<form 
 					class="pageclip-form space-y-6"
-					action="https://send.pageclip.co/YOUR_PAGECLIP_ID/contact-form"
+					action="https://send.pageclip.co/nM4cSaniUmwHywlkFzhkzr7NkcpIaghz/GenMatcha"
 					method="post"
+					id="contact-form"
 				>
 					<div>
 						<label for="name" class="block text-sm font-medium text-[#4C4C4C] dark:text-[#B0B0A8]">Name</label>
@@ -190,7 +204,39 @@ import Layout from '../layouts/Layout.astro';
 	</section>
 
 	<!-- Add Pageclip Script -->
-	<script src="https://unpkg.com/pageclip@1.0.0/dist/pageclip.min.js"></script>
+	<script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const form = document.getElementById('contact-form') as HTMLFormElement;
+			const successMessage = document.getElementById('success-message');
+			const errorMessage = document.getElementById('error-message');
+
+			if (form) {
+				form.addEventListener('pageclip:submit', () => {
+					// Hide any existing messages
+					successMessage?.classList.add('hidden');
+					errorMessage?.classList.add('hidden');
+				});
+
+				form.addEventListener('pageclip:success', () => {
+					// Show success message
+					successMessage?.classList.remove('hidden');
+					// Reset form
+					form.reset();
+					// Scroll to success message
+					successMessage?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+				});
+
+				form.addEventListener('pageclip:error', () => {
+					// Show error message
+					errorMessage?.classList.remove('hidden');
+					// Scroll to error message
+					errorMessage?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+				});
+			}
+		});
+	</script>
 
 	<style>
 		/* Container and section positioning */
