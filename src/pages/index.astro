@@ -193,45 +193,7 @@ import Layout from '../layouts/Layout.astro';
 	<script src="https://unpkg.com/pageclip@1.0.0/dist/pageclip.min.js"></script>
 
 	<style>
-		/* Background with pattern */
-		main {
-			position: relative;
-			background-color: rgb(var(--background));
-		}
-
-		main::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			background-image: url('/patterns/texture-pattern.svg');
-			background-repeat: repeat;
-			background-size: clamp(200px, 20vw, 400px);
-			mix-blend-mode: overlay;
-			opacity: 0.15;
-			pointer-events: none;
-			z-index: 0;
-			will-change: transform;
-			transform: translateZ(0);
-			backface-visibility: hidden;
-			transition: opacity 0.3s ease;
-		}
-
-		/* Fallback background in case SVG fails to load */
-		main::after {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			background-color: rgb(var(--background));
-			opacity: 0;
-			z-index: -1;
-		}
-
+		/* Container and section positioning */
 		.container {
 			position: relative;
 			z-index: 1;
@@ -240,12 +202,6 @@ import Layout from '../layouts/Layout.astro';
 		section {
 			position: relative;
 			z-index: 1;
-		}
-
-		/* Optimize performance for theme transitions */
-		.dark main::before {
-			opacity: 0.2;
-			mix-blend-mode: soft-light;
 		}
 	</style>
 </Layout>
