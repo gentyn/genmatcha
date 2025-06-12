@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ProjectModal from '../components/ProjectModal.astro';
 ---
 
 <Layout title="Genesis Tyndall" theme="portfolio">
@@ -10,6 +11,13 @@ import Layout from '../layouts/Layout.astro';
 	<section id="home" class="min-h-screen flex items-center justify-center">
 		<div class="container mx-auto px-4 py-16">
 			<div class="text-center">
+				<div class="mb-8">
+					<img 
+						src="/images/portfolio/headshot/GenHeadshot.jpg" 
+						alt="Genesis Tyndall" 
+						class="w-48 h-48 rounded-full object-cover mx-auto border-4 border-[#91B77F] dark:border-[#A1C28F]"
+					/>
+				</div>
 				<h1 class="text-4xl md:text-6xl font-bold text-[#1F1F1F] dark:text-[#EDEDE6] mb-6">
 					Genesis Tyndall
 				</h1>
@@ -27,6 +35,191 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 		</div>
 	</section>
+
+	<!-- Projects Section -->
+	<section id="projects" class="py-20">
+		<div class="container mx-auto px-4">
+			<h2 class="text-4xl font-bold text-[#1F1F1F] dark:text-[#EDEDE6] mb-8">Featured Projects</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+				<!-- Avionics Test Automation -->
+				<div 
+					class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
+					onclick="document.getElementById('modal-avionics').classList.remove('hidden')"
+				>
+					<img 
+						src="/images/portfolio/projects/Placeholder.jpg" 
+						alt="Avionics Test Automation Project" 
+						class="w-full h-48 object-cover"
+					/>
+					<div class="p-6">
+						<h3 class="text-xl font-semibold text-[#1F1F1F] dark:text-[#EDEDE6] mb-2">Avionics Test Automation Suite</h3>
+						<p class="text-[#4C4C4C] dark:text-[#B0B0A8] mb-4">Automated testing framework for Boeing 777X and 787 avionics systems</p>
+						<ul class="list-disc list-inside text-[#4C4C4C] dark:text-[#B0B0A8] space-y-2">
+							<li>Developed Python-based test automation scripts</li>
+							<li>Integrated with IBM DOORS and RQM for requirement verification</li>
+							<li>Reduced testing time by 60% through automation</li>
+						</ul>
+						<div class="mt-4 flex flex-wrap gap-2">
+							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">Python</span>
+							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">Test Automation</span>
+							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">IBM DOORS</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Internal Database Tool -->
+				<div 
+					class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
+					onclick="document.getElementById('modal-database').classList.remove('hidden')"
+				>
+					<img 
+						src="/images/portfolio/projects/Placeholder.jpg" 
+						alt="Requirements Management Tool Project" 
+						class="w-full h-48 object-cover"
+					/>
+					<div class="p-6">
+						<h3 class="text-xl font-semibold text-[#1F1F1F] dark:text-[#EDEDE6] mb-2">Requirements Management Tool</h3>
+						<p class="text-[#4C4C4C] dark:text-[#B0B0A8] mb-4">Frontend development for internal Boeing requirements database</p>
+						<ul class="list-disc list-inside text-[#4C4C4C] dark:text-[#B0B0A8] space-y-2">
+							<li>Led frontend development for cross-team tool</li>
+							<li>Implemented responsive design for various screen sizes</li>
+							<li>Streamlined workflow across five engineering teams</li>
+						</ul>
+						<div class="mt-4 flex flex-wrap gap-2">
+							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">JavaScript</span>
+							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">HTML/CSS</span>
+							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">Frontend</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- PowerShell Automation -->
+				<div 
+					class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
+					onclick="document.getElementById('modal-powershell').classList.remove('hidden')"
+				>
+					<img 
+						src="/images/portfolio/projects/Placeholder.jpg" 
+						alt="Government IT Automation Project" 
+						class="w-full h-48 object-cover"
+					/>
+					<div class="p-6">
+						<h3 class="text-xl font-semibold text-[#1F1F1F] dark:text-[#EDEDE6] mb-2">Government IT Automation</h3>
+						<p class="text-[#4C4C4C] dark:text-[#B0B0A8] mb-4">PowerShell automation for Wisconsin DNR</p>
+						<ul class="list-disc list-inside text-[#4C4C4C] dark:text-[#B0B0A8] space-y-2">
+							<li>Optimized PowerShell scripts for IT operations</li>
+							<li>Saved hundreds of hours in manual processing</li>
+							<li>Implemented automated system monitoring</li>
+						</ul>
+						<div class="mt-4 flex flex-wrap gap-2">
+							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">PowerShell</span>
+							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">Automation</span>
+							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">IT Operations</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Algorithmic Animation -->
+				<div 
+					class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
+					onclick="document.getElementById('modal-animation').classList.remove('hidden')"
+				>
+					<img 
+						src="/images/portfolio/projects/Placeholder.jpg" 
+						alt="Algorithmic Animation System Project" 
+						class="w-full h-48 object-cover"
+					/>
+					<div class="p-6">
+						<h3 class="text-xl font-semibold text-[#1F1F1F] dark:text-[#EDEDE6] mb-2">Algorithmic Animation System</h3>
+						<p class="text-[#4C4C4C] dark:text-[#B0B0A8] mb-4">Interactive digital art installation with physical interface</p>
+						<ul class="list-disc list-inside text-[#4C4C4C] dark:text-[#B0B0A8] space-y-2">
+							<li>Developed interactive animations using P5.js</li>
+							<li>Created physical interface with Raspberry Pi</li>
+							<li>Explored algorithmic and data structure concepts</li>
+						</ul>
+						<div class="mt-4 flex flex-wrap gap-2">
+							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">JavaScript</span>
+							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">P5.js</span>
+							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">Raspberry Pi</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Project Modals -->
+	<ProjectModal
+		projectId="avionics"
+		title="Avionics Test Automation Suite"
+		description="A comprehensive test automation framework developed for Boeing's 777X and 787 avionics systems. This project significantly improved testing efficiency and accuracy while ensuring compliance with aviation safety standards."
+		images={[
+			"/images/portfolio/projects/Placeholder.jpg",
+			"/images/portfolio/projects/Placeholder.jpg"
+		]}
+		details={[
+			"Developed Python-based test automation scripts for avionics systems",
+			"Integrated with IBM DOORS and RQM for requirement verification",
+			"Implemented automated test reporting and documentation",
+			"Reduced testing time by 60% through automation",
+			"Ensured compliance with DO-178C safety standards"
+		]}
+		technologies={["Python", "Test Automation", "IBM DOORS", "RQM", "Avionics Systems"]}
+	/>
+
+	<ProjectModal
+		projectId="database"
+		title="Requirements Management Tool"
+		description="A frontend development project for Boeing's internal requirements database. This tool streamlined the workflow across multiple engineering teams and improved the efficiency of requirements management."
+		images={[
+			"/images/portfolio/projects/Placeholder.jpg",
+			"/images/portfolio/projects/Placeholder.jpg"
+		]}
+		details={[
+			"Led frontend development for cross-team tool",
+			"Implemented responsive design for various screen sizes",
+			"Created intuitive user interface for requirements management",
+			"Streamlined workflow across five engineering teams",
+			"Integrated with existing backend systems"
+		]}
+		technologies={["JavaScript", "HTML/CSS", "Frontend Development", "UI/UX Design"]}
+	/>
+
+	<ProjectModal
+		projectId="powershell"
+		title="Government IT Automation"
+		description="PowerShell automation solutions developed for the Wisconsin Department of Natural Resources. These scripts significantly improved IT operations efficiency and reduced manual processing time."
+		images={[
+			"/images/portfolio/projects/Placeholder.jpg",
+			"/images/portfolio/projects/Placeholder.jpg"
+		]}
+		details={[
+			"Optimized PowerShell scripts for IT operations",
+			"Implemented automated system monitoring",
+			"Created self-healing automation solutions",
+			"Saved hundreds of hours in manual processing",
+			"Improved system reliability and uptime"
+		]}
+		technologies={["PowerShell", "Automation", "IT Operations", "System Administration"]}
+	/>
+
+	<ProjectModal
+		projectId="animation"
+		title="Algorithmic Animation System"
+		description="An interactive digital art installation that combines algorithmic animation with physical interface controls. This project explores the intersection of art, technology, and user interaction."
+		images={[
+			"/images/portfolio/projects/Placeholder.jpg",
+			"/images/portfolio/projects/Placeholder.jpg"
+		]}
+		details={[
+			"Developed interactive animations using P5.js",
+			"Created physical interface with Raspberry Pi",
+			"Implemented real-time user interaction",
+			"Explored algorithmic and data structure concepts",
+			"Designed modular and extensible architecture"
+		]}
+		technologies={["JavaScript", "P5.js", "Raspberry Pi", "Interactive Art"]}
+	/>
 
 	<!-- About Section -->
 	<section id="about" class="py-20">
@@ -55,86 +248,6 @@ import Layout from '../layouts/Layout.astro';
 							<li>Technical Documentation</li>
 							<li>Problem-Solving</li>
 						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Projects Section -->
-	<section id="projects" class="py-20">
-		<div class="container mx-auto px-4">
-			<h2 class="text-4xl font-bold text-[#1F1F1F] dark:text-[#EDEDE6] mb-8">Featured Projects</h2>
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-				<!-- Avionics Test Automation -->
-				<div class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden">
-					<div class="p-6">
-						<h3 class="text-xl font-semibold text-[#1F1F1F] dark:text-[#EDEDE6] mb-2">Avionics Test Automation Suite</h3>
-						<p class="text-[#4C4C4C] dark:text-[#B0B0A8] mb-4">Automated testing framework for Boeing 777X and 787 avionics systems</p>
-						<ul class="list-disc list-inside text-[#4C4C4C] dark:text-[#B0B0A8] space-y-2">
-							<li>Developed Python-based test automation scripts</li>
-							<li>Integrated with IBM DOORS and RQM for requirement verification</li>
-							<li>Reduced testing time by 60% through automation</li>
-						</ul>
-						<div class="mt-4 flex flex-wrap gap-2">
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">Python</span>
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">Test Automation</span>
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">IBM DOORS</span>
-						</div>
-					</div>
-				</div>
-
-				<!-- Internal Database Tool -->
-				<div class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden">
-					<div class="p-6">
-						<h3 class="text-xl font-semibold text-[#1F1F1F] dark:text-[#EDEDE6] mb-2">Requirements Management Tool</h3>
-						<p class="text-[#4C4C4C] dark:text-[#B0B0A8] mb-4">Frontend development for internal Boeing requirements database</p>
-						<ul class="list-disc list-inside text-[#4C4C4C] dark:text-[#B0B0A8] space-y-2">
-							<li>Led frontend development for cross-team tool</li>
-							<li>Implemented responsive design for various screen sizes</li>
-							<li>Streamlined workflow across five engineering teams</li>
-						</ul>
-						<div class="mt-4 flex flex-wrap gap-2">
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">JavaScript</span>
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">HTML/CSS</span>
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">Frontend</span>
-						</div>
-					</div>
-				</div>
-
-				<!-- PowerShell Automation -->
-				<div class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden">
-					<div class="p-6">
-						<h3 class="text-xl font-semibold text-[#1F1F1F] dark:text-[#EDEDE6] mb-2">Government IT Automation</h3>
-						<p class="text-[#4C4C4C] dark:text-[#B0B0A8] mb-4">PowerShell automation for Wisconsin DNR</p>
-						<ul class="list-disc list-inside text-[#4C4C4C] dark:text-[#B0B0A8] space-y-2">
-							<li>Optimized PowerShell scripts for IT operations</li>
-							<li>Saved hundreds of hours in manual processing</li>
-							<li>Implemented automated system monitoring</li>
-						</ul>
-						<div class="mt-4 flex flex-wrap gap-2">
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">PowerShell</span>
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">Automation</span>
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">IT Operations</span>
-						</div>
-					</div>
-				</div>
-
-				<!-- Algorithmic Animation -->
-				<div class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden">
-					<div class="p-6">
-						<h3 class="text-xl font-semibold text-[#1F1F1F] dark:text-[#EDEDE6] mb-2">Algorithmic Animation System</h3>
-						<p class="text-[#4C4C4C] dark:text-[#B0B0A8] mb-4">Interactive digital art installation with physical interface</p>
-						<ul class="list-disc list-inside text-[#4C4C4C] dark:text-[#B0B0A8] space-y-2">
-							<li>Developed interactive animations using P5.js</li>
-							<li>Created physical interface with Raspberry Pi</li>
-							<li>Explored algorithmic and data structure concepts</li>
-						</ul>
-						<div class="mt-4 flex flex-wrap gap-2">
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">JavaScript</span>
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">P5.js</span>
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">Raspberry Pi</span>
-						</div>
 					</div>
 				</div>
 			</div>

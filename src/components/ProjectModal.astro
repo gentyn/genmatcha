@@ -1,0 +1,140 @@
+---
+interface Props {
+  projectId: string;
+  title: string;
+  description: string;
+  images: string[];
+  details: string[];
+  technologies: string[];
+  demoUrl?: string;
+  githubUrl?: string;
+}
+
+const { projectId, title, description, images, details, technologies, demoUrl, githubUrl } = Astro.props;
+---
+
+<div id={`modal-${projectId}`} class="hidden fixed inset-0 bg-black/50 z-50">
+  <div class="modal-content bg-white dark:bg-[#262926] max-w-4xl mx-auto mt-20 rounded-lg shadow-xl">
+    <div class="p-6">
+      <div class="flex justify-between items-start">
+        <h3 class="text-2xl font-bold text-[#1F1F1F] dark:text-[#EDEDE6]">{title}</h3>
+        <button 
+          class="close-modal text-2xl text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#1F1F1F] dark:hover:text-[#EDEDE6]"
+          aria-label="Close modal"
+        >
+          ×
+        </button>
+      </div>
+      
+      <!-- Image Gallery -->
+      <div class="mt-4">
+        <div class="main-image">
+          <img 
+            src={images[0]} 
+            alt={`${title} main image`} 
+            class="w-full h-64 object-cover rounded-lg"
+          />
+        </div>
+        {images.length > 1 && (
+          <div class="thumbnail-grid grid grid-cols-4 gap-2 mt-2">
+            {images.map((image, index) => (
+              <img 
+                src={image} 
+                alt={`${title} thumbnail ${index + 1}`}
+                class="w-full h-20 object-cover rounded cursor-pointer hover:opacity-75 transition-opacity"
+                data-index={index}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+      <!-- Project Details -->
+      <div class="mt-6">
+        <h4 class="text-xl font-semibold text-[#1F1F1F] dark:text-[#EDEDE6]">Overview</h4>
+        <p class="mt-2 text-[#4C4C4C] dark:text-[#B0B0A8]">{description}</p>
+        
+        <h4 class="text-xl font-semibold mt-4 text-[#1F1F1F] dark:text-[#EDEDE6]">Technical Details</h4>
+        <ul class="mt-2 list-disc list-inside text-[#4C4C4C] dark:text-[#B0B0A8] space-y-2">
+          {details.map((detail) => (
+            <li>{detail}</li>
+          ))}
+        </ul>
+
+        <div class="mt-6 flex flex-wrap gap-2">
+          {technologies.map((tech) => (
+            <span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        {(demoUrl || githubUrl) && (
+          <div class="mt-6 flex gap-4">
+            {demoUrl && (
+              <a 
+                href={demoUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="px-4 py-2 bg-[#91B77F] dark:bg-[#A1C28F] text-[#1F1F1F] rounded hover:bg-[#7DA867] dark:hover:bg-[#8CAF78] transition-colors"
+              >
+                Live Demo
+              </a>
+            )}
+            {githubUrl && (
+              <a 
+                href={githubUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="px-4 py-2 border border-[#91B77F] dark:border-[#A1C28F] text-[#1F1F1F] dark:text-[#EDEDE6] rounded hover:bg-[#91B77F]/10 dark:hover:bg-[#A1C28F]/10 transition-colors"
+              >
+                GitHub
+              </a>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Modal functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const modals = document.querySelectorAll('[id^="modal-"]');
+    
+    modals.forEach(modal => {
+      const closeBtn = modal.querySelector('.close-modal');
+      const thumbnails = modal.querySelectorAll('.thumbnail-grid img');
+      const mainImage = modal.querySelector('.main-image img');
+      
+      // Close modal
+      closeBtn?.addEventListener('click', () => {
+        modal.classList.add('hidden');
+      });
+      
+      // Close on outside click
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.add('hidden');
+        }
+      });
+      
+      // Thumbnail click
+      thumbnails.forEach(thumb => {
+        thumb.addEventListener('click', () => {
+          if (mainImage instanceof HTMLImageElement && thumb instanceof HTMLImageElement) {
+            mainImage.src = thumb.src;
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  .modal-content {
+    max-height: calc(100vh - 10rem);
+    overflow-y: auto;
+  }
+</style> 
