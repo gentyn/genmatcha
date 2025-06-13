@@ -62,17 +62,17 @@ const { title, theme = 'default' } = Astro.props;
   <body class={theme === 'matcha' ? 'min-h-screen bg-gradient-to-br from-pink-200 via-white to-green-200 overflow-x-hidden' : theme === 'portfolio' ? 'min-h-screen bg-[#FAFAF5] dark:bg-[#1B1D1A] overflow-x-hidden' : 'min-h-screen bg-[#FAFAF5] dark:bg-[#1B1D1A] overflow-x-hidden'}>
     <!-- Navigation -->
     <header class={theme === 'matcha' ? 'bg-gradient-to-r from-green-100 via-white to-green-50 py-4 shadow-lg' : theme === 'portfolio' ? 'bg-[#F0F0E8] dark:bg-[#262926] text-[#1F1F1F] dark:text-[#EDEDE6] py-4 border-b border-[#DCDCD0] dark:border-[#3A3E38]' : 'bg-[#F0F0E8] dark:bg-[#262926] text-[#1F1F1F] dark:text-[#EDEDE6] py-4 border-b border-[#DCDCD0] dark:border-[#3A3E38]'}>
-      <nav class="container mx-auto px-4">
+      <div class="container mx-auto px-4">
         <div class="flex justify-between items-center">
           <a href="/" class={theme === 'matcha' ? 'text-lg sm:text-xl md:text-2xl font-cute text-pastel-green hover:text-pink-300 transition-colors whitespace-nowrap' : theme === 'portfolio' ? 'text-2xl font-bold text-[#1F1F1F] dark:text-[#EDEDE6] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors' : 'text-2xl font-bold text-[#1F1F1F] dark:text-[#EDEDE6] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors'}>
             {theme === 'matcha' ? '⋆˚✿˖° GenMatcha!! °˖✿˚⋆' : 'Genesis Tyndall'}
           </a>
           <div class="flex items-center space-x-2 sm:space-x-4 md:space-x-6">
             <a href="/" class={theme === 'matcha' ? 'text-sm sm:text-base md:text-lg font-cute text-pastel-green hover:text-pink-300 transition-colors whitespace-nowrap' : theme === 'portfolio' ? 'text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors' : 'text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors'}>Home</a>
-            <a href="/matcha" class={theme === 'matcha' ? 'text-sm sm:text-base md:text-lg font-cute text-pink-300 hover:text-pastel-green transition-colors whitespace-nowrap' : theme === 'portfolio' ? 'text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors' : 'text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors'}>Matcha</a>
+            <a href="/personal_projects" class={theme === 'matcha' ? 'text-sm sm:text-base md:text-lg font-cute text-pink-300 hover:text-pastel-green transition-colors whitespace-nowrap' : theme === 'portfolio' ? 'text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors' : 'text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors'}>Projects</a>
           </div>
         </div>
-      </nav>
+      </div>
     </header>
 
     <!-- Main Content -->
