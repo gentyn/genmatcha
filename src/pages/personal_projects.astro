@@ -1,0 +1,354 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectModal from '../components/ProjectModal.astro';
+
+const projects = [
+  {
+    id: "vice",
+    title: "Vice - Specialized Stumpjumper Evo Elite Alloy",
+    description: "My primary mountain bike, built for aggressive trail riding and enduro racing.",
+    details: [
+      "Frame: Specialized Stumpjumper Evo Elite Alloy",
+      "Suspension: Fox Factory 36 Grip2 160mm / Fox Float X2 Factory",
+      "Drivetrain: SRAM GX Eagle",
+      "Brakes: SRAM Code RSC",
+      "Wheels: Roval Traverse 29",
+      "Tire Pressures: 22psi front, 24psi rear (tubeless)",
+      "Favorite trails: Technical descents and steep climbs"
+    ],
+    technologies: ["Mountain Biking", "Enduro", "Trail Riding"],
+    images: [
+      {
+        src: "/images/personal_projects/bikes/vice_in_pacifica.jpg",
+        alt: "Vice mountain bike at Pacifica trails"
+      },
+      {
+        src: "/images/personal_projects/bikes/gen_wheelie_on_vice.png",
+        alt: "Performing a wheelie on Vice"
+      },
+      {
+        src: "/images/personal_projects/bikes/gen_jumping_vice.jpg",
+        alt: "Jumping on Vice at the trails"
+      },
+      {
+        src: "/images/personal_projects/bikes/gen_speedtucking_vice.jpg",
+        alt: "Speed tucking on Vice"
+      },
+      {
+        src: "/images/personal_projects/bikes/transporting_bouquet_on_vice_in_sf.jpg",
+        alt: "Transporting flowers on Vice in San Francisco"
+      },
+      {
+        src: "/images/personal_projects/bikes/gap_jump_gravy_train_vice.jpg",
+        alt: "Gap jump feature built for the Gravy Train trail"
+      }
+    ]
+  },
+  {
+    id: "pickles",
+    title: "Pickles and Cream - All-City Cosmic Stallion GRX",
+    description: "My gravel and adventure bike, perfect for long days in the saddle.",
+    details: [
+      "Frame: All-City Cosmic Stallion",
+      "Groupset: Shimano GRX 810",
+      "Wheels: DT Swiss G1800",
+      "Tires: Panaracer GravelKing SK 700x43c",
+      "Tire Pressures: 35psi front, 38psi rear",
+      "Favorite rides: Mixed surface adventures and gravel races"
+    ],
+    technologies: ["Gravel", "Adventure", "Bikepacking"],
+    images: [
+      {
+        src: "/images/personal_projects/bikes/pnc_glamour.jpg",
+        alt: "Pickles and Cream in a glamour shot"
+      },
+      {
+        src: "/images/personal_projects/bikes/pnc_on_wsf.jpg",
+        alt: "Pickles and Cream on the Washington State Ferry"
+      },
+      {
+        src: "/images/personal_projects/bikes/pnc_on_iron_horse.jpg",
+        alt: "Riding Pickles and Cream on the Iron Horse Trail"
+      },
+      {
+        src: "/images/personal_projects/bikes/pnc_bike_packing.jpg",
+        alt: "Bikepacking setup on Pickles and Cream"
+      },
+      {
+        src: "/images/personal_projects/bikes/pnc_bike_packing_cockpit.jpg",
+        alt: "Bikepacking cockpit setup on Pickles and Cream"
+      }
+    ]
+  },
+  {
+    id: "divine",
+    title: "Divine Hammer - Commencal Meta HT AM",
+    description: "My hardtail trail bike, built for aggressive riding and simplicity.",
+    details: [
+      "Frame: Commencal Meta HT AM Essential",
+      "Fork: RockShox Yari RC 160mm",
+      "Drivetrain: SRAM NX Eagle",
+      "Brakes: SRAM Guide T",
+      "Wheels: WTB ST i30",
+      "Tire Pressures: 20psi front, 22psi rear (tubeless)",
+      "Favorite trails: Technical singletrack and jump lines"
+    ],
+    technologies: ["Hardtail", "Trail", "Technical Riding"],
+    images: [
+      {
+        src: "/images/personal_projects/bikes/divine_hammer_in_queen_anne.jpg",
+        alt: "Divine Hammer in Queen Anne"
+      },
+      {
+        src: "/images/personal_projects/bikes/divine_hammer_raging_river.jpg",
+        alt: "Divine Hammer at Raging River"
+      }
+    ]
+  },
+  {
+    id: "bike-projects",
+    title: "Bike Projects",
+    description: "Building ramps, trails, and working on bikes is a passion of mine. I love creating spaces and tools that bring the cycling community together.",
+    details: [
+      "Custom built wooden ramps and features",
+      "Trail building and maintenance",
+      "Bike maintenance and repairs",
+      "Race organization and participation",
+      "Community events and group rides"
+    ],
+    technologies: ["Woodworking", "Trail Building", "Mechanics"],
+    images: [
+      {
+        src: "/images/personal_projects/bikes/bike_highjump_bar.jpg",
+        alt: "Custom built high jump bar for bikes"
+      },
+      {
+        src: "/images/personal_projects/bikes/bike_landing_and_skinny_on_farm.jpg",
+        alt: "Custom built landing and skinny features on the farm"
+      },
+      {
+        src: "/images/personal_projects/bikes/gap_jump_gravy_train_vice.jpg",
+        alt: "Gap jump feature built for the Gravy Train trail"
+      }
+    ]
+  },
+  {
+    id: "juno",
+    title: "Juno - Minivan Stealth Car Camper",
+    description: "A micro-budget stealth minivan camper conversion that took me on an amazing month-long adventure through California.",
+    details: [
+      "Budget: Under $500",
+      "Build Time: 1 week",
+      "Features: Bed platform, window covers, curtains, storage solutions",
+      "Trip: 1 month in California",
+      "Purpose: Bike trips and stealth camping",
+      "Highlights: Amazing sleep, meeting new people, freedom to explore"
+    ],
+    technologies: ["Van Life", "DIY", "Minimalism"],
+    images: [
+      {
+        src: "/images/personal_projects/automotive/juno_camper_conversion_completed.jpg",
+        alt: "Completed Juno camper conversion"
+      },
+      {
+        src: "/images/personal_projects/automotive/juno_bed_platform_completed_plus_window_covers.jpg",
+        alt: "Bed platform and window covers in Juno"
+      },
+      {
+        src: "/images/personal_projects/automotive/cosy_lighting_in_juno.jpg",
+        alt: "Cozy lighting setup in Juno"
+      },
+      {
+        src: "/images/personal_projects/automotive/testing_the_bed_in_juno.jpg",
+        alt: "Testing the bed platform in Juno"
+      },
+      {
+        src: "/images/personal_projects/automotive/eating_burrito_in_campervan.jpg",
+        alt: "Enjoying a burrito in the campervan"
+      }
+    ]
+  },
+  {
+    id: "skate",
+    title: "Skate",
+    description: "Started skating in high school when my brother gave me my first board. Now it's all about the fun and community.",
+    details: [
+      "Started: High school",
+      "Style: Street and transition",
+      "Focus: Fun and community",
+      "Favorite spots: Local parks and street spots"
+    ],
+    technologies: ["Skateboarding", "Community"],
+    images: [
+      {
+        src: "/images/personal_projects/skate/gen_skating_sea_skate.jpg",
+        alt: "Skating at Sea Skate park"
+      },
+      {
+        src: "/images/personal_projects/skate/skating_downtown_edgy.jpg",
+        alt: "Skating downtown"
+      },
+      {
+        src: "/images/personal_projects/skate/pnc_and_skateboard_at_colonnade_pump_track.jpg",
+        alt: "Bike and skateboard at Colonnade pump track"
+      }
+    ],
+    video: "/images/personal_projects/skate/c5_backside_50_50.mp4",
+    videoPoster: "/images/personal_projects/skate/gen_skating_sea_skate.jpg"
+  },
+  {
+    id: "cooking",
+    title: "Cooking",
+    description: "Some of my favorite dishes and cooking adventures.",
+    details: [],
+    technologies: ["Cooking", "Food"],
+    images: [
+      {
+        src: "/images/personal_projects/food/blueberry_smoothie.jpg",
+        alt: "Blueberry smoothie"
+      },
+      {
+        src: "/images/personal_projects/food/matcha_latte_and_biscotti_at_desk.jpg",
+        alt: "Matcha latte and biscotti at desk"
+      },
+      {
+        src: "/images/personal_projects/food/dramatic_angle_of_gens_drinks.jpg",
+        alt: "Dramatic angle of drinks"
+      },
+      {
+        src: "/images/personal_projects/food/smoothie_and_two_matcha_lattes.jpg",
+        alt: "Smoothie and two matcha lattes"
+      },
+      {
+        src: "/images/personal_projects/food/blueberry_lavender_matcha_latte.jpg",
+        alt: "Blueberry lavender matcha latte"
+      }
+    ]
+  },
+  {
+    id: "matcha",
+    title: "Matcha Site",
+    description: "A deep dive into the world of matcha tea.",
+    details: [
+      "Personal project exploring matcha culture",
+      "Interactive matcha guide",
+      "Detailed brewing instructions",
+      "Matcha history and traditions"
+    ],
+    technologies: ["Web Development", "Matcha", "Tea Culture"],
+    images: [
+      {
+        src: "/images/personal_projects/matcha_site_thumbnail.png",
+        alt: "Matcha appreciation site thumbnail"
+      }
+    ],
+    demoUrl: "/matcha"
+  }
+];
+---
+
+<Layout title="Personal Projects">
+  <main class="container mx-auto px-4 py-20">
+    <h1 class="text-4xl font-bold text-center mb-8 text-[#1F1F1F] dark:text-[#EDEDE6]">Personal Projects</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects.map((project) => (
+        <div class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer" data-project-id={project.id}>
+          <img 
+            src={project.images[0].src} 
+            alt={project.images[0].alt}
+            class="w-full h-64 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold text-[#1F1F1F] dark:text-[#EDEDE6]">{project.title}</h3>
+          </div>
+        </div>
+      ))}
+    </div>
+  </main>
+
+  {projects.map((project) => (
+    <ProjectModal
+      projectId={project.id}
+      title={project.title}
+      description={project.description}
+      details={project.details}
+      technologies={project.technologies}
+      images={project.images.map(img => img.src)}
+      video={project.video}
+      videoPoster={project.videoPoster}
+      demoUrl={project.demoUrl}
+    />
+  ))}
+
+  <!-- Background SVG -->
+  <img 
+    src="/images/portfolio/Genesis.svg" 
+    alt="" 
+    class="background-svg"
+    aria-hidden="true"
+  />
+</Layout>
+
+<script>
+  // Project card click handlers
+  document.addEventListener('DOMContentLoaded', () => {
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    projectCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const projectId = card.getAttribute('data-project-id');
+        const modal = document.getElementById(`modal-${projectId}`);
+        if (modal) {
+          modal.classList.remove('hidden');
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  /* Container and section positioning */
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Background SVG */
+  .background-svg {
+    position: absolute;
+    top: 5rem;
+    right: 2rem;
+    width: min(300px, 50vw);
+    height: auto;
+    opacity: 0.1;
+    z-index: 0;
+    pointer-events: none;
+    max-height: calc(100vh - 4rem);
+    object-fit: contain;
+  }
+
+  @media (max-width: 640px) {
+    .background-svg {
+      top: 5rem;
+      right: 1rem;
+      width: min(200px, 50vw);
+    }
+  }
+
+  .background-svg path {
+    fill: #91B77F;
+  }
+
+  .dark .background-svg path {
+    fill: #A1C28F;
+  }
+
+  .project-card {
+    transition: transform 0.2s;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-4px);
+  }
+</style> 
