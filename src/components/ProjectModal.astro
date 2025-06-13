@@ -1,23 +1,38 @@
 ---
+import VideoPlayer from './VideoPlayer.astro';
+
 interface Props {
   projectId: string;
   title: string;
   description: string;
-  images: string[];
   details: string[];
   technologies: string[];
+  images: string[];
+  video?: string;
+  videoPoster?: string;
   demoUrl?: string;
   githubUrl?: string;
 }
 
-const { projectId, title, description, images, details, technologies, demoUrl, githubUrl } = Astro.props;
+const { 
+  projectId, 
+  title, 
+  description, 
+  details, 
+  technologies, 
+  images,
+  video,
+  videoPoster,
+  demoUrl, 
+  githubUrl 
+} = Astro.props;
 ---
 
 <div id={`modal-${projectId}`} class="hidden fixed inset-0 bg-black/50 z-50">
-  <div class="modal-content bg-[#F0F0E8] dark:bg-[#262926] max-w-4xl mx-auto mt-20 rounded-lg shadow-xl">
-    <div class="p-6">
+  <div class="modal-content bg-[#F0F0E8] dark:bg-[#262926] max-w-4xl mx-auto mt-4 md:mt-20 rounded-lg shadow-xl">
+    <div class="p-4 md:p-6">
       <div class="flex justify-between items-start">
-        <h3 class="text-2xl font-bold text-[#1F1F1F] dark:text-[#EDEDE6]">{title}</h3>
+        <h3 class="text-xl md:text-2xl font-bold text-[#1F1F1F] dark:text-[#EDEDE6]">{title}</h3>
         <button 
           class="close-modal text-2xl text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#1F1F1F] dark:hover:text-[#EDEDE6]"
           aria-label="Close modal"
@@ -26,27 +41,60 @@ const { projectId, title, description, images, details, technologies, demoUrl, g
         </button>
       </div>
       
-      <!-- Image Gallery -->
+      <!-- Media Toggle and Gallery -->
       <div class="mt-4">
-        <div class="main-image">
-          <img 
-            src={images[0]} 
-            alt={`${title} main image`} 
-            class="w-full h-64 object-cover rounded-lg"
-          />
-        </div>
-        {images.length > 1 && (
-          <div class="thumbnail-grid grid grid-cols-4 gap-2 mt-2">
-            {images.map((image, index) => (
-              <img 
-                src={image} 
-                alt={`${title} thumbnail ${index + 1}`}
-                class="w-full h-20 object-cover rounded cursor-pointer hover:opacity-75 transition-opacity"
-                data-index={index}
-              />
-            ))}
+        {video && (
+          <div class="flex justify-center mb-4">
+            <button 
+              class="media-toggle px-4 py-2 bg-[#91B77F] dark:bg-[#A1C28F] text-[#1F1F1F] rounded hover:bg-[#7DA867] dark:hover:bg-[#8CAF78] transition-colors"
+              data-media="video"
+            >
+              Video
+            </button>
+            <button 
+              class="media-toggle px-4 py-2 border border-[#91B77F] dark:border-[#A1C28F] text-[#1F1F1F] dark:text-[#EDEDE6] rounded hover:bg-[#91B77F]/10 dark:hover:bg-[#A1C28F]/10 transition-colors ml-2"
+              data-media="images"
+            >
+              Images
+            </button>
           </div>
         )}
+
+        <!-- Video Section -->
+        {video && (
+          <div id={`video-section-${projectId}`} class="video-section">
+            <VideoPlayer 
+              src={video} 
+              poster={videoPoster} 
+              title={`${title} demo video`}
+              className="mb-4"
+            />
+          </div>
+        )}
+
+        <!-- Image Gallery Section -->
+        <div id={`image-section-${projectId}`} class={`image-section ${video ? 'hidden' : ''}`}>
+          <div class="main-image-container mb-4">
+            <img 
+              src={images[0]} 
+              alt={`${title} main image`} 
+              class="w-full rounded-lg"
+              style="max-height: 70vh; object-fit: contain;"
+            />
+          </div>
+          {images.length > 1 && (
+            <div class="thumbnail-grid grid grid-cols-4 gap-2 mt-2">
+              {images.map((image, index) => (
+                <img 
+                  src={image} 
+                  alt={`${title} thumbnail ${index + 1}`}
+                  class="w-full h-20 object-cover rounded cursor-pointer hover:opacity-75 transition-opacity"
+                  data-index={index}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       <!-- Project Details -->
@@ -98,6 +146,40 @@ const { projectId, title, description, images, details, technologies, demoUrl, g
   </div>
 </div>
 
+<style>
+  .modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .main-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    min-height: 400px;
+    max-height: 70vh;
+  }
+
+  .main-image-container img {
+    max-width: 100%;
+    max-height: 70vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .thumbnail-grid img {
+    transition: transform 0.2s;
+  }
+
+  .thumbnail-grid img:hover {
+    transform: scale(1.05);
+  }
+</style>
+
 <script>
   // Modal functionality
   document.addEventListener('DOMContentLoaded', () => {
@@ -106,7 +188,10 @@ const { projectId, title, description, images, details, technologies, demoUrl, g
     modals.forEach(modal => {
       const closeBtn = modal.querySelector('.close-modal');
       const thumbnails = modal.querySelectorAll('.thumbnail-grid img');
-      const mainImage = modal.querySelector('.main-image img');
+      const mainImage = modal.querySelector('.main-image-container img');
+      const mediaToggles = modal.querySelectorAll('.media-toggle');
+      const videoSection = modal.querySelector('.video-section');
+      const imageSection = modal.querySelector('.image-section');
       
       // Close modal
       closeBtn?.addEventListener('click', () => {
@@ -125,16 +210,37 @@ const { projectId, title, description, images, details, technologies, demoUrl, g
         thumb.addEventListener('click', () => {
           if (mainImage instanceof HTMLImageElement && thumb instanceof HTMLImageElement) {
             mainImage.src = thumb.src;
+            mainImage.alt = thumb.alt;
+          }
+        });
+      });
+
+      // Media toggle
+      mediaToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+          const mediaType = toggle.getAttribute('data-media');
+          
+          // Update button styles
+          mediaToggles.forEach(t => {
+            if (t.getAttribute('data-media') === mediaType) {
+              t.classList.add('bg-[#91B77F]', 'dark:bg-[#A1C28F]', 'text-[#1F1F1F]');
+              t.classList.remove('border', 'border-[#91B77F]', 'dark:border-[#A1C28F]', 'text-[#1F1F1F]', 'dark:text-[#EDEDE6]');
+            } else {
+              t.classList.remove('bg-[#91B77F]', 'dark:bg-[#A1C28F]', 'text-[#1F1F1F]');
+              t.classList.add('border', 'border-[#91B77F]', 'dark:border-[#A1C28F]', 'text-[#1F1F1F]', 'dark:text-[#EDEDE6]');
+            }
+          });
+
+          // Show/hide sections
+          if (mediaType === 'video') {
+            videoSection?.classList.remove('hidden');
+            imageSection?.classList.add('hidden');
+          } else {
+            videoSection?.classList.add('hidden');
+            imageSection?.classList.remove('hidden');
           }
         });
       });
     });
   });
-</script>
-
-<style>
-  .modal-content {
-    max-height: calc(100vh - 10rem);
-    overflow-y: auto;
-  }
-</style> 
+</script> 
