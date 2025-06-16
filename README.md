@@ -80,7 +80,7 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 👤 Contact
 
 - GitHub: [@gentyn](https://github.com/gentyn)
-- Portfolio: [genesis-tyndall.com](https://genesis-tyndall.com)
+- Portfolio: [genmatcha.com](https://genmatcha.com)
 
 ```sh
 npm create astro@latest -- --template minimal
