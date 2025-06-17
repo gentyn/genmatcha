@@ -156,11 +156,34 @@ const {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #000;
+    background: #4C4C4C;
     border-radius: 0.5rem;
     overflow: hidden;
     height: 70vh;
     width: 100%;
+    position: relative;
+  }
+
+  .dark .main-image-container {
+    background: #262926;
+  }
+
+  .main-image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/images/portfolio/Genesis.svg');
+    background-repeat: repeat;
+    background-size: 200px;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  .dark .main-image-container::before {
+    opacity: 0.15;
   }
 
   .main-image-container img {
@@ -168,6 +191,8 @@ const {
     height: 100%;
     width: auto;
     object-fit: contain;
+    position: relative;
+    z-index: 1;
   }
 
   .thumbnail-grid img {
