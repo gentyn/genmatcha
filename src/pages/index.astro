@@ -65,108 +65,124 @@ import ProjectModal from '../components/ProjectModal.astro';
 	<section id="projects" class="py-20">
 		<div class="container mx-auto px-4">
 			<h2 class="text-4xl font-bold text-[#1F1F1F] dark:text-[#EDEDE6] mb-8">Featured Projects</h2>
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-				<!-- Avionics Test Automation -->
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+				<!-- Interactive Art Installation -->
 				<div 
-					class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
-					onclick="document.getElementById('modal-avionics').classList.remove('hidden')"
+					class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow relative"
+					onclick="document.getElementById('modal-interactive-art').classList.remove('hidden')"
 				>
 					<img 
-						src="/images/portfolio/projects/Placeholder.jpg" 
-						alt="Avionics Test Automation Project" 
-						class="w-full h-48 object-cover"
+						src="/images/portfolio/projects/interactive_art_installation/functional_demo.jpg" 
+						alt="Interactive Art Installation" 
+						class="w-full h-64 object-cover"
 					/>
-					<div class="p-6">
-						<h3 class="text-xl font-semibold text-[#1F1F1F] dark:text-[#EDEDE6] mb-2">Avionics Test Automation Suite</h3>
-						<p class="text-[#4C4C4C] dark:text-[#B0B0A8] mb-4">Automated testing framework for Boeing 777X and 787 avionics systems</p>
-						<ul class="list-disc list-inside text-[#4C4C4C] dark:text-[#B0B0A8] space-y-2">
-							<li>Developed Python-based test automation scripts</li>
-							<li>Integrated with IBM DOORS and RQM for requirement verification</li>
-							<li>Reduced testing time by 60% through automation</li>
-						</ul>
-						<div class="mt-4 flex flex-wrap gap-2">
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">Python</span>
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">Test Automation</span>
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">IBM DOORS</span>
-						</div>
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
+						<h3 class="text-xl font-semibold text-white">Interactive Art Installation</h3>
 					</div>
 				</div>
 
-				<!-- Internal Database Tool -->
+				<!-- Boeing -->
 				<div 
-					class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
-					onclick="document.getElementById('modal-database').classList.remove('hidden')"
+					class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow relative"
+					onclick="document.getElementById('modal-boeing').classList.remove('hidden')"
 				>
 					<img 
 						src="/images/portfolio/projects/Placeholder.jpg" 
-						alt="Requirements Management Tool Project" 
-						class="w-full h-48 object-cover"
+						alt="Boeing Projects" 
+						class="w-full h-64 object-cover"
 					/>
-					<div class="p-6">
-						<h3 class="text-xl font-semibold text-[#1F1F1F] dark:text-[#EDEDE6] mb-2">Requirements Management Tool</h3>
-						<p class="text-[#4C4C4C] dark:text-[#B0B0A8] mb-4">Frontend development for internal Boeing requirements database</p>
-						<ul class="list-disc list-inside text-[#4C4C4C] dark:text-[#B0B0A8] space-y-2">
-							<li>Led frontend development for cross-team tool</li>
-							<li>Implemented responsive design for various screen sizes</li>
-							<li>Streamlined workflow across five engineering teams</li>
-						</ul>
-						<div class="mt-4 flex flex-wrap gap-2">
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">JavaScript</span>
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">HTML/CSS</span>
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">Frontend</span>
-						</div>
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
+						<h3 class="text-xl font-semibold text-white">Boeing</h3>
 					</div>
 				</div>
 
-				<!-- PowerShell Automation -->
+				<!-- Makerspace -->
 				<div 
-					class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
-					onclick="document.getElementById('modal-powershell').classList.remove('hidden')"
+					class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow relative"
+					onclick="document.getElementById('modal-makerspace').classList.remove('hidden')"
 				>
 					<img 
-						src="/images/portfolio/projects/Placeholder.jpg" 
-						alt="Government IT Automation Project" 
-						class="w-full h-48 object-cover"
+						src="/images/portfolio/projects/makerspace/makerspace_view_benches_and_printers.jpg" 
+						alt="Makerspace" 
+						class="w-full h-64 object-cover"
 					/>
-					<div class="p-6">
-						<h3 class="text-xl font-semibold text-[#1F1F1F] dark:text-[#EDEDE6] mb-2">Government IT Automation</h3>
-						<p class="text-[#4C4C4C] dark:text-[#B0B0A8] mb-4">PowerShell automation for Wisconsin DNR</p>
-						<ul class="list-disc list-inside text-[#4C4C4C] dark:text-[#B0B0A8] space-y-2">
-							<li>Optimized PowerShell scripts for IT operations</li>
-							<li>Saved hundreds of hours in manual processing</li>
-							<li>Implemented automated system monitoring</li>
-						</ul>
-						<div class="mt-4 flex flex-wrap gap-2">
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">PowerShell</span>
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">Automation</span>
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">IT Operations</span>
-						</div>
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
+						<h3 class="text-xl font-semibold text-white">Makerspace</h3>
 					</div>
 				</div>
 
-				<!-- Algorithmic Animation -->
+				<!-- Art -->
 				<div 
-					class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
-					onclick="document.getElementById('modal-animation').classList.remove('hidden')"
+					class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow relative"
+					onclick="document.getElementById('modal-art').classList.remove('hidden')"
+				>
+					<img 
+						src="/images/portfolio/projects/VisualSynth.jpg" 
+						alt="Art Projects" 
+						class="w-full h-64 object-cover"
+					/>
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
+						<h3 class="text-xl font-semibold text-white">Art</h3>
+					</div>
+				</div>
+
+				<!-- Webservers and Sites -->
+				<div 
+					class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow relative"
+					onclick="document.getElementById('modal-webservers').classList.remove('hidden')"
+				>
+					<img 
+						src="/images/portfolio/projects/webservers/two_home_servers_in_service.jpg" 
+						alt="Webservers and Sites" 
+						class="w-full h-64 object-cover"
+					/>
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
+						<h3 class="text-xl font-semibold text-white">Webservers and Sites</h3>
+					</div>
+				</div>
+
+				<!-- DNR -->
+				<div 
+					class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow relative"
+					onclick="document.getElementById('modal-dnr').classList.remove('hidden')"
+				>
+					<img 
+						src="/images/portfolio/projects/dnr/dnr_desk.jpg" 
+						alt="DNR Work" 
+						class="w-full h-64 object-cover"
+					/>
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
+						<h3 class="text-xl font-semibold text-white">DNR</h3>
+					</div>
+				</div>
+
+				<!-- Work at UWM -->
+				<div 
+					class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow relative"
+					onclick="document.getElementById('modal-uwm').classList.remove('hidden')"
 				>
 					<img 
 						src="/images/portfolio/projects/Placeholder.jpg" 
-						alt="Algorithmic Animation System Project" 
-						class="w-full h-48 object-cover"
+						alt="Work at UWM" 
+						class="w-full h-64 object-cover"
 					/>
-					<div class="p-6">
-						<h3 class="text-xl font-semibold text-[#1F1F1F] dark:text-[#EDEDE6] mb-2">Algorithmic Animation System</h3>
-						<p class="text-[#4C4C4C] dark:text-[#B0B0A8] mb-4">Interactive digital art installation with physical interface</p>
-						<ul class="list-disc list-inside text-[#4C4C4C] dark:text-[#B0B0A8] space-y-2">
-							<li>Developed interactive animations using P5.js</li>
-							<li>Created physical interface with Raspberry Pi</li>
-							<li>Explored algorithmic and data structure concepts</li>
-						</ul>
-						<div class="mt-4 flex flex-wrap gap-2">
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">JavaScript</span>
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">P5.js</span>
-							<span class="px-3 py-1 bg-[#91B77F]/10 dark:bg-[#A1C28F]/10 text-[#1F1F1F] dark:text-[#EDEDE6] rounded-full text-sm">Raspberry Pi</span>
-						</div>
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
+						<h3 class="text-xl font-semibold text-white">Work at UWM</h3>
+					</div>
+				</div>
+
+				<!-- TimeAssign Student Project -->
+				<div 
+					class="bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow relative"
+					onclick="document.getElementById('modal-timeassign').classList.remove('hidden')"
+				>
+					<img 
+						src="/images/portfolio/projects/TimeAssign/uml_diagram_views.png" 
+						alt="TimeAssign Student Project" 
+						class="w-full h-64 object-cover"
+					/>
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
+						<h3 class="text-xl font-semibold text-white">TimeAssign Student Project</h3>
 					</div>
 				</div>
 			</div>
@@ -175,48 +191,127 @@ import ProjectModal from '../components/ProjectModal.astro';
 
 	<!-- Project Modals -->
 	<ProjectModal
-		projectId="avionics"
-		title="Avionics Test Automation Suite"
-		description="A comprehensive test automation framework developed for Boeing's 777X and 787 avionics systems. This project significantly improved testing efficiency and accuracy while ensuring compliance with aviation safety standards."
+		projectId="interactive-art"
+		title="Interactive Art Installation"
+		description="An interactive digital art installation that combines algorithmic animation with physical interface controls. This project explores the intersection of art, technology, and user interaction."
 		images={[
-			"/images/portfolio/projects/Placeholder.jpg",
-			"/images/portfolio/projects/skateboard_rack.jpg"
+			"/images/portfolio/projects/interactive_art_installation/functional_demo.jpg",
+			"/images/portfolio/projects/interactive_art_installation/completed_unit_next_to_example_parts.jpg",
+			"/images/portfolio/projects/interactive_art_installation/controls_prototype.jpg",
+			"/images/portfolio/projects/interactive_art_installation/controls_components.jpg",
+			"/images/portfolio/projects/interactive_art_installation/completed_controls.jpg",
+			"/images/portfolio/projects/interactive_art_installation/woodworking_in_progress.jpg",
+			"/images/portfolio/projects/interactive_art_installation/lvs_hardware_packaging.jpg",
+			"/images/portfolio/projects/interactive_art_installation/fit_test.jpg",
+			"/images/portfolio/projects/interactive_art_installation/controller_programming_in_progress.jpg",
+			"/images/portfolio/projects/interactive_art_installation/cad_model.png"
 		]}
 		details={[
-			"Developed Python-based test automation scripts for avionics systems",
+			"Developed interactive animations using P5.js",
+			"Created physical interface with Raspberry Pi",
+			"Implemented real-time user interaction",
+			"Explored algorithmic and data structure concepts",
+			"Designed modular and extensible architecture",
+			"Built custom hardware controls and packaging",
+			"Integrated software and hardware components"
+		]}
+		technologies={["JavaScript", "P5.js", "Raspberry Pi", "Interactive Art", "Hardware Design", "CAD"]}
+	/>
+
+	<ProjectModal
+		projectId="boeing"
+		title="Boeing"
+		description="Avionics test automation and requirements management work at Boeing Commercial Airplanes."
+		images={[
+			"/images/portfolio/projects/Placeholder.jpg"
+		]}
+		details={[
+			"Managed 1,250+ system requirements for 777X and 787 aircraft",
+			"Developed Python-based test automation scripts",
 			"Integrated with IBM DOORS and RQM for requirement verification",
-			"Implemented automated test reporting and documentation",
+			"Led frontend development for internal requirements database",
 			"Reduced testing time by 60% through automation",
 			"Ensured compliance with DO-178C safety standards"
 		]}
-		technologies={["Python", "Test Automation", "IBM DOORS", "RQM", "Avionics Systems"]}
+		technologies={["Python", "Test Automation", "IBM DOORS", "RQM", "Avionics Systems", "JavaScript", "HTML/CSS"]}
 	/>
 
 	<ProjectModal
-		projectId="database"
-		title="Requirements Management Tool"
-		description="A frontend development project for Boeing's internal requirements database. This tool streamlined the workflow across multiple engineering teams and improved the efficiency of requirements management."
+		projectId="makerspace"
+		title="Makerspace"
+		description="University makerspace management and community building at UWM."
 		images={[
-			"/images/portfolio/projects/Placeholder.jpg",
-			"/images/portfolio/projects/Placeholder.jpg"
+			"/images/portfolio/projects/makerspace/makerspace_view_benches_and_printers.jpg",
+			"/images/portfolio/projects/makerspace/makerspace_computer_lab.jpg",
+			"/images/portfolio/projects/makerspace/makerspace_door_decal_and_logo.jpg",
+			"/images/portfolio/projects/makerspace/vinyl_sticker_cutter_and_material_storage_rack.jpg",
+			"/images/portfolio/projects/makerspace/gen_soldering_keyboard.jpg",
+			"/images/portfolio/projects/makerspace/university_laboratory_space.jpg",
+			"/images/portfolio/projects/makerspace/proto_club_flyer.png"
 		]}
 		details={[
-			"Led frontend development for cross-team tool",
-			"Implemented responsive design for various screen sizes",
-			"Created intuitive user interface for requirements management",
-			"Streamlined workflow across five engineering teams",
-			"Integrated with existing backend systems"
+			"Managed university makerspace operations",
+			"Led community building and educational programs",
+			"Maintained 3D printers and fabrication equipment",
+			"Created educational materials and workshops",
+			"Organized Proto Club events and activities",
+			"Provided technical support and training"
 		]}
-		technologies={["JavaScript", "HTML/CSS", "Frontend Development", "UI/UX Design"]}
+		technologies={["3D Printing", "Community Management", "Education", "Hardware", "Leadership"]}
 	/>
 
 	<ProjectModal
-		projectId="powershell"
-		title="Government IT Automation"
-		description="PowerShell automation solutions developed for the Wisconsin Department of Natural Resources. These scripts significantly improved IT operations efficiency and reduced manual processing time."
+		projectId="art"
+		title="Art"
+		description="Digital art and creative coding projects exploring algorithmic and parametric design."
 		images={[
-			"/images/portfolio/projects/Placeholder.jpg",
-			"/images/portfolio/projects/Placeholder.jpg"
+			"/images/portfolio/projects/VisualSynth.jpg",
+			"/images/portfolio/projects/parametric_art/2.0.2 a.png",
+			"/images/portfolio/projects/parametric_art/2.0.2 b.png",
+			"/images/portfolio/projects/parametric_art/1.4.0 j.png",
+			"/images/portfolio/projects/parametric_art/1.4.0 i.png",
+			"/images/portfolio/projects/parametric_art/1.4.0 h.png",
+			"/images/portfolio/projects/parametric_art/1.4.0 d.png",
+			"/images/portfolio/projects/parametric_art/44.png",
+			"/images/portfolio/projects/parametric_art/10.1.0 c.png",
+			"/images/portfolio/projects/parametric_art/login-static.png"
+		]}
+		video="/images/portfolio/projects/parametric_art/a.mp4"
+		videoPoster="/images/portfolio/projects/parametric_art/2.0.2 a.png"
+		details={[
+			"Created algorithmic and parametric art pieces",
+			"Developed visual synthesis and generative art",
+			"Explored mathematical concepts in art",
+			"Built interactive art installations",
+			"Combined traditional and digital art techniques"
+		]}
+		technologies={["Creative Coding", "Algorithmic Art", "Digital Design", "Visual Synthesis", "Interactive Media"]}
+	/>
+
+	<ProjectModal
+		projectId="webservers"
+		title="Webservers and Sites"
+		description="Home server setup and web development projects."
+		images={[
+			"/images/portfolio/projects/webservers/two_home_servers_in_service.jpg",
+			"/images/portfolio/projects/webservers/first_home_server_being_set_up.jpg"
+		]}
+		details={[
+			"Set up and maintained home server infrastructure",
+			"Developed web applications and sites",
+			"Configured Linux server environments",
+			"Implemented security and backup solutions",
+			"Managed domain and hosting services"
+		]}
+		technologies={["Linux", "Web Development", "Server Administration", "Networking", "Security"]}
+	/>
+
+	<ProjectModal
+		projectId="dnr"
+		title="DNR"
+		description="Government IT automation and PowerShell scripting for Wisconsin Department of Natural Resources."
+		images={[
+			"/images/portfolio/projects/dnr/dnr_desk.jpg"
 		]}
 		details={[
 			"Optimized PowerShell scripts for IT operations",
@@ -225,25 +320,42 @@ import ProjectModal from '../components/ProjectModal.astro';
 			"Saved hundreds of hours in manual processing",
 			"Improved system reliability and uptime"
 		]}
-		technologies={["PowerShell", "Automation", "IT Operations", "System Administration"]}
+		technologies={["PowerShell", "Automation", "IT Operations", "System Administration", "Government IT"]}
 	/>
 
 	<ProjectModal
-		projectId="animation"
-		title="Algorithmic Animation System"
-		description="An interactive digital art installation that combines algorithmic animation with physical interface controls. This project explores the intersection of art, technology, and user interaction."
+		projectId="uwm"
+		title="Work at UWM"
+		description="University of Wisconsin-Milwaukee projects and research work."
 		images={[
-			"/images/portfolio/projects/Placeholder.jpg",
 			"/images/portfolio/projects/Placeholder.jpg"
 		]}
 		details={[
-			"Developed interactive animations using P5.js",
-			"Created physical interface with Raspberry Pi",
-			"Implemented real-time user interaction",
-			"Explored algorithmic and data structure concepts",
-			"Designed modular and extensible architecture"
+			"Academic research and development projects",
+			"Educational technology implementation",
+			"Student project supervision and mentoring",
+			"University IT infrastructure support",
+			"Collaborative research initiatives"
 		]}
-		technologies={["JavaScript", "P5.js", "Raspberry Pi", "Interactive Art"]}
+		technologies={["Research", "Education", "Academic Technology", "Mentoring", "Collaboration"]}
+	/>
+
+	<ProjectModal
+		projectId="timeassign"
+		title="TimeAssign Student Project"
+		description="Student project management and scheduling system developed as an academic project."
+		images={[
+			"/images/portfolio/projects/TimeAssign/uml_diagram_views.png",
+			"/images/portfolio/projects/TimeAssign/sprint_3_report.png"
+		]}
+		details={[
+			"Designed and implemented student project management system",
+			"Created UML diagrams and system architecture",
+			"Developed scheduling and assignment features",
+			"Implemented user interface and database design",
+			"Followed agile development methodology"
+		]}
+		technologies={["Student Project", "UML Design", "Database Design", "Agile Development", "Project Management"]}
 	/>
 
 	<!-- About Section -->
