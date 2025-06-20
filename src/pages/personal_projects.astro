@@ -6,16 +6,6 @@ const projects = [
   {
     id: "vice",
     title: "Vice - Specialized Stumpjumper Evo Elite Alloy",
-    description: "My primary mountain bike, built for aggressive trail riding and enduro racing.",
-    details: [
-      "Frame: Specialized Stumpjumper Evo Elite Alloy",
-      "Suspension: Fox Factory 36 Grip2 160mm / Fox Float X2 Factory",
-      "Drivetrain: SRAM GX Eagle",
-      "Brakes: SRAM Code RSC",
-      "Wheels: Roval Traverse 29",
-      "Tire Pressures: 22psi front, 24psi rear (tubeless)",
-      "Favorite trails: Technical descents and steep climbs"
-    ],
     technologies: ["Mountain Biking", "Enduro", "Trail Riding"],
     images: [
       {
@@ -41,6 +31,40 @@ const projects = [
       {
         src: "/images/personal_projects/vice/vice_in_pacifica.jpg",
         alt: "Vice mountain bike at Pacifica trails"
+      }
+    ],
+    contentBlocks: [
+      {
+        type: 'text',
+        content: 'Vice is my primary mountain bike, built for aggressive trail riding and enduro racing. It has taken me on some of the most technical descents and steep climbs I have ever ridden.'
+      },
+      {
+        type: 'header',
+        content: 'Build Highlights'
+      },
+      {
+        type: 'list',
+        content: [
+          'Frame: Specialized Stumpjumper Evo Elite Alloy',
+          'Suspension: Fox Factory 36 Grip2 160mm / Fox Float X2 Factory',
+          'Drivetrain: SRAM GX Eagle',
+          'Brakes: SRAM Code RSC',
+          'Wheels: Roval Traverse 29',
+          'Tire Pressures: 22psi front, 24psi rear (tubeless)'
+        ]
+      },
+      {
+        type: 'image',
+        title: 'Gap jump on Gravy Train',
+        content: {
+          src: '/images/personal_projects/vice/gap_jump_gravy_train_vice.jpg',
+          alt: 'Gap jump feature built for the Gravy Train trail',
+          caption: 'Sending the big gap on Gravy Train trail.'
+        }
+      },
+      {
+        type: 'text',
+        content: 'Vice is my go-to for technical descents, but it also climbs surprisingly well for a long-travel bike. I love the versatility and confidence it gives me on the trails.'
       }
     ]
   },
@@ -270,6 +294,7 @@ const projects = [
       video={project.video}
       videoPoster={project.videoPoster}
       demoUrl={project.demoUrl}
+      contentBlocks={project.contentBlocks}
     />
   ))}
 

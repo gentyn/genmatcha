@@ -1,19 +1,17 @@
 ---
 import VideoPlayer from './VideoPlayer.astro';
-import ContentBlock from './ContentBlock.astro';
 
 interface Props {
   projectId: string;
   title: string;
-  description?: string;
-  details?: string[];
+  description: string;
+  details: string[];
   technologies: string[];
   images: string[];
   video?: string;
   videoPoster?: string;
   demoUrl?: string;
   githubUrl?: string;
-  contentBlocks?: any[];
 }
 
 const { 
@@ -26,8 +24,7 @@ const {
   video,
   videoPoster,
   demoUrl, 
-  githubUrl,
-  contentBlocks
+  githubUrl 
 } = Astro.props;
 ---
 
@@ -102,24 +99,15 @@ const {
 
       <!-- Project Details -->
       <div class="mt-6">
-        {contentBlocks ? (
-          <>
-            {contentBlocks.map((block, idx) => (
-              <ContentBlock block={block} />
-            ))}
-          </>
-        ) : (
-          <>
-            <h4 class="text-xl font-semibold text-[#1F1F1F] dark:text-[#EDEDE6]">Overview</h4>
-            <p class="mt-2 text-[#4C4C4C] dark:text-[#B0B0A8]">{description}</p>
-            <h4 class="text-xl font-semibold mt-4 text-[#1F1F1F] dark:text-[#EDEDE6]">Details</h4>
-            <ul class="mt-2 list-disc list-inside text-[#4C4C4C] dark:text-[#B0B0A8] space-y-2">
-              {details && details.map((detail) => (
-                <li>{detail}</li>
-              ))}
-            </ul>
-          </>
-        )}
+        <h4 class="text-xl font-semibold text-[#1F1F1F] dark:text-[#EDEDE6]">Overview</h4>
+        <p class="mt-2 text-[#4C4C4C] dark:text-[#B0B0A8]">{description}</p>
+        
+        <h4 class="text-xl font-semibold mt-4 text-[#1F1F1F] dark:text-[#EDEDE6]">Details</h4>
+        <ul class="mt-2 list-disc list-inside text-[#4C4C4C] dark:text-[#B0B0A8] space-y-2">
+          {details.map((detail) => (
+            <li>{detail}</li>
+          ))}
+        </ul>
 
         <div class="mt-6 flex flex-wrap gap-2">
           {technologies.map((tech) => (
