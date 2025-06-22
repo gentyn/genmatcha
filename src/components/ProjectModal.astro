@@ -78,22 +78,32 @@ const {
         <!-- Image Gallery Section -->
         <div id={`image-section-${projectId}`} class={`image-section ${video ? 'hidden' : ''}`}>
           <div class="main-image-container mb-4">
+            <div class="image-loading-skeleton hidden absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse rounded-lg"></div>
             <img 
               src={images[0]} 
               alt={`${title} main image`} 
               class="w-full rounded-lg"
               style="height: 70vh; object-fit: contain;"
+              loading="lazy"
+              onload="this.previousElementSibling.classList.add('hidden')"
+              onerror="this.previousElementSibling.classList.add('hidden')"
             />
           </div>
           {images.length > 1 && (
             <div class="thumbnail-grid grid grid-cols-4 gap-2 mt-2">
               {images.map((image, index) => (
-                <img 
-                  src={image} 
-                  alt={`${title} thumbnail ${index + 1}`}
-                  class="w-full h-32 object-cover rounded cursor-pointer hover:opacity-75 transition-opacity"
-                  data-index={index}
-                />
+                <div class="relative">
+                  <div class="thumbnail-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse rounded"></div>
+                  <img 
+                    src={image} 
+                    alt={`${title} thumbnail ${index + 1}`}
+                    class="w-full h-32 object-cover rounded cursor-pointer hover:opacity-75 transition-opacity relative z-10"
+                    data-index={index}
+                    loading="lazy"
+                    onload="this.previousElementSibling.classList.add('hidden')"
+                    onerror="this.previousElementSibling.classList.add('hidden')"
+                  />
+                </div>
               ))}
             </div>
           )}
@@ -205,6 +215,30 @@ const {
 
   .thumbnail-grid img:hover {
     transform: scale(1.05);
+  }
+
+  /* Enhanced skeleton loading animations */
+  .image-loading-skeleton,
+  .thumbnail-loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  .dark .image-loading-skeleton,
+  .dark .thumbnail-loading-skeleton {
+    background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
   }
 </style>
 

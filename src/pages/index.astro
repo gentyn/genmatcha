@@ -71,12 +71,16 @@ import ProjectModal from '../components/ProjectModal.astro';
 					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
 					onclick="document.getElementById('modal-interactive-art').classList.remove('hidden')"
 				>
+					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
 					<img 
 						src="/images/portfolio/projects/interactive_art_installation/functional_demo.jpg" 
 						alt="Interactive Art Installation" 
-						class="w-full h-64 object-cover"
+						class="w-full h-64 object-cover relative z-10"
+						loading="lazy"
+						onload="this.previousElementSibling.classList.add('hidden')"
+						onerror="this.previousElementSibling.classList.add('hidden')"
 					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 z-20">
 						<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
 							<h3 class="text-xl font-semibold text-white">Interactive Art Installation</h3>
 						</div>
@@ -88,12 +92,16 @@ import ProjectModal from '../components/ProjectModal.astro';
 					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
 					onclick="document.getElementById('modal-boeing').classList.remove('hidden')"
 				>
+					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
 					<img 
 						src="/images/portfolio/projects/Placeholder.jpg" 
 						alt="Boeing Projects" 
-						class="w-full h-64 object-cover"
+						class="w-full h-64 object-cover relative z-10"
+						loading="lazy"
+						onload="this.previousElementSibling.classList.add('hidden')"
+						onerror="this.previousElementSibling.classList.add('hidden')"
 					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 z-20">
 						<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
 							<h3 class="text-xl font-semibold text-white">Boeing</h3>
 						</div>
@@ -105,12 +113,16 @@ import ProjectModal from '../components/ProjectModal.astro';
 					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
 					onclick="document.getElementById('modal-makerspace').classList.remove('hidden')"
 				>
+					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
 					<img 
 						src="/images/portfolio/projects/makerspace/makerspace_view_benches_and_printers.jpg" 
 						alt="Makerspace" 
-						class="w-full h-64 object-cover"
+						class="w-full h-64 object-cover relative z-10"
+						loading="lazy"
+						onload="this.previousElementSibling.classList.add('hidden')"
+						onerror="this.previousElementSibling.classList.add('hidden')"
 					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 z-20">
 						<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
 							<h3 class="text-xl font-semibold text-white">Makerspace</h3>
 						</div>
@@ -122,12 +134,16 @@ import ProjectModal from '../components/ProjectModal.astro';
 					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
 					onclick="document.getElementById('modal-art').classList.remove('hidden')"
 				>
+					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
 					<img 
 						src="/images/portfolio/projects/VisualSynth.jpg" 
 						alt="Art Projects" 
-						class="w-full h-64 object-cover"
+						class="w-full h-64 object-cover relative z-10"
+						loading="lazy"
+						onload="this.previousElementSibling.classList.add('hidden')"
+						onerror="this.previousElementSibling.classList.add('hidden')"
 					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 z-20">
 						<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
 							<h3 class="text-xl font-semibold text-white">Art</h3>
 						</div>
@@ -139,12 +155,16 @@ import ProjectModal from '../components/ProjectModal.astro';
 					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
 					onclick="document.getElementById('modal-webservers').classList.remove('hidden')"
 				>
+					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
 					<img 
 						src="/images/portfolio/projects/webservers/two_home_servers_in_service.jpg" 
 						alt="Webservers and Sites" 
-						class="w-full h-64 object-cover"
+						class="w-full h-64 object-cover relative z-10"
+						loading="lazy"
+						onload="this.previousElementSibling.classList.add('hidden')"
+						onerror="this.previousElementSibling.classList.add('hidden')"
 					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 z-20">
 						<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
 							<h3 class="text-xl font-semibold text-white">Webservers and Sites</h3>
 						</div>
@@ -156,12 +176,16 @@ import ProjectModal from '../components/ProjectModal.astro';
 					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
 					onclick="document.getElementById('modal-dnr').classList.remove('hidden')"
 				>
+					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
 					<img 
 						src="/images/portfolio/projects/dnr/dnr_desk.jpg" 
 						alt="DNR Work" 
-						class="w-full h-64 object-cover"
+						class="w-full h-64 object-cover relative z-10"
+						loading="lazy"
+						onload="this.previousElementSibling.classList.add('hidden')"
+						onerror="this.previousElementSibling.classList.add('hidden')"
 					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 z-20">
 						<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
 							<h3 class="text-xl font-semibold text-white">DNR</h3>
 						</div>
@@ -173,12 +197,16 @@ import ProjectModal from '../components/ProjectModal.astro';
 					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
 					onclick="document.getElementById('modal-uwm').classList.remove('hidden')"
 				>
+					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
 					<img 
 						src="/images/portfolio/projects/Placeholder.jpg" 
 						alt="Work at UWM" 
-						class="w-full h-64 object-cover"
+						class="w-full h-64 object-cover relative z-10"
+						loading="lazy"
+						onload="this.previousElementSibling.classList.add('hidden')"
+						onerror="this.previousElementSibling.classList.add('hidden')"
 					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 z-20">
 						<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
 							<h3 class="text-xl font-semibold text-white">Work at UWM</h3>
 						</div>
@@ -190,12 +218,16 @@ import ProjectModal from '../components/ProjectModal.astro';
 					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
 					onclick="document.getElementById('modal-timeassign').classList.remove('hidden')"
 				>
+					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
 					<img 
 						src="/images/portfolio/projects/TimeAssign/uml_diagram_views.png" 
 						alt="TimeAssign Student Project" 
-						class="w-full h-64 object-cover"
+						class="w-full h-64 object-cover relative z-10"
+						loading="lazy"
+						onload="this.previousElementSibling.classList.add('hidden')"
+						onerror="this.previousElementSibling.classList.add('hidden')"
 					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 z-20">
 						<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
 							<h3 class="text-xl font-semibold text-white">TimeAssign Student Project</h3>
 						</div>
@@ -910,6 +942,28 @@ import ProjectModal from '../components/ProjectModal.astro';
 		.dark .project-card:hover {
 			box-shadow: 0 0 0 3px #A1C28F, 0 10px 25px rgba(0, 0, 0, 0.3);
 			transform: scale(1.02);
+		}
+
+		/* Enhanced skeleton loading animations */
+		.card-image-loading-skeleton {
+			background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+			background-size: 200% 100%;
+			animation: shimmer 1.5s infinite;
+		}
+
+		.dark .card-image-loading-skeleton {
+			background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+			background-size: 200% 100%;
+			animation: shimmer 1.5s infinite;
+		}
+
+		@keyframes shimmer {
+			0% {
+				background-position: -200% 0;
+			}
+			100% {
+				background-position: 200% 0;
+			}
 		}
 	</style>
 
