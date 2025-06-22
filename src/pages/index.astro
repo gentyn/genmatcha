@@ -77,8 +77,8 @@ import portfolioProjects from '../data/portfolio-projects.json';
 					>
 						<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
 						<img 
-							src={project.images[0]} 
-							alt={project.title} 
+							src={typeof project.images[0] === 'string' ? project.images[0] : project.images[0].src} 
+							alt={typeof project.images[0] === 'string' ? project.title : project.images[0].alt} 
 							class="w-full h-64 object-cover relative z-10"
 							loading="lazy"
 							onload="this.previousElementSibling.classList.add('hidden')"
@@ -102,7 +102,7 @@ import portfolioProjects from '../data/portfolio-projects.json';
 			title={project.title}
 			description={project.description}
 			technologies={project.technologies}
-			images={project.images}
+			images={project.images.map(img => typeof img === 'string' ? img : img.src)}
 			contentBlocks={project.contentBlocks}
 		/>
 	))}
