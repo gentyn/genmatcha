@@ -76,7 +76,7 @@ const { title, theme = 'default' } = Astro.props;
     </header>
 
     <!-- Main Content -->
-    <main class={theme === 'matcha' ? '' : 'bg-[#FAFAF5] dark:bg-[#1B1D1A]'}>
+    <main id="main-content" class={theme === 'matcha' ? '' : 'bg-[#FAFAF5] dark:bg-[#1B1D1A]'}>
       <slot />
     </main>
 
@@ -152,9 +152,40 @@ const { title, theme = 'default' } = Astro.props;
               console.error('Failed to save theme preference:', e);
             }
           });
+
+          // Add keyboard support for theme toggle
+          themeToggle.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              themeToggle.click();
+            }
+          });
         } else {
           console.error('Theme toggle button not found');
         }
+
+        // Add keyboard navigation for main navigation
+        const navLinks = document.querySelectorAll('header a');
+        navLinks.forEach(link => {
+          link.addEventListener('keydown', (e: Event) => {
+            const keyboardEvent = e as KeyboardEvent;
+            if (keyboardEvent.key === 'Enter') {
+              // Enter key will naturally follow the link
+              return;
+            }
+            if (keyboardEvent.key === ' ') {
+              keyboardEvent.preventDefault();
+              (link as HTMLElement).click();
+            }
+          });
+        });
+
+        // Add skip to main content functionality
+        const skipLink = document.createElement('a');
+        skipLink.href = '#main-content';
+        skipLink.textContent = 'Skip to main content';
+        skipLink.className = 'sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-[#91B77F] dark:bg-[#A1C28F] text-[#1F1F1F] px-4 py-2 rounded z-50';
+        document.body.insertBefore(skipLink, document.body.firstChild);
       });
     </script>
   </body>

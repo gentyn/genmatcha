@@ -69,7 +69,11 @@ import ProjectModal from '../components/ProjectModal.astro';
 				<!-- Interactive Art Installation -->
 				<div 
 					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
-					onclick="document.getElementById('modal-interactive-art').classList.remove('hidden')"
+					tabindex="0"
+					role="button"
+					aria-label="Open Interactive Art Installation project details"
+					onclick="window['openModal-interactive-art']?.()"
+					onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
 				>
 					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
 					<img 
@@ -90,7 +94,11 @@ import ProjectModal from '../components/ProjectModal.astro';
 				<!-- Boeing -->
 				<div 
 					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
-					onclick="document.getElementById('modal-boeing').classList.remove('hidden')"
+					tabindex="0"
+					role="button"
+					aria-label="Open Boeing project details"
+					onclick="window['openModal-boeing']?.()"
+					onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
 				>
 					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
 					<img 
@@ -111,7 +119,11 @@ import ProjectModal from '../components/ProjectModal.astro';
 				<!-- Makerspace -->
 				<div 
 					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
-					onclick="document.getElementById('modal-makerspace').classList.remove('hidden')"
+					tabindex="0"
+					role="button"
+					aria-label="Open Makerspace project details"
+					onclick="window['openModal-makerspace']?.()"
+					onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
 				>
 					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
 					<img 
@@ -132,7 +144,11 @@ import ProjectModal from '../components/ProjectModal.astro';
 				<!-- Art -->
 				<div 
 					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
-					onclick="document.getElementById('modal-art').classList.remove('hidden')"
+					tabindex="0"
+					role="button"
+					aria-label="Open Art project details"
+					onclick="window['openModal-art']?.()"
+					onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
 				>
 					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
 					<img 
@@ -153,7 +169,11 @@ import ProjectModal from '../components/ProjectModal.astro';
 				<!-- Webservers and Sites -->
 				<div 
 					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
-					onclick="document.getElementById('modal-webservers').classList.remove('hidden')"
+					tabindex="0"
+					role="button"
+					aria-label="Open Webservers and Sites project details"
+					onclick="window['openModal-webservers']?.()"
+					onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
 				>
 					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
 					<img 
@@ -174,7 +194,11 @@ import ProjectModal from '../components/ProjectModal.astro';
 				<!-- DNR -->
 				<div 
 					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
-					onclick="document.getElementById('modal-dnr').classList.remove('hidden')"
+					tabindex="0"
+					role="button"
+					aria-label="Open DNR project details"
+					onclick="window['openModal-dnr']?.()"
+					onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
 				>
 					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
 					<img 
@@ -195,7 +219,11 @@ import ProjectModal from '../components/ProjectModal.astro';
 				<!-- Work at UWM -->
 				<div 
 					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
-					onclick="document.getElementById('modal-uwm').classList.remove('hidden')"
+					tabindex="0"
+					role="button"
+					aria-label="Open Work at UWM project details"
+					onclick="window['openModal-uwm']?.()"
+					onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
 				>
 					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
 					<img 
@@ -216,7 +244,11 @@ import ProjectModal from '../components/ProjectModal.astro';
 				<!-- TimeAssign Student Project -->
 				<div 
 					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
-					onclick="document.getElementById('modal-timeassign').classList.remove('hidden')"
+					tabindex="0"
+					role="button"
+					aria-label="Open TimeAssign Student Project details"
+					onclick="window['openModal-timeassign']?.()"
+					onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
 				>
 					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
 					<img 

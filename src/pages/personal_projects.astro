@@ -583,11 +583,27 @@ const projects = [
     const projectCards = document.querySelectorAll('.project-card');
     
     projectCards.forEach(card => {
+      const projectId = card.getAttribute('data-project-id');
+      
+      // Make cards focusable for keyboard navigation
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', `Open ${projectId} project details`);
+      
+      // Click handler
       card.addEventListener('click', () => {
-        const projectId = card.getAttribute('data-project-id');
-        const modal = document.getElementById(`modal-${projectId}`);
-        if (modal) {
-          modal.classList.remove('hidden');
+        const openModalFunction = (window as any)[`openModal-${projectId}`];
+        if (openModalFunction && typeof openModalFunction === 'function') {
+          openModalFunction();
+        }
+      });
+      
+      // Keyboard handler
+      card.addEventListener('keydown', (e: Event) => {
+        const keyboardEvent = e as KeyboardEvent;
+        if (keyboardEvent.key === 'Enter' || keyboardEvent.key === ' ') {
+          keyboardEvent.preventDefault();
+          (card as HTMLElement).click();
         }
       });
     });
