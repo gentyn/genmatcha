@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ProjectModal from '../components/ProjectModal.astro';
+import portfolioProjects from '../data/portfolio-projects.json';
 ---
 
 <Layout title="Genesis Tyndall" theme="portfolio">
@@ -69,708 +70,42 @@ import ProjectModal from '../components/ProjectModal.astro';
 		<div class="container mx-auto px-4">
 			<h2 class="text-4xl font-bold text-[#1F1F1F] dark:text-[#EDEDE6] mb-8">Featured Projects</h2>
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-				<!-- Interactive Art Installation -->
-				<div 
-					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
-					tabindex="0"
-					role="button"
-					aria-label="Open Interactive Art Installation project details"
-					onclick="window['openModal-interactive-art']?.()"
-					onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
-				>
-					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
-					<img 
-						src="/images/portfolio/projects/interactive_art_installation/functional_demo.jpg" 
-						alt="Interactive Art Installation" 
-						class="w-full h-64 object-cover relative z-10"
-						loading="lazy"
-						onload="this.previousElementSibling.classList.add('hidden')"
-						onerror="this.previousElementSibling.classList.add('hidden')"
-					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 z-20">
-						<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
-							<h3 class="text-xl font-semibold text-white">Interactive Art Installation</h3>
+				{portfolioProjects.map((project) => (
+					<div 
+						class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg overflow-hidden shadow-lg transition-shadow cursor-pointer relative" 
+						data-project-id={project.id}
+					>
+						<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
+						<img 
+							src={project.images[0]} 
+							alt={project.title} 
+							class="w-full h-64 object-cover relative z-10"
+							loading="lazy"
+							onload="this.previousElementSibling.classList.add('hidden')"
+							onerror="this.previousElementSibling.classList.add('hidden')"
+						/>
+						<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 z-20">
+							<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
+								<h3 class="text-xl font-semibold text-white">{project.title}</h3>
+							</div>
 						</div>
 					</div>
-				</div>
-
-				<!-- Boeing -->
-				<div 
-					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
-					tabindex="0"
-					role="button"
-					aria-label="Open Boeing project details"
-					onclick="window['openModal-boeing']?.()"
-					onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
-				>
-					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
-					<img 
-						src="/images/portfolio/projects/Placeholder.jpg" 
-						alt="Boeing Projects" 
-						class="w-full h-64 object-cover relative z-10"
-						loading="lazy"
-						onload="this.previousElementSibling.classList.add('hidden')"
-						onerror="this.previousElementSibling.classList.add('hidden')"
-					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 z-20">
-						<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
-							<h3 class="text-xl font-semibold text-white">Boeing</h3>
-						</div>
-					</div>
-				</div>
-
-				<!-- Makerspace -->
-				<div 
-					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
-					tabindex="0"
-					role="button"
-					aria-label="Open Makerspace project details"
-					onclick="window['openModal-makerspace']?.()"
-					onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
-				>
-					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
-					<img 
-						src="/images/portfolio/projects/makerspace/makerspace_view_benches_and_printers.jpg" 
-						alt="Makerspace" 
-						class="w-full h-64 object-cover relative z-10"
-						loading="lazy"
-						onload="this.previousElementSibling.classList.add('hidden')"
-						onerror="this.previousElementSibling.classList.add('hidden')"
-					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 z-20">
-						<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
-							<h3 class="text-xl font-semibold text-white">Makerspace</h3>
-						</div>
-					</div>
-				</div>
-
-				<!-- Art -->
-				<div 
-					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
-					tabindex="0"
-					role="button"
-					aria-label="Open Art project details"
-					onclick="window['openModal-art']?.()"
-					onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
-				>
-					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
-					<img 
-						src="/images/portfolio/projects/VisualSynth.jpg" 
-						alt="Art Projects" 
-						class="w-full h-64 object-cover relative z-10"
-						loading="lazy"
-						onload="this.previousElementSibling.classList.add('hidden')"
-						onerror="this.previousElementSibling.classList.add('hidden')"
-					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 z-20">
-						<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
-							<h3 class="text-xl font-semibold text-white">Art</h3>
-						</div>
-					</div>
-				</div>
-
-				<!-- Webservers and Sites -->
-				<div 
-					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
-					tabindex="0"
-					role="button"
-					aria-label="Open Webservers and Sites project details"
-					onclick="window['openModal-webservers']?.()"
-					onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
-				>
-					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
-					<img 
-						src="/images/portfolio/projects/webservers/two_home_servers_in_service.jpg" 
-						alt="Webservers and Sites" 
-						class="w-full h-64 object-cover relative z-10"
-						loading="lazy"
-						onload="this.previousElementSibling.classList.add('hidden')"
-						onerror="this.previousElementSibling.classList.add('hidden')"
-					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 z-20">
-						<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
-							<h3 class="text-xl font-semibold text-white">Webservers and Sites</h3>
-						</div>
-					</div>
-				</div>
-
-				<!-- DNR -->
-				<div 
-					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
-					tabindex="0"
-					role="button"
-					aria-label="Open DNR project details"
-					onclick="window['openModal-dnr']?.()"
-					onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
-				>
-					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
-					<img 
-						src="/images/portfolio/projects/dnr/dnr_desk.jpg" 
-						alt="DNR Work" 
-						class="w-full h-64 object-cover relative z-10"
-						loading="lazy"
-						onload="this.previousElementSibling.classList.add('hidden')"
-						onerror="this.previousElementSibling.classList.add('hidden')"
-					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 z-20">
-						<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
-							<h3 class="text-xl font-semibold text-white">DNR</h3>
-						</div>
-					</div>
-				</div>
-
-				<!-- Work at UWM -->
-				<div 
-					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
-					tabindex="0"
-					role="button"
-					aria-label="Open Work at UWM project details"
-					onclick="window['openModal-uwm']?.()"
-					onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
-				>
-					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
-					<img 
-						src="/images/portfolio/projects/Placeholder.jpg" 
-						alt="Work at UWM" 
-						class="w-full h-64 object-cover relative z-10"
-						loading="lazy"
-						onload="this.previousElementSibling.classList.add('hidden')"
-						onerror="this.previousElementSibling.classList.add('hidden')"
-					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 z-20">
-						<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
-							<h3 class="text-xl font-semibold text-white">Work at UWM</h3>
-						</div>
-					</div>
-				</div>
-
-				<!-- TimeAssign Student Project -->
-				<div 
-					class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg shadow-lg overflow-hidden cursor-pointer transition-shadow relative"
-					tabindex="0"
-					role="button"
-					aria-label="Open TimeAssign Student Project details"
-					onclick="window['openModal-timeassign']?.()"
-					onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
-				>
-					<div class="card-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
-					<img 
-						src="/images/portfolio/projects/TimeAssign/uml_diagram_views.png" 
-						alt="TimeAssign Student Project" 
-						class="w-full h-64 object-cover relative z-10"
-						loading="lazy"
-						onload="this.previousElementSibling.classList.add('hidden')"
-						onerror="this.previousElementSibling.classList.add('hidden')"
-					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 z-20">
-						<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
-							<h3 class="text-xl font-semibold text-white">TimeAssign Student Project</h3>
-						</div>
-					</div>
-				</div>
+				))}
 			</div>
 		</div>
 	</section>
 
 	<!-- Project Modals -->
-	<ProjectModal
-		projectId="interactive-art"
-		title="Interactive Art Installation"
-		description="An interactive digital art installation that combines algorithmic animation with physical interface controls. This project explores the intersection of art, technology, and user interaction."
-		images={[
-			"/images/portfolio/projects/interactive_art_installation/functional_demo.jpg",
-			"/images/portfolio/projects/interactive_art_installation/completed_unit_next_to_example_parts.jpg",
-			"/images/portfolio/projects/interactive_art_installation/controls_prototype.jpg",
-			"/images/portfolio/projects/interactive_art_installation/controls_components.jpg",
-			"/images/portfolio/projects/interactive_art_installation/completed_controls.jpg",
-			"/images/portfolio/projects/interactive_art_installation/woodworking_in_progress.jpg",
-			"/images/portfolio/projects/interactive_art_installation/lvs_hardware_packaging.jpg",
-			"/images/portfolio/projects/interactive_art_installation/fit_test.jpg",
-			"/images/portfolio/projects/interactive_art_installation/controller_programming_in_progress.jpg",
-			"/images/portfolio/projects/interactive_art_installation/cad_model.png"
-		]}
-		details={[
-			"Developed interactive animations using P5.js",
-			"Created physical interface with Raspberry Pi",
-			"Implemented real-time user interaction",
-			"Explored algorithmic and data structure concepts",
-			"Designed modular and extensible architecture",
-			"Built custom hardware controls and packaging",
-			"Integrated software and hardware components"
-		]}
-		technologies={["JavaScript", "P5.js", "Raspberry Pi", "Interactive Art", "Hardware Design", "CAD"]}
-		contentBlocks={[
-			{
-				type: 'text',
-				content: 'This interactive art installation represents the perfect intersection of my technical skills and creative interests. It combines algorithmic animation with physical interface controls to create an engaging user experience that responds in real-time.'
-			},
-			{
-				type: 'header',
-				content: 'Technical Architecture'
-			},
-			{
-				type: 'list',
-				content: [
-					'Frontend: P5.js for interactive animations',
-					'Backend: Raspberry Pi for hardware control',
-					'Interface: Custom physical controls and sensors',
-					'Integration: Real-time communication between components'
-				]
-			},
-			{
-				type: 'image',
-				title: 'Functional Demo',
-				content: {
-					src: '/images/portfolio/projects/interactive_art_installation/functional_demo.jpg',
-					alt: 'Interactive Art Installation functional demo',
-					caption: 'The completed installation in action, demonstrating real-time user interaction.'
-				}
-			},
-			{
-				type: 'text',
-				content: 'The project challenged me to think about user experience from both a software and hardware perspective. Creating intuitive physical controls that seamlessly integrate with digital animations required careful consideration of both domains.'
-			}
-		]}
-	/>
-
-	<ProjectModal
-		projectId="boeing"
-		title="Boeing"
-		description="Avionics test automation and requirements management work at Boeing Commercial Airplanes."
-		images={[
-			"/images/portfolio/projects/Placeholder.jpg"
-		]}
-		details={[
-			"Managed 1,250+ system requirements for 777X and 787 aircraft",
-			"Developed Python-based test automation scripts",
-			"Integrated with IBM DOORS and RQM for requirement verification",
-			"Led frontend development for internal requirements database",
-			"Reduced testing time by 60% through automation",
-			"Ensured compliance with DO-178C safety standards"
-		]}
-		technologies={["Python", "Test Automation", "IBM DOORS", "RQM", "Avionics Systems", "JavaScript", "HTML/CSS"]}
-		contentBlocks={[
-			{
-				type: 'text',
-				content: 'Working at Boeing Commercial Airplanes was an incredible opportunity to apply software engineering principles to safety-critical avionics systems. The scale and complexity of aircraft systems provided unique challenges that required both technical expertise and meticulous attention to detail.'
-			},
-			{
-				type: 'header',
-				content: 'Key Achievements'
-			},
-			{
-				type: 'list',
-				content: [
-					'Managed 1,250+ system requirements for 777X and 787 aircraft',
-					'Reduced testing time by 60% through automation',
-					'Led frontend development for internal tools',
-					'Ensured compliance with DO-178C safety standards'
-				]
-			},
-			{
-				type: 'text',
-				content: 'The work required deep understanding of both software development and aviation safety standards. Every line of code and every test case had to meet the highest standards of reliability and traceability.'
-			},
-			{
-				type: 'header',
-				content: 'Technical Skills Applied'
-			},
-			{
-				type: 'list',
-				content: [
-					'Python for test automation and data processing',
-					'IBM DOORS and RQM for requirements management',
-					'JavaScript and HTML/CSS for internal tool development',
-					'Systems integration and verification processes'
-				]
-			}
-		]}
-	/>
-
-	<ProjectModal
-		projectId="makerspace"
-		title="Makerspace"
-		description="University makerspace management and community building at UWM."
-		images={[
-			"/images/portfolio/projects/makerspace/makerspace_view_benches_and_printers.jpg",
-			"/images/portfolio/projects/makerspace/makerspace_computer_lab.jpg",
-			"/images/portfolio/projects/makerspace/makerspace_door_decal_and_logo.jpg",
-			"/images/portfolio/projects/makerspace/vinyl_sticker_cutter_and_material_storage_rack.jpg",
-			"/images/portfolio/projects/makerspace/gen_soldering_keyboard.jpg",
-			"/images/portfolio/projects/makerspace/university_laboratory_space.jpg",
-			"/images/portfolio/projects/makerspace/proto_club_flyer.png"
-		]}
-		details={[
-			"Managed university makerspace operations",
-			"Led community building and educational programs",
-			"Maintained 3D printers and fabrication equipment",
-			"Created educational materials and workshops",
-			"Organized Proto Club events and activities",
-			"Provided technical support and training"
-		]}
-		technologies={["3D Printing", "Community Management", "Education", "Hardware", "Leadership"]}
-		contentBlocks={[
-			{
-				type: 'text',
-				content: 'Managing the university makerspace was about more than just maintaining equipment - it was about building a community of makers, learners, and innovators. The space became a hub for creativity and hands-on learning.'
-			},
-			{
-				type: 'header',
-				content: 'Community Impact'
-			},
-			{
-				type: 'list',
-				content: [
-					'Led educational programs and workshops',
-					'Organized Proto Club events and activities',
-					'Provided technical support and training',
-					'Created inclusive learning environment'
-				]
-			},
-			{
-				type: 'image',
-				title: 'Makerspace Overview',
-				content: {
-					src: '/images/portfolio/projects/makerspace/makerspace_view_benches_and_printers.jpg',
-					alt: 'Makerspace view of benches and printers',
-					caption: 'The main makerspace area with workbenches and 3D printers ready for student projects.'
-				}
-			},
-			{
-				type: 'text',
-				content: 'The most rewarding aspect was seeing students grow from complete beginners to confident makers. The space provided a safe environment for experimentation and learning from failure.'
-			},
-			{
-				type: 'header',
-				content: 'Equipment Management'
-			},
-			{
-				type: 'list',
-				content: [
-					'3D printers and fabrication equipment',
-					'Computer lab with design software',
-					'Vinyl cutter and material storage',
-					'Soldering stations and electronics tools'
-				]
-			}
-		]}
-	/>
-
-	<ProjectModal
-		projectId="art"
-		title="Art"
-		description="Digital art and creative coding projects exploring algorithmic and parametric design."
-		images={[
-			"/images/portfolio/projects/VisualSynth.jpg",
-			"/images/portfolio/projects/parametric_art/2.0.2 a.png",
-			"/images/portfolio/projects/parametric_art/2.0.2 b.png",
-			"/images/portfolio/projects/parametric_art/1.4.0 j.png",
-			"/images/portfolio/projects/parametric_art/1.4.0 i.png",
-			"/images/portfolio/projects/parametric_art/1.4.0 h.png",
-			"/images/portfolio/projects/parametric_art/1.4.0 d.png",
-			"/images/portfolio/projects/parametric_art/44.png",
-			"/images/portfolio/projects/parametric_art/10.1.0 c.png",
-			"/images/portfolio/projects/parametric_art/login-static.png"
-		]}
-		details={[
-			"Created algorithmic and parametric art pieces",
-			"Developed visual synthesis and generative art",
-			"Explored mathematical concepts in art",
-			"Built interactive art installations",
-			"Combined traditional and digital art techniques"
-		]}
-		technologies={["Creative Coding", "Algorithmic Art", "Digital Design", "Visual Synthesis", "Interactive Media"]}
-		contentBlocks={[
-			{
-				type: 'text',
-				content: 'My art projects explore the intersection of mathematics, programming, and visual design. Through algorithmic and parametric approaches, I create pieces that blend the precision of code with the expressiveness of art.'
-			},
-			{
-				type: 'header',
-				content: 'Creative Process'
-			},
-			{
-				type: 'list',
-				content: [
-					'Algorithmic generation using mathematical principles',
-					'Parametric design with variable inputs',
-					'Interactive elements and user participation',
-					'Exploration of visual synthesis techniques'
-				]
-			},
-			{
-				type: 'image',
-				title: 'Visual Synthesis',
-				content: {
-					src: '/images/portfolio/projects/VisualSynth.jpg',
-					alt: 'Visual synthesis artwork',
-					caption: 'A piece exploring visual synthesis and algorithmic composition.'
-				}
-			},
-			{
-				type: 'text',
-				content: 'Each piece starts with a mathematical concept or algorithm, which I then translate into visual form. The process often involves iteration and refinement, allowing the code to guide the artistic direction.'
-			},
-			{
-				type: 'header',
-				content: 'Technical Approach'
-			},
-			{
-				type: 'list',
-				content: [
-					'Creative coding with various programming languages',
-					'Mathematical modeling and algorithms',
-					'Digital design tools and techniques',
-					'Interactive media and user experience design'
-				]
-			}
-		]}
-	/>
-
-	<ProjectModal
-		projectId="webservers"
-		title="Webservers and Sites"
-		description="Home server setup and web development projects."
-		images={[
-			"/images/portfolio/projects/webservers/two_home_servers_in_service.jpg",
-			"/images/portfolio/projects/webservers/first_home_server_being_set_up.jpg"
-		]}
-		details={[
-			"Set up and maintained home server infrastructure",
-			"Developed web applications and sites",
-			"Configured Linux server environments",
-			"Implemented security and backup solutions",
-			"Managed domain and hosting services"
-		]}
-		technologies={["Linux", "Web Development", "Server Administration", "Networking", "Security"]}
-		contentBlocks={[
-			{
-				type: 'text',
-				content: 'My home server setup represents a comprehensive approach to web infrastructure, combining server administration, web development, and security best practices. It\'s been a great learning environment for understanding full-stack development.'
-			},
-			{
-				type: 'header',
-				content: 'Infrastructure Setup'
-			},
-			{
-				type: 'list',
-				content: [
-					'Multiple server configurations and environments',
-					'Linux-based server administration',
-					'Network configuration and security',
-					'Automated backup and monitoring systems'
-				]
-			},
-			{
-				type: 'image',
-				title: 'Server Infrastructure',
-				content: {
-					src: '/images/portfolio/projects/webservers/two_home_servers_in_service.jpg',
-					alt: 'Two home servers in service',
-					caption: 'The home server infrastructure supporting multiple web applications and services.'
-				}
-			},
-			{
-				type: 'text',
-				content: 'Running my own servers has given me hands-on experience with everything from hardware setup to application deployment. It\'s taught me the importance of reliability, security, and scalability in web infrastructure.'
-			},
-			{
-				type: 'header',
-				content: 'Web Development Projects'
-			},
-			{
-				type: 'list',
-				content: [
-					'Full-stack web applications',
-					'Static site generation and deployment',
-					'Database design and management',
-					'API development and integration'
-				]
-			}
-		]}
-	/>
-
-	<ProjectModal
-		projectId="dnr"
-		title="DNR"
-		description="Government IT automation and PowerShell scripting for Wisconsin Department of Natural Resources."
-		images={[
-			"/images/portfolio/projects/dnr/dnr_desk.jpg"
-		]}
-		details={[
-			"Optimized PowerShell scripts for IT operations",
-			"Implemented automated system monitoring",
-			"Created self-healing automation solutions",
-			"Saved hundreds of hours in manual processing",
-			"Improved system reliability and uptime"
-		]}
-		technologies={["PowerShell", "Automation", "IT Operations", "System Administration", "Government IT"]}
-		contentBlocks={[
-			{
-				type: 'text',
-				content: 'Working at the Wisconsin Department of Natural Resources provided an opportunity to apply automation and scripting skills to improve government IT operations. The focus was on creating reliable, efficient solutions that could handle the unique challenges of government infrastructure.'
-			},
-			{
-				type: 'header',
-				content: 'Automation Achievements'
-			},
-			{
-				type: 'list',
-				content: [
-					'Optimized PowerShell scripts for IT operations',
-					'Implemented automated system monitoring',
-					'Created self-healing automation solutions',
-					'Saved hundreds of hours in manual processing'
-				]
-			},
-			{
-				type: 'image',
-				title: 'DNR Workspace',
-				content: {
-					src: '/images/portfolio/projects/dnr/dnr_desk.jpg',
-					alt: 'DNR desk workspace',
-					caption: 'The workspace where automation scripts were developed and tested for government IT operations.'
-				}
-			},
-			{
-				type: 'text',
-				content: 'The work required understanding of both technical automation and government IT policies. Every script had to be robust, well-documented, and compliant with government security standards.'
-			},
-			{
-				type: 'header',
-				content: 'Technical Skills Applied'
-			},
-			{
-				type: 'list',
-				content: [
-					'PowerShell scripting and automation',
-					'System administration and monitoring',
-					'Government IT compliance and security',
-					'Process optimization and documentation'
-				]
-			}
-		]}
-	/>
-
-	<ProjectModal
-		projectId="uwm"
-		title="Work at UWM"
-		description="University of Wisconsin-Milwaukee projects and research work."
-		images={[
-			"/images/portfolio/projects/Placeholder.jpg"
-		]}
-		details={[
-			"Academic research and development projects",
-			"Educational technology implementation",
-			"Student project supervision and mentoring",
-			"University IT infrastructure support",
-			"Collaborative research initiatives"
-		]}
-		technologies={["Research", "Education", "Academic Technology", "Mentoring", "Collaboration"]}
-		contentBlocks={[
-			{
-				type: 'text',
-				content: 'My work at the University of Wisconsin-Milwaukee involved a diverse range of academic and technical projects, from research initiatives to educational technology implementation. It was an opportunity to contribute to both the academic community and technological advancement.'
-			},
-			{
-				type: 'header',
-				content: 'Academic Contributions'
-			},
-			{
-				type: 'list',
-				content: [
-					'Academic research and development projects',
-					'Educational technology implementation',
-					'Student project supervision and mentoring',
-					'Collaborative research initiatives'
-				]
-			},
-			{
-				type: 'text',
-				content: 'The university environment provided a unique setting for exploring new technologies and methodologies. Working with students and faculty allowed me to stay current with emerging trends while contributing to meaningful research projects.'
-			},
-			{
-				type: 'header',
-				content: 'Technical Focus Areas'
-			},
-			{
-				type: 'list',
-				content: [
-					'Research methodology and implementation',
-					'Educational technology platforms',
-					'University IT infrastructure support',
-					'Academic collaboration tools and systems'
-				]
-			},
-			{
-				type: 'text',
-				content: 'The experience reinforced the importance of clear communication, documentation, and collaboration in technical projects. Working in an academic setting required balancing innovation with reliability and accessibility.'
-			}
-		]}
-	/>
-
-	<ProjectModal
-		projectId="timeassign"
-		title="TimeAssign Student Project"
-		description="Student project management and scheduling system developed as an academic project."
-		images={[
-			"/images/portfolio/projects/TimeAssign/uml_diagram_views.png",
-			"/images/portfolio/projects/TimeAssign/sprint_3_report.png"
-		]}
-		details={[
-			"Designed and implemented student project management system",
-			"Created UML diagrams and system architecture",
-			"Developed scheduling and assignment features",
-			"Implemented user interface and database design",
-			"Followed agile development methodology"
-		]}
-		technologies={["Student Project", "UML Design", "Database Design", "Agile Development", "Project Management"]}
-		contentBlocks={[
-			{
-				type: 'text',
-				content: 'TimeAssign was a comprehensive student project that combined software engineering principles with practical project management needs. It demonstrated the full software development lifecycle from requirements gathering to implementation.'
-			},
-			{
-				type: 'header',
-				content: 'Project Scope'
-			},
-			{
-				type: 'list',
-				content: [
-					'Student project management and scheduling system',
-					'UML diagrams and system architecture design',
-					'Database design and implementation',
-					'User interface development and testing'
-				]
-			},
-			{
-				type: 'image',
-				title: 'UML System Design',
-				content: {
-					src: '/images/portfolio/projects/TimeAssign/uml_diagram_views.png',
-					alt: 'UML diagram views of the system',
-					caption: 'Comprehensive UML diagrams showing the system architecture and relationships.'
-				}
-			},
-			{
-				type: 'text',
-				content: 'The project followed agile development methodology, allowing for iterative improvement and adaptation to changing requirements. This approach taught valuable lessons about project management and team collaboration.'
-			},
-			{
-				type: 'header',
-				content: 'Development Process'
-			},
-			{
-				type: 'list',
-				content: [
-					'Requirements analysis and documentation',
-					'System design with UML modeling',
-					'Agile development with sprints',
-					'Testing and user feedback integration'
-				]
-			}
-		]}
-	/>
+	{portfolioProjects.map((project) => (
+		<ProjectModal
+			projectId={project.id}
+			title={project.title}
+			description={project.description}
+			technologies={project.technologies}
+			images={project.images}
+			contentBlocks={project.contentBlocks}
+		/>
+	))}
 
 	<!-- About Section -->
 	<section id="about" class="py-20">
@@ -899,6 +234,35 @@ import ProjectModal from '../components/ProjectModal.astro';
 					errorMessage?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 				});
 			}
+
+			// Project card click handlers
+			const projectCards = document.querySelectorAll('.project-card');
+			
+			projectCards.forEach(card => {
+				const projectId = card.getAttribute('data-project-id');
+				
+				// Make cards focusable for keyboard navigation
+				card.setAttribute('tabindex', '0');
+				card.setAttribute('role', 'button');
+				card.setAttribute('aria-label', `Open ${projectId} project details`);
+				
+				// Click handler
+				card.addEventListener('click', () => {
+					const openModalFunction = (window as any)[`openModal-${projectId}`];
+					if (openModalFunction && typeof openModalFunction === 'function') {
+						openModalFunction();
+					}
+				});
+				
+				// Keyboard handler
+				card.addEventListener('keydown', (e: Event) => {
+					const keyboardEvent = e as KeyboardEvent;
+					if (keyboardEvent.key === 'Enter' || keyboardEvent.key === ' ') {
+						keyboardEvent.preventDefault();
+						(card as HTMLElement).click();
+					}
+				});
+			});
 		});
 	</script>
 
@@ -977,6 +341,11 @@ import ProjectModal from '../components/ProjectModal.astro';
 		.dark .project-card:hover {
 			box-shadow: 0 0 0 3px #A1C28F, 0 10px 25px rgba(0, 0, 0, 0.3);
 			transform: scale(1.02);
+		}
+		
+		.project-card img {
+			position: relative;
+			z-index: 0;
 		}
 
 		/* Enhanced skeleton loading animations */
