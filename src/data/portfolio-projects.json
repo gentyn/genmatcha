@@ -6,44 +6,36 @@
     "technologies": ["JavaScript", "P5.js", "Raspberry Pi", "Interactive Art", "Hardware Design", "CAD"],
     "images": [
       {
-        "src": "/images/portfolio/projects/interactive_art_installation/functional_demo.jpg",
-        "alt": "Interactive Art Installation functional demo"
-      },
-      {
         "src": "/images/portfolio/projects/interactive_art_installation/completed_unit_next_to_example_parts.jpg",
         "alt": "Completed unit next to example parts"
+      },
+      {
+        "src": "/images/portfolio/projects/interactive_art_installation/cad_model.png",
+        "alt": "CAD model"
       },
       {
         "src": "/images/portfolio/projects/interactive_art_installation/controls_prototype.jpg",
         "alt": "Controls prototype"
       },
       {
-        "src": "/images/portfolio/projects/interactive_art_installation/controls_components.jpg",
-        "alt": "Controls components"
-      },
-      {
-        "src": "/images/portfolio/projects/interactive_art_installation/completed_controls.jpg",
-        "alt": "Completed controls"
+        "src": "/images/portfolio/projects/interactive_art_installation/functional_demo.jpg",
+        "alt": "Interactive Art Installation functional demo"
       },
       {
         "src": "/images/portfolio/projects/interactive_art_installation/woodworking_in_progress.jpg",
         "alt": "Woodworking in progress"
       },
       {
-        "src": "/images/portfolio/projects/interactive_art_installation/lvs_hardware_packaging.jpg",
-        "alt": "LVS hardware packaging"
-      },
-      {
         "src": "/images/portfolio/projects/interactive_art_installation/fit_test.jpg",
         "alt": "Fit test"
       },
       {
-        "src": "/images/portfolio/projects/interactive_art_installation/controller_programming_in_progress.jpg",
-        "alt": "Controller programming in progress"
+        "src": "/images/portfolio/projects/interactive_art_installation/lvs_hardware_packaging.jpg",
+        "alt": "LVS hardware packaging"
       },
       {
-        "src": "/images/portfolio/projects/interactive_art_installation/cad_model.png",
-        "alt": "CAD model"
+        "src": "/images/portfolio/projects/interactive_art_installation/controller_programming_in_progress.jpg",
+        "alt": "Controller programming in progress"
       }
     ],
     "contentBlocks": [
@@ -81,7 +73,7 @@
   },
   {
     "id": "boeing",
-    "title": "Boeing",
+    "title": "Displays System Development at Boeing",
     "description": "Avionics test automation and requirements management work at Boeing Commercial Airplanes.",
     "technologies": ["Python", "Test Automation", "IBM DOORS", "RQM", "Avionics Systems", "JavaScript", "HTML/CSS"],
     "images": [
@@ -129,17 +121,17 @@
   },
   {
     "id": "makerspace",
-    "title": "Makerspace",
+    "title": "Makerspace Leadership at UWM",
     "description": "University makerspace management and community building at UWM.",
     "technologies": ["3D Printing", "Community Management", "Education", "Hardware", "Leadership"],
     "images": [
       {
-        "src": "/images/portfolio/projects/makerspace/makerspace_view_benches_and_printers.jpg",
-        "alt": "Makerspace view of benches and printers"
-      },
-      {
         "src": "/images/portfolio/projects/makerspace/makerspace_computer_lab.jpg",
         "alt": "Makerspace computer lab"
+      },
+      {
+        "src": "/images/portfolio/projects/makerspace/makerspace_view_benches_and_printers.jpg",
+        "alt": "Makerspace view of benches and printers"
       },
       {
         "src": "/images/portfolio/projects/makerspace/makerspace_door_decal_and_logo.jpg",
@@ -206,10 +198,14 @@
   },
   {
     "id": "art",
-    "title": "Art",
+    "title": "Parametric Art",
     "description": "Digital art and creative coding projects exploring algorithmic and parametric design.",
     "technologies": ["Creative Coding", "Algorithmic Art", "Digital Design", "Visual Synthesis", "Interactive Media"],
     "images": [
+      {
+        "src": "/images/portfolio/projects/parametric_art/1.4.0 j.png",
+        "alt": "Parametric art 1.4.0 j"
+      },
       {
         "src": "/images/portfolio/projects/VisualSynth.jpg",
         "alt": "Visual synthesis artwork"
@@ -221,10 +217,6 @@
       {
         "src": "/images/portfolio/projects/parametric_art/2.0.2 b.png",
         "alt": "Parametric art 2.0.2 b"
-      },
-      {
-        "src": "/images/portfolio/projects/parametric_art/1.4.0 j.png",
-        "alt": "Parametric art 1.4.0 j"
       },
       {
         "src": "/images/portfolio/projects/parametric_art/1.4.0 i.png",
@@ -299,17 +291,17 @@
   },
   {
     "id": "webservers",
-    "title": "Webservers and Sites",
+    "title": "Self-Hosted Servers & Web Projects",
     "description": "Home server setup and web development projects.",
     "technologies": ["Linux", "Web Development", "Server Administration", "Networking", "Security"],
     "images": [
       {
-        "src": "/images/portfolio/projects/webservers/two_home_servers_in_service.jpg",
-        "alt": "Two home servers in service"
-      },
-      {
         "src": "/images/portfolio/projects/webservers/first_home_server_being_set_up.jpg",
         "alt": "First home server being set up"
+      },
+      {
+        "src": "/images/portfolio/projects/webservers/two_home_servers_in_service.jpg",
+        "alt": "Two home servers in service"
       }
     ],
     "contentBlocks": [
@@ -360,7 +352,7 @@
   },
   {
     "id": "dnr",
-    "title": "DNR",
+    "title": "PowerShell Automation at WI DNR",
     "description": "Government IT automation and PowerShell scripting for Wisconsin Department of Natural Resources.",
     "technologies": ["PowerShell", "Automation", "IT Operations", "System Administration", "Government IT"],
     "images": [
@@ -417,12 +409,12 @@
   },
   {
     "id": "uwm",
-    "title": "Work at UWM",
+    "title": "Laboratory Infrastructure at UWM",
     "description": "University of Wisconsin-Milwaukee projects and research work.",
     "technologies": ["Research", "Education", "Academic Technology", "Mentoring", "Collaboration"],
     "images": [
       {
-        "src": "/images/portfolio/projects/makerspace/university_laboratory_space.jpg",
+        "src": "/images/portfolio/projects/uwm/university_laboratory_space.jpg",
         "alt": "University hydrodynamics laboratory space"
       }
     ],
@@ -469,17 +461,17 @@
   },
   {
     "id": "timeassign",
-    "title": "TimeAssign Student Project",
-    "description": "Student project management and scheduling system developed as an academic project.",
+    "title": "Course Scheduling Web App",
+    "description": "Student project mant Projectagement and scheduling system developed as an academic project.",
     "technologies": ["Student Project", "UML Design", "Database Design", "Agile Development", "Project Management"],
     "images": [
       {
-        "src": "/images/portfolio/projects/TimeAssign/uml_diagram_views.png",
-        "alt": "UML diagram views of the system"
-      },
-      {
         "src": "/images/portfolio/projects/TimeAssign/sprint_3_report.png",
         "alt": "Sprint 3 report"
+      },
+      {
+        "src": "/images/portfolio/projects/TimeAssign/uml_diagram_views.png",
+        "alt": "UML diagram views of the system"
       }
     ],
     "contentBlocks": [
