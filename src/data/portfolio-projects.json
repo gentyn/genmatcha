@@ -6,7 +6,7 @@
     "technologies": ["JavaScript", "P5.js", "Raspberry Pi", "Interactive Art", "Hardware Design", "CAD"],
     "images": [
       {
-        "src": "/images/portfolio/projects/interactive_art_installation/completed_unit_next_to_example_parts.jpg",
+        "src": "/images/portfolio/projects/interactive_art_installation/cover.jpg",
         "alt": "Completed unit next to example parts"
       },
       {
@@ -230,7 +230,7 @@
     "contentBlocks": [
       {
         "type": "text",
-        "content": ""
+        "content": "As Assistant Laboratory Manager at UWM, I deployed and maintained IT infrastructure to support engineering labs, and provided hands-on assistance with electronics and diagnostic equipment to support ongoing student projects."
       }
     ]
   },
@@ -241,12 +241,8 @@
     "technologies": ["Student Project", "UML Design", "Database Design", "Agile Development", "Project Management"],
     "images": [
       {
-        "src": "/images/portfolio/projects/TimeAssign/sprint_3_report.png",
+        "src": "/images/portfolio/projects/TimeAssign/course_management.png",
         "alt": "Sprint 3 report"
-      },
-      {
-        "src": "/images/portfolio/projects/TimeAssign/uml_diagram_views.png",
-        "alt": "UML diagram views of the system"
       }
     ],
     "contentBlocks": [
