@@ -1,5 +1,6 @@
 ---
 import VideoPlayer from './VideoPlayer.astro';
+import ProgressiveImage from './ProgressiveImage.astro';
 
 interface ContentBlock {
   type: 'text' | 'list' | 'image' | 'video' | 'header';
@@ -42,15 +43,12 @@ const { block } = Astro.props;
       </h4>
     )}
     <div class="relative">
-      <div class="content-image-loading-skeleton absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse rounded-lg"></div>
-      <img 
-        src={(block.content as { src: string; alt: string }).src} 
+      <ProgressiveImage
+        src={(block.content as { src: string; alt: string }).src}
         alt={(block.content as { src: string; alt: string }).alt}
-        class="w-full rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer relative z-10"
-        style="max-height: 60vh; object-fit: contain;"
-        loading="lazy"
-        onload="this.previousElementSibling.classList.add('hidden')"
-        onerror="this.previousElementSibling.classList.add('hidden')"
+        className="w-full"
+        style="max-height: 60vh;"
+        objectFit="contain"
       />
     </div>
     {(block.content as { src: string; alt: string; caption?: string }).caption && (
@@ -92,27 +90,5 @@ const { block } = Astro.props;
   
   img:hover {
     transform: scale(1.02);
-  }
-
-  /* Enhanced skeleton loading animations */
-  .content-image-loading-skeleton {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-  }
-
-  .dark .content-image-loading-skeleton {
-    background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-  }
-
-  @keyframes shimmer {
-    0% {
-      background-position: -200% 0;
-    }
-    100% {
-      background-position: 200% 0;
-    }
   }
 </style> 

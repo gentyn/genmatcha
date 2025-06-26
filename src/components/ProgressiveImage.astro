@@ -1,0 +1,213 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  className?: string;
+  style?: string;
+  width?: number;
+  height?: number;
+  priority?: boolean;
+  placeholder?: string;
+  objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+}
+
+const { 
+  src, 
+  alt, 
+  className = "", 
+  style = "", 
+  width, 
+  height, 
+  priority = false,
+  placeholder = "",
+  objectFit = "cover"
+} = Astro.props;
+
+// Generate a unique ID for this image
+const imageId = `progressive-image-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class={`progressive-image-container relative ${className}`} style={style}>
+  <!-- Skeleton Loading State -->
+  <div 
+    class="progressive-skeleton absolute inset-0 animate-pulse rounded-lg"
+    data-skeleton-for={imageId}
+  ></div>
+  
+  <!-- Low-quality placeholder (if provided) -->
+  {placeholder && (
+    <img 
+      src={placeholder}
+      alt=""
+      class="absolute inset-0 w-full h-full rounded-lg blur-sm scale-105"
+      data-placeholder-for={imageId}
+      aria-hidden="true"
+      style={`object-fit: ${objectFit};`}
+    />
+  )}
+  
+  <!-- Main Image -->
+  <img 
+    id={imageId}
+    src={src}
+    alt={alt}
+    class="progressive-main-image w-full h-full rounded-lg relative z-10 opacity-0 transition-opacity duration-300"
+    loading={priority ? "eager" : "lazy"}
+    width={width}
+    height={height}
+    data-src={src}
+    style={`object-fit: ${objectFit};`}
+  />
+</div>
+
+<style>
+  .progressive-image-container {
+    overflow: hidden;
+  }
+
+  .progressive-main-image {
+    transition: opacity 0.3s ease, transform 0.2s ease;
+  }
+
+  .progressive-main-image.loaded {
+    opacity: 1;
+  }
+
+  .progressive-main-image:hover {
+    transform: scale(1.02);
+  }
+
+  /* Enhanced skeleton loading animations */
+  .progressive-skeleton {
+    background: linear-gradient(90deg, #F0F0E8 25%, #E8E8E0 50%, #F0F0E8 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  .dark .progressive-skeleton {
+    background: linear-gradient(90deg, #262926 25%, #2A2D2A 50%, #262926 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* Blur-up effect for placeholders */
+  .progressive-image-container img[data-placeholder-for] {
+    filter: blur(10px);
+    transform: scale(1.1);
+  }
+</style>
+
+<script>
+  class ProgressiveImageLoader {
+    private observer: IntersectionObserver | null = null;
+
+    constructor() {
+      this.init();
+    }
+
+    init(): void {
+      // Use Intersection Observer for better performance
+      if ('IntersectionObserver' in window) {
+        this.observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                this.loadImage(entry.target as HTMLImageElement);
+                this.observer?.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            rootMargin: '50px 0px',
+            threshold: 0.1
+          }
+        );
+
+        // Observe all progressive images
+        document.querySelectorAll('.progressive-main-image').forEach(img => {
+          this.observer?.observe(img);
+        });
+      } else {
+        // Fallback for older browsers
+        this.loadAllImages();
+      }
+    }
+
+    loadImage(img: HTMLImageElement): void {
+      const imageId = img.id;
+      const skeleton = document.querySelector(`[data-skeleton-for="${imageId}"]`) as HTMLElement;
+      const placeholder = document.querySelector(`[data-placeholder-for="${imageId}"]`) as HTMLImageElement;
+      
+      // If image is already loaded, show it immediately
+      if (img.complete && img.naturalHeight !== 0) {
+        this.showImage(img, skeleton, placeholder);
+        return;
+      }
+
+      // Load the image
+      img.onload = () => {
+        this.showImage(img, skeleton, placeholder);
+      };
+
+      img.onerror = () => {
+        this.handleError(img, skeleton, placeholder);
+      };
+
+      // Trigger load if src is already set
+      if (img.src) {
+        img.dispatchEvent(new Event('load'));
+      }
+    }
+
+    showImage(img: HTMLImageElement, skeleton: HTMLElement | null, placeholder: HTMLImageElement | null): void {
+      // Add loaded class for smooth transition
+      img.classList.add('loaded');
+      
+      // Hide skeleton and placeholder after a short delay
+      setTimeout(() => {
+        if (skeleton) skeleton.style.display = 'none';
+        if (placeholder) placeholder.style.display = 'none';
+      }, 300);
+    }
+
+    handleError(img: HTMLImageElement, skeleton: HTMLElement | null, placeholder: HTMLImageElement | null): void {
+      // Hide skeleton and placeholder on error
+      if (skeleton) skeleton.style.display = 'none';
+      if (placeholder) placeholder.style.display = 'none';
+      
+      // Add error styling
+      img.style.opacity = '0.5';
+      img.style.filter = 'grayscale(100%)';
+    }
+
+    loadAllImages(): void {
+      // Fallback: load all images immediately
+      document.querySelectorAll('.progressive-main-image').forEach(img => {
+        this.loadImage(img as HTMLImageElement);
+      });
+    }
+  }
+
+  // Initialize when DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    new ProgressiveImageLoader();
+  });
+
+  // Also initialize for dynamically added content
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      new ProgressiveImageLoader();
+    });
+  } else {
+    new ProgressiveImageLoader();
+  }
+</script> 

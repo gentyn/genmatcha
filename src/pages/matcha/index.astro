@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ProgressiveImage from '../../components/ProgressiveImage.astro';
 
 // Get all images from the matcha directory
 const images = [
@@ -42,10 +43,10 @@ const images = [
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{images.slice(0, 6).map((image, index) => (
 					<div class={`matcha-image-container ${index % 2 === 0 ? 'animate-float' : ''}`}>
-						<img
+						<ProgressiveImage
 							src={`/images/matcha/${image.filename}`}
 							alt={image.alt}
-							class="matcha-image w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+							className="matcha-image w-full h-64 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
 							style={`animation-delay: ${index * 0.2}s`}
 							data-src={`/images/matcha/${image.filename}`}
 						/>
@@ -77,10 +78,10 @@ const images = [
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{images.slice(6).map((image, index) => (
 					<div class={`matcha-image-container ${index % 2 === 0 ? 'animate-float' : ''}`}>
-						<img
+						<ProgressiveImage
 							src={`/images/matcha/${image.filename}`}
 							alt={image.alt}
-							class="matcha-image w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+							className="matcha-image w-full h-64 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
 							style={`animation-delay: ${index * 0.2}s`}
 							data-src={`/images/matcha/${image.filename}`}
 						/>
