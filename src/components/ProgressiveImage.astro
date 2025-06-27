@@ -9,6 +9,7 @@ interface Props {
   priority?: boolean;
   placeholder?: string;
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+  context?: string; // For analytics tracking
 }
 
 const { 
@@ -20,7 +21,8 @@ const {
   height, 
   priority = false,
   placeholder = "",
-  objectFit = "cover"
+  objectFit = "cover",
+  context = "general"
 } = Astro.props;
 
 // Generate a unique ID for this image
@@ -51,11 +53,12 @@ const imageId = `progressive-image-${Math.random().toString(36).substr(2, 9)}`;
     id={imageId}
     src={src}
     alt={alt}
-    class="progressive-main-image w-full h-full rounded-lg relative z-10 opacity-0 transition-opacity duration-300"
+    class="progressive-main-image w-full h-full rounded-lg relative z-10 opacity-0 transition-opacity duration-300 cursor-pointer"
     loading={priority ? "eager" : "lazy"}
     width={width}
     height={height}
     data-src={src}
+    data-context={context}
     style={`object-fit: ${objectFit};`}
   />
 </div>
@@ -107,6 +110,17 @@ const imageId = `progressive-image-${Math.random().toString(36).substr(2, 9)}`;
 </style>
 
 <script>
+  // Analytics tracking functions
+  function trackImageEvent(eventName: string, imageSrc: string, context: string) {
+    if (typeof window !== 'undefined' && typeof window.umami !== 'undefined') {
+      window.umami.track(eventName, {
+        image_src: imageSrc,
+        context: context
+      });
+      console.log('Tracked image event:', eventName, { image_src: imageSrc, context });
+    }
+  }
+
   class ProgressiveImageLoader {
     private observer: IntersectionObserver | null = null;
 
@@ -140,26 +154,43 @@ const imageId = `progressive-image-${Math.random().toString(36).substr(2, 9)}`;
         // Fallback for older browsers
         this.loadAllImages();
       }
+
+      // Add click tracking for images
+      this.addClickTracking();
+    }
+
+    addClickTracking(): void {
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const img = target.closest('.progressive-main-image') as HTMLImageElement;
+        if (img) {
+          const imageSrc = img.src || img.dataset.src || '';
+          const context = img.dataset.context || 'general';
+          trackImageEvent('image_click', imageSrc, context);
+        }
+      });
     }
 
     loadImage(img: HTMLImageElement): void {
       const imageId = img.id;
       const skeleton = document.querySelector(`[data-skeleton-for="${imageId}"]`) as HTMLElement;
       const placeholder = document.querySelector(`[data-placeholder-for="${imageId}"]`) as HTMLImageElement;
+      const imageSrc = img.src || img.dataset.src || '';
+      const context = img.dataset.context || 'general';
       
       // If image is already loaded, show it immediately
       if (img.complete && img.naturalHeight !== 0) {
-        this.showImage(img, skeleton, placeholder);
+        this.showImage(img, skeleton, placeholder, imageSrc, context);
         return;
       }
 
       // Load the image
       img.onload = () => {
-        this.showImage(img, skeleton, placeholder);
+        this.showImage(img, skeleton, placeholder, imageSrc, context);
       };
 
       img.onerror = () => {
-        this.handleError(img, skeleton, placeholder);
+        this.handleError(img, skeleton, placeholder, imageSrc, context);
       };
 
       // Trigger load if src is already set
@@ -168,9 +199,12 @@ const imageId = `progressive-image-${Math.random().toString(36).substr(2, 9)}`;
       }
     }
 
-    showImage(img: HTMLImageElement, skeleton: HTMLElement | null, placeholder: HTMLImageElement | null): void {
+    showImage(img: HTMLImageElement, skeleton: HTMLElement | null, placeholder: HTMLImageElement | null, imageSrc: string, context: string): void {
       // Add loaded class for smooth transition
       img.classList.add('loaded');
+      
+      // Track successful image load
+      trackImageEvent('image_load', imageSrc, context);
       
       // Hide skeleton and placeholder after a short delay
       setTimeout(() => {
@@ -179,10 +213,13 @@ const imageId = `progressive-image-${Math.random().toString(36).substr(2, 9)}`;
       }, 300);
     }
 
-    handleError(img: HTMLImageElement, skeleton: HTMLElement | null, placeholder: HTMLImageElement | null): void {
+    handleError(img: HTMLImageElement, skeleton: HTMLElement | null, placeholder: HTMLImageElement | null, imageSrc: string, context: string): void {
       // Hide skeleton and placeholder on error
       if (skeleton) skeleton.style.display = 'none';
       if (placeholder) placeholder.style.display = 'none';
+      
+      // Track image error
+      trackImageEvent('image_error', imageSrc, context);
       
       // Add error styling
       img.style.opacity = '0.5';

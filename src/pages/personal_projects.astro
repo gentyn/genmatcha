@@ -16,6 +16,7 @@ import personalProjects from '../data/personal-projects.json';
             src={project.images[0].src}
             alt={project.images[0].alt}
             className="w-full h-64"
+            context="project_card"
           />
           <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 z-20">
             <div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
@@ -49,12 +50,25 @@ import personalProjects from '../data/personal-projects.json';
 </Layout>
 
 <script>
+  // Analytics tracking function
+  function trackProjectCardClick(projectId: string, projectTitle: string) {
+    if (typeof window !== 'undefined' && typeof window.umami !== 'undefined') {
+      window.umami.track('project_card_click', {
+        project_id: projectId,
+        project_title: projectTitle,
+        page: 'personal_projects'
+      });
+      console.log('Tracked project card click:', { project_id: projectId, project_title: projectTitle });
+    }
+  }
+
   // Project card click handlers
   document.addEventListener('DOMContentLoaded', () => {
     const projectCards = document.querySelectorAll('.project-card');
     
     projectCards.forEach(card => {
       const projectId = card.getAttribute('data-project-id');
+      const projectTitle = card.querySelector('h3')?.textContent || 'Unknown Project';
       
       // Make cards focusable for keyboard navigation
       card.setAttribute('tabindex', '0');
@@ -63,6 +77,9 @@ import personalProjects from '../data/personal-projects.json';
       
       // Click handler
       card.addEventListener('click', () => {
+        // Track the click
+        trackProjectCardClick(projectId!, projectTitle);
+        
         const openModalFunction = (window as any)[`openModal-${projectId}`];
         if (openModalFunction && typeof openModalFunction === 'function') {
           openModalFunction();

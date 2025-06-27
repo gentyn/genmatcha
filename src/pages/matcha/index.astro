@@ -84,6 +84,7 @@ const images = [
 							className="matcha-image w-full h-64 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
 							style={`animation-delay: ${index * 0.2}s`}
 							data-src={`/images/matcha/${image.filename}`}
+							context="matcha_gallery"
 						/>
 					</div>
 				))}
@@ -199,8 +200,47 @@ const images = [
 	</style>
 
 	<script>
+		// Analytics tracking functions
+		function trackGalleryImageClick(imageSrc: string, imageIndex: number) {
+			if (typeof window !== 'undefined' && typeof window.umami !== 'undefined') {
+				window.umami.track('gallery_image_click', {
+					gallery_name: 'matcha_gallery',
+					image_src: imageSrc,
+					image_index: imageIndex
+				});
+				console.log('Tracked gallery image click:', { image_src: imageSrc, image_index: imageIndex });
+			}
+		}
+
+		function trackGalleryModalOpen(imageSrc: string) {
+			if (typeof window !== 'undefined' && typeof window.umami !== 'undefined') {
+				window.umami.track('gallery_modal_open', {
+					gallery_name: 'matcha_gallery',
+					image_src: imageSrc
+				});
+				console.log('Tracked gallery modal open:', { image_src: imageSrc });
+			}
+		}
+
+		function trackGalleryModalClose() {
+			if (typeof window !== 'undefined' && typeof window.umami !== 'undefined') {
+				window.umami.track('gallery_modal_close', {
+					gallery_name: 'matcha_gallery'
+				});
+				console.log('Tracked gallery modal close');
+			}
+		}
+
 		// Defer non-critical JavaScript
 		document.addEventListener('DOMContentLoaded', () => {
+			// Track gallery view
+			if (typeof window !== 'undefined' && typeof window.umami !== 'undefined') {
+				window.umami.track('gallery_view', {
+					gallery_name: 'matcha_gallery'
+				});
+				console.log('Tracked gallery view: matcha_gallery');
+			}
+
 			// Use Intersection Observer for better performance
 			const observer = new IntersectionObserver((entries) => {
 				entries.forEach(entry => {
@@ -220,18 +260,6 @@ const images = [
 							img.style.transform = `rotate(${rotation}deg)`;
 						});
 
-						// Add click handler for expansion
-						img.addEventListener('click', () => {
-							const modal = document.getElementById('imageModal');
-							const expandedImg = document.getElementById('expandedImage') as HTMLImageElement;
-							
-							if (modal && expandedImg) {
-								expandedImg.src = img.getAttribute('data-src') || '';
-								modal.classList.remove('hidden');
-								modal.classList.add('flex');
-							}
-						});
-
 						// Unobserve after processing
 						observer.unobserve(img);
 					}
@@ -241,9 +269,36 @@ const images = [
 				threshold: 0.1
 			});
 
-			// Observe all images
-			document.querySelectorAll('.matcha-image').forEach(img => {
+			// Observe all progressive images
+			document.querySelectorAll('.progressive-main-image').forEach(img => {
 				observer.observe(img);
+			});
+
+			// Add click handler for image expansion
+			document.addEventListener('click', (e) => {
+				const target = e.target as HTMLElement;
+				const img = target.closest('.progressive-main-image') as HTMLImageElement;
+				
+				if (img) {
+					const imageSrc = img.src || img.dataset.src || '';
+					const imageIndex = Array.from(document.querySelectorAll('.progressive-main-image')).indexOf(img);
+					
+					// Track image click
+					trackGalleryImageClick(imageSrc, imageIndex);
+					
+					const modal = document.getElementById('imageModal');
+					const expandedImg = document.getElementById('expandedImage') as HTMLImageElement;
+					
+					if (modal && expandedImg) {
+						expandedImg.src = imageSrc;
+						expandedImg.alt = img.alt || 'Expanded image';
+						modal.classList.remove('hidden');
+						modal.classList.add('flex');
+						
+						// Track modal open
+						trackGalleryModalOpen(imageSrc);
+					}
+				}
 			});
 
 			// Add click handler to close modal
@@ -252,6 +307,8 @@ const images = [
 				modal.addEventListener('click', () => {
 					modal.classList.add('hidden');
 					modal.classList.remove('flex');
+					// Track modal close
+					trackGalleryModalClose();
 				});
 			}
 
@@ -262,6 +319,8 @@ const images = [
 					if (modal) {
 						modal.classList.add('hidden');
 						modal.classList.remove('flex');
+						// Track modal close
+						trackGalleryModalClose();
 					}
 				}
 			});

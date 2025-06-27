@@ -102,6 +102,7 @@ const {
                     alt={`${title} thumbnail ${index + 1}`}
                     className="w-full h-32 cursor-pointer hover:opacity-75 transition-opacity"
                     data-index={index}
+                    context="project_modal_thumbnail"
                   />
                 </div>
               ))}
@@ -229,11 +230,25 @@ const {
 </style>
 
 <script>
+  // Analytics tracking functions
+  function trackModalEvent(eventName: string, projectId: string, projectTitle: string, additionalData: Record<string, any> = {}) {
+    if (typeof window !== 'undefined' && typeof window.umami !== 'undefined') {
+      window.umami.track(eventName, {
+        project_id: projectId,
+        project_title: projectTitle,
+        ...additionalData
+      });
+      console.log('Tracked modal event:', eventName, { project_id: projectId, project_title: projectTitle, ...additionalData });
+    }
+  }
+
   // Modal functionality
   document.addEventListener('DOMContentLoaded', () => {
     const modals = document.querySelectorAll('[id^="modal-"]');
     
     modals.forEach(modal => {
+      const projectId = modal.id.replace('modal-', '');
+      const projectTitle = modal.querySelector('h3')?.textContent || 'Unknown Project';
       const closeBtn = modal.querySelector('.close-modal');
       const thumbnails = modal.querySelectorAll('.thumbnail-grid img');
       const mainImage = modal.querySelector('.main-image-container img');
@@ -248,6 +263,8 @@ const {
       // Function to close modal
       const closeModal = () => {
         modal.classList.add('hidden');
+        // Track modal close
+        trackModalEvent('project_modal_close', projectId, projectTitle);
         // Restore focus to original element
         if (originalFocusElement) {
           originalFocusElement.focus();
@@ -307,6 +324,12 @@ const {
         if (mainImage instanceof HTMLImageElement && targetThumb instanceof HTMLImageElement) {
           mainImage.src = targetThumb.src;
           mainImage.alt = targetThumb.alt;
+          // Track thumbnail navigation
+          trackModalEvent('project_modal_thumbnail_navigate', projectId, projectTitle, {
+            direction: direction > 0 ? 'next' : 'previous',
+            image_index: newIndex,
+            total_images: thumbnails.length
+          });
           // Focus the thumbnail for accessibility
           targetThumb.focus();
         }
@@ -318,6 +341,9 @@ const {
         originalFocusElement = document.activeElement as HTMLElement;
         
         modal.classList.remove('hidden');
+        
+        // Track modal open
+        trackModalEvent('project_modal_open', projectId, projectTitle);
         
         // Focus the close button for accessibility
         if (closeBtn) {
@@ -353,11 +379,16 @@ const {
       });
       
       // Thumbnail click
-      thumbnails.forEach(thumb => {
+      thumbnails.forEach((thumb, index) => {
         thumb.addEventListener('click', () => {
           if (mainImage instanceof HTMLImageElement && thumb instanceof HTMLImageElement) {
             mainImage.src = thumb.src;
             mainImage.alt = thumb.alt;
+            // Track thumbnail click
+            trackModalEvent('project_modal_thumbnail_click', projectId, projectTitle, {
+              image_index: index,
+              total_images: thumbnails.length
+            });
           }
         });
         
@@ -376,6 +407,11 @@ const {
       mediaToggles.forEach(toggle => {
         toggle.addEventListener('click', () => {
           const mediaType = toggle.getAttribute('data-media');
+          
+          // Track media toggle
+          trackModalEvent('project_modal_media_toggle', projectId, projectTitle, {
+            media_type: mediaType
+          });
           
           // Update button styles
           mediaToggles.forEach(t => {

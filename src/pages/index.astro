@@ -80,6 +80,7 @@ import portfolioProjects from '../data/portfolio-projects.json';
 							src={typeof project.images[0] === 'string' ? project.images[0] : project.images[0].src}
 							alt={typeof project.images[0] === 'string' ? project.title : project.images[0].alt}
 							className="w-full h-64"
+							context="homepage_project_card"
 						/>
 						<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 z-20">
 							<div class="bg-black/60 rounded-lg p-3 backdrop-blur-sm">
@@ -174,6 +175,45 @@ import portfolioProjects from '../data/portfolio-projects.json';
 	<script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
 
 	<script>
+		// Analytics tracking functions
+		function trackProjectCardClick(projectId: string, projectTitle: string) {
+			if (typeof window !== 'undefined' && typeof window.umami !== 'undefined') {
+				window.umami.track('project_card_click', {
+					project_id: projectId,
+					project_title: projectTitle,
+					page: 'homepage'
+				});
+				console.log('Tracked project card click:', { project_id: projectId, project_title: projectTitle });
+			}
+		}
+
+		function trackContactFormSubmit() {
+			if (typeof window !== 'undefined' && typeof window.umami !== 'undefined') {
+				window.umami.track('contact_form_submit', {
+					page: 'homepage'
+				});
+				console.log('Tracked contact form submit');
+			}
+		}
+
+		function trackContactFormSuccess() {
+			if (typeof window !== 'undefined' && typeof window.umami !== 'undefined') {
+				window.umami.track('contact_form_success', {
+					page: 'homepage'
+				});
+				console.log('Tracked contact form success');
+			}
+		}
+
+		function trackContactFormError() {
+			if (typeof window !== 'undefined' && typeof window.umami !== 'undefined') {
+				window.umami.track('contact_form_error', {
+					page: 'homepage'
+				});
+				console.log('Tracked contact form error');
+			}
+		}
+
 		document.addEventListener('DOMContentLoaded', () => {
 			const form = document.getElementById('contact-form') as HTMLFormElement;
 			const successMessage = document.getElementById('success-message');
@@ -181,12 +221,16 @@ import portfolioProjects from '../data/portfolio-projects.json';
 
 			if (form) {
 				form.addEventListener('pageclip:submit', () => {
+					// Track form submission
+					trackContactFormSubmit();
 					// Hide any existing messages
 					successMessage?.classList.add('hidden');
 					errorMessage?.classList.add('hidden');
 				});
 
 				form.addEventListener('pageclip:success', () => {
+					// Track successful submission
+					trackContactFormSuccess();
 					// Show success message
 					successMessage?.classList.remove('hidden');
 					// Custom form reset that maintains theme styling
@@ -204,6 +248,8 @@ import portfolioProjects from '../data/portfolio-projects.json';
 				});
 
 				form.addEventListener('pageclip:error', () => {
+					// Track form error
+					trackContactFormError();
 					// Show error message
 					errorMessage?.classList.remove('hidden');
 					// Scroll to error message
@@ -216,6 +262,7 @@ import portfolioProjects from '../data/portfolio-projects.json';
 			
 			projectCards.forEach(card => {
 				const projectId = card.getAttribute('data-project-id');
+				const projectTitle = card.querySelector('h3')?.textContent || 'Unknown Project';
 				
 				// Make cards focusable for keyboard navigation
 				card.setAttribute('tabindex', '0');
@@ -224,6 +271,9 @@ import portfolioProjects from '../data/portfolio-projects.json';
 				
 				// Click handler
 				card.addEventListener('click', () => {
+					// Track the click
+					trackProjectCardClick(projectId!, projectTitle);
+					
 					const openModalFunction = (window as any)[`openModal-${projectId}`];
 					if (openModalFunction && typeof openModalFunction === 'function') {
 						openModalFunction();

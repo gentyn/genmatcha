@@ -16,6 +16,11 @@ const { title, theme = 'default' } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content="GenMatcha" />
     <title>{title}</title>
+    
+    <!-- Umami Analytics -->
+    <script defer src="https://analytics.genmatcha.com/script.js" data-website-id="cacd1990-6f94-4726-bd33-123fff430a34"></script>
+    <script defer src="https://analytics.genmatcha.com/script.js" data-website-id="1790673a-b21c-4c35-b63c-29a5e96a7d1e"></script>
+    
     <script is:inline>
       // Prevent flash of wrong theme
       document.documentElement.style.visibility = 'hidden';
@@ -125,10 +130,43 @@ const { title, theme = 'default' } = Astro.props;
     )}
 
     <script>
+      // Type declarations for Umami
+      declare global {
+        interface Window {
+          umami?: {
+            track: (eventName: string, eventData?: Record<string, any>) => void;
+          };
+        }
+      }
+
+      // Umami Analytics utility functions
+      function trackEvent(eventName: string, eventData: Record<string, any> = {}) {
+        if (typeof window.umami !== 'undefined') {
+          window.umami.track(eventName, eventData);
+          console.log('Tracked event:', eventName, eventData);
+        } else {
+          console.log('Umami not loaded yet, event queued:', eventName, eventData);
+        }
+      }
+
+      // Track page views
+      function trackPageView() {
+        const currentPath = window.location.pathname;
+        const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        trackEvent('page_view', {
+          path: currentPath,
+          theme: currentTheme,
+          referrer: document.referrer || 'direct'
+        });
+      }
+
       // Theme toggle functionality with error handling and transitions
       document.addEventListener('DOMContentLoaded', () => {
         const themeToggle = document.getElementById('theme-toggle');
         console.log('DOM loaded, theme toggle element:', themeToggle);
+
+        // Track initial page view
+        trackPageView();
 
         if (themeToggle) {
           themeToggle.addEventListener('click', () => {
@@ -142,11 +180,13 @@ const { title, theme = 'default' } = Astro.props;
                 localStorage.setItem('theme', 'light');
                 console.log('Switched to light theme');
                 console.log('Current classes:', document.documentElement.classList.toString());
+                trackEvent('theme_changed', { theme: 'light' });
               } else {
                 document.documentElement.classList.add('dark');
                 localStorage.setItem('theme', 'dark');
                 console.log('Switched to dark theme');
                 console.log('Current classes:', document.documentElement.classList.toString());
+                trackEvent('theme_changed', { theme: 'dark' });
               }
             } catch (e) {
               console.error('Failed to save theme preference:', e);
@@ -164,9 +204,19 @@ const { title, theme = 'default' } = Astro.props;
           console.error('Theme toggle button not found');
         }
 
-        // Add keyboard navigation for main navigation
+        // Track navigation clicks
         const navLinks = document.querySelectorAll('header a');
         navLinks.forEach(link => {
+          link.addEventListener('click', (e) => {
+            const href = (e.currentTarget as HTMLAnchorElement).href;
+            const linkText = (e.currentTarget as HTMLAnchorElement).textContent?.trim();
+            trackEvent('navigation_click', {
+              link: href,
+              text: linkText,
+              current_path: window.location.pathname
+            });
+          });
+
           link.addEventListener('keydown', (e: Event) => {
             const keyboardEvent = e as KeyboardEvent;
             if (keyboardEvent.key === 'Enter') {
@@ -180,12 +230,50 @@ const { title, theme = 'default' } = Astro.props;
           });
         });
 
+        // Track external link clicks
+        document.addEventListener('click', (e) => {
+          const target = e.target as HTMLElement;
+          const link = target.closest('a');
+          if (link && link.hostname !== window.location.hostname) {
+            trackEvent('external_link_click', {
+              url: link.href,
+              text: link.textContent?.trim()
+            });
+          }
+        });
+
+        // Track scroll depth
+        let maxScrollDepth = 0;
+        window.addEventListener('scroll', () => {
+          const scrollDepth = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+          if (scrollDepth > maxScrollDepth) {
+            maxScrollDepth = scrollDepth;
+            if (scrollDepth % 25 === 0) { // Track at 25%, 50%, 75%, 100%
+              trackEvent('scroll_depth', { depth: scrollDepth });
+            }
+          }
+        });
+
+        // Track time on page
+        let startTime = Date.now();
+        window.addEventListener('beforeunload', () => {
+          const timeOnPage = Math.round((Date.now() - startTime) / 1000);
+          if (timeOnPage > 10) { // Only track if user spent more than 10 seconds
+            trackEvent('time_on_page', { seconds: timeOnPage });
+          }
+        });
+
         // Add skip to main content functionality
         const skipLink = document.createElement('a');
         skipLink.href = '#main-content';
         skipLink.textContent = 'Skip to main content';
         skipLink.className = 'sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-[#91B77F] dark:bg-[#A1C28F] text-[#1F1F1F] px-4 py-2 rounded z-50';
         document.body.insertBefore(skipLink, document.body.firstChild);
+
+        // Track skip link usage
+        skipLink.addEventListener('click', () => {
+          trackEvent('accessibility_skip_link_used');
+        });
       });
     </script>
   </body>
