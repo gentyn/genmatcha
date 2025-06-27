@@ -100,7 +100,11 @@ const images = [
 		<!-- Modal for expanded images -->
 		<div id="imageModal" class="fixed inset-0 bg-white/30 dark:bg-gray-900/30 backdrop-blur-md hidden items-center justify-center z-50">
 			<div class="relative">
-				<img id="expandedImage" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl" src="" alt="Expanded image">
+				<!-- Loading spinner -->
+				<div id="modalLoading" class="absolute inset-0 flex items-center justify-center bg-white/20 dark:bg-gray-900/20 rounded-lg hidden">
+					<div class="animate-spin rounded-full h-12 w-12 border-b-2 border-pastel-green"></div>
+				</div>
+				<img id="expandedImage" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl opacity-0 transition-opacity duration-300" src="" alt="Expanded image">
 			</div>
 		</div>
 	</main>
@@ -294,11 +298,28 @@ const images = [
 				const targetImg = allImages[currentImageIndex];
 				const modal = document.getElementById('imageModal');
 				const expandedImg = document.getElementById('expandedImage') as HTMLImageElement;
+				const loadingSpinner = document.getElementById('modalLoading');
 				
 				if (modal && expandedImg && targetImg) {
+					// Show loading state
+					expandedImg.style.opacity = '0';
+					loadingSpinner?.classList.remove('hidden');
+					
 					const imageSrc = targetImg.dataset.src || targetImg.src || '';
-					expandedImg.src = imageSrc;
-					expandedImg.alt = targetImg.alt || 'Expanded image';
+					
+					// Load the new image
+					const newImg = new Image();
+					newImg.onload = () => {
+						expandedImg.src = imageSrc;
+						expandedImg.alt = targetImg.alt || 'Expanded image';
+						expandedImg.style.opacity = '1';
+						loadingSpinner?.classList.add('hidden');
+					};
+					newImg.onerror = () => {
+						loadingSpinner?.classList.add('hidden');
+						expandedImg.style.opacity = '1';
+					};
+					newImg.src = imageSrc;
 					
 					// Track navigation
 					if (typeof window !== 'undefined' && typeof window.umami !== 'undefined') {
@@ -309,6 +330,62 @@ const images = [
 							total_images: allImages.length
 						});
 					}
+				}
+			};
+
+			// Function to open modal with loading state
+			const openModal = (img: HTMLImageElement) => {
+				const modal = document.getElementById('imageModal');
+				const expandedImg = document.getElementById('expandedImage') as HTMLImageElement;
+				const loadingSpinner = document.getElementById('modalLoading');
+				
+				if (modal && expandedImg) {
+					// Clear previous image and show loading
+					expandedImg.style.opacity = '0';
+					expandedImg.src = '';
+					loadingSpinner?.classList.remove('hidden');
+					
+					// Show modal
+					modal.classList.remove('hidden');
+					modal.classList.add('flex');
+					
+					// Load the new image
+					const imageSrc = img.dataset.src || img.src || '';
+					const newImg = new Image();
+					newImg.onload = () => {
+						expandedImg.src = imageSrc;
+						expandedImg.alt = img.alt || 'Expanded image';
+						expandedImg.style.opacity = '1';
+						loadingSpinner?.classList.add('hidden');
+					};
+					newImg.onerror = () => {
+						loadingSpinner?.classList.add('hidden');
+						expandedImg.style.opacity = '1';
+					};
+					newImg.src = imageSrc;
+					
+					// Track modal open
+					trackGalleryModalOpen(imageSrc);
+				}
+			};
+
+			// Function to close modal and clear image
+			const closeModal = () => {
+				const modal = document.getElementById('imageModal');
+				const expandedImg = document.getElementById('expandedImage') as HTMLImageElement;
+				const loadingSpinner = document.getElementById('modalLoading');
+				
+				if (modal) {
+					modal.classList.add('hidden');
+					modal.classList.remove('flex');
+					
+					// Clear the image and hide loading
+					expandedImg.style.opacity = '0';
+					expandedImg.src = '';
+					loadingSpinner?.classList.add('hidden');
+					
+					// Track modal close
+					trackGalleryModalClose();
 				}
 			};
 
@@ -328,18 +405,8 @@ const images = [
 					// Track image click
 					trackGalleryImageClick(imageSrc, currentImageIndex);
 					
-					const modal = document.getElementById('imageModal');
-					const expandedImg = document.getElementById('expandedImage') as HTMLImageElement;
-					
-					if (modal && expandedImg) {
-						expandedImg.src = imageSrc;
-						expandedImg.alt = img.alt || 'Expanded image';
-						modal.classList.remove('hidden');
-						modal.classList.add('flex');
-						
-						// Track modal open
-						trackGalleryModalOpen(imageSrc);
-					}
+					// Open modal with loading state
+					openModal(img);
 				}
 			});
 
@@ -347,10 +414,7 @@ const images = [
 			const modal = document.getElementById('imageModal');
 			if (modal) {
 				modal.addEventListener('click', () => {
-					modal.classList.add('hidden');
-					modal.classList.remove('flex');
-					// Track modal close
-					trackGalleryModalClose();
+					closeModal();
 				});
 			}
 
@@ -362,10 +426,7 @@ const images = [
 				switch (e.key) {
 					case 'Escape':
 						e.preventDefault();
-						modal.classList.add('hidden');
-						modal.classList.remove('flex');
-						// Track modal close
-						trackGalleryModalClose();
+						closeModal();
 						break;
 					case 'ArrowLeft':
 						e.preventDefault();

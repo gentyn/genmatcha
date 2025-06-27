@@ -33,7 +33,7 @@ const IMAGE_DIRECTORIES = [
 ];
 
 // File extensions to process
-const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp'];
+const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
 
 /**
  * Generate thumbnails for a single image
@@ -70,10 +70,12 @@ async function generateThumbnails(imagePath) {
       // }
 
       await sharp(imageBuffer)
+        .rotate() // Auto-rotate based on EXIF orientation
         .resize(config.width, config.height, {
           fit: 'cover',
           position: 'center'
         })
+        .withMetadata() // Preserve metadata
         .jpeg({ quality: config.quality })
         .toFile(thumbnailPath);
 

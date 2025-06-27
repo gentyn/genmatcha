@@ -86,10 +86,14 @@ const {
         <!-- Image Gallery Section -->
         <div id={`image-section-${projectId}`} class={`image-section ${video ? 'hidden' : ''}`}>
           <div class="main-image-container mb-4">
+            <!-- Loading spinner for main image -->
+            <div id={`main-image-loading-${projectId}`} class="absolute inset-0 flex items-center justify-center bg-black/20 rounded-lg hidden z-20">
+              <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+            </div>
             <img
               src={images[0]}
               alt={`${title} main image`}
-              class="w-full"
+              class="w-full transition-opacity duration-300"
               style="height: 70vh; object-fit: contain;"
             />
           </div>
@@ -271,11 +275,29 @@ const {
         // Calculate new index
         const newIndex = (currentImageIndex + direction + thumbnails.length) % thumbnails.length;
         const targetThumb = thumbnails[newIndex] as HTMLImageElement;
+        const loadingSpinner = modal.querySelector(`#main-image-loading-${projectId}`) as HTMLElement;
         
         if (mainImage instanceof HTMLImageElement && targetThumb instanceof HTMLImageElement) {
+          // Show loading state
+          mainImage.style.opacity = '0';
+          loadingSpinner?.classList.remove('hidden');
+          
           // Use the original full-size image URL from data-src
-          mainImage.src = targetThumb.dataset.src || targetThumb.src;
-          mainImage.alt = targetThumb.alt;
+          const imageSrc = targetThumb.dataset.src || targetThumb.src;
+          
+          // Load the new image
+          const newImg = new Image();
+          newImg.onload = () => {
+            mainImage.src = imageSrc;
+            mainImage.alt = targetThumb.alt;
+            mainImage.style.opacity = '1';
+            loadingSpinner?.classList.add('hidden');
+          };
+          newImg.onerror = () => {
+            loadingSpinner?.classList.add('hidden');
+            mainImage.style.opacity = '1';
+          };
+          newImg.src = imageSrc;
           
           // Update current index
           currentImageIndex = newIndex;
@@ -376,6 +398,7 @@ const {
             // Use the original full-size image URL from data-src
             mainImage.src = firstThumb.dataset.src || firstThumb.src;
             mainImage.alt = firstThumb.alt;
+            mainImage.style.opacity = '1';
           }
         }
       };
@@ -399,9 +422,28 @@ const {
         
         thumb.addEventListener('click', () => {
           if (mainImage instanceof HTMLImageElement && thumb instanceof HTMLImageElement) {
+            const loadingSpinner = modal.querySelector(`#main-image-loading-${projectId}`) as HTMLElement;
+            
+            // Show loading state
+            mainImage.style.opacity = '0';
+            loadingSpinner?.classList.remove('hidden');
+            
             // Use the original full-size image URL from data-src
-            mainImage.src = thumb.dataset.src || thumb.src;
-            mainImage.alt = thumb.alt;
+            const imageSrc = thumb.dataset.src || thumb.src;
+            
+            // Load the new image
+            const newImg = new Image();
+            newImg.onload = () => {
+              mainImage.src = imageSrc;
+              mainImage.alt = thumb.alt;
+              mainImage.style.opacity = '1';
+              loadingSpinner?.classList.add('hidden');
+            };
+            newImg.onerror = () => {
+              loadingSpinner?.classList.add('hidden');
+              mainImage.style.opacity = '1';
+            };
+            newImg.src = imageSrc;
             
             // Update current index
             currentImageIndex = index;
