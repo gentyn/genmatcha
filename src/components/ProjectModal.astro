@@ -103,6 +103,9 @@ const {
                     className="w-full h-32 cursor-pointer hover:opacity-75 transition-opacity"
                     data-index={index}
                     context="project_modal_thumbnail"
+                    thumbnail={true}
+                    thumbnailContext="modal_thumbnail"
+                    objectFit="cover"
                   />
                 </div>
               ))}
@@ -259,6 +262,34 @@ const {
       
       // Store original focus element
       let originalFocusElement: HTMLElement | null = null;
+      let currentImageIndex = 0; // Track current image index
+      
+      // Thumbnail navigation function
+      const navigateThumbnails = (direction: number) => {
+        if (thumbnails.length === 0 || !mainImage) return;
+        
+        // Calculate new index
+        const newIndex = (currentImageIndex + direction + thumbnails.length) % thumbnails.length;
+        const targetThumb = thumbnails[newIndex] as HTMLImageElement;
+        
+        if (mainImage instanceof HTMLImageElement && targetThumb instanceof HTMLImageElement) {
+          // Use the original full-size image URL from data-src
+          mainImage.src = targetThumb.dataset.src || targetThumb.src;
+          mainImage.alt = targetThumb.alt;
+          
+          // Update current index
+          currentImageIndex = newIndex;
+          
+          // Track thumbnail navigation
+          trackModalEvent('project_modal_thumbnail_navigate', projectId, projectTitle, {
+            direction: direction > 0 ? 'next' : 'previous',
+            image_index: newIndex,
+            total_images: thumbnails.length
+          });
+          // Focus the thumbnail for accessibility
+          targetThumb.focus();
+        }
+      };
       
       // Function to close modal
       const closeModal = () => {
@@ -275,6 +306,9 @@ const {
       
       // Keyboard event handler
       const handleKeydown = (e: KeyboardEvent) => {
+        // Only handle events when this modal is open
+        if (modal.classList.contains('hidden')) return;
+        
         switch (e.key) {
           case 'Escape':
             e.preventDefault();
@@ -311,30 +345,6 @@ const {
         }
       };
       
-      // Thumbnail navigation function
-      const navigateThumbnails = (direction: number) => {
-        if (thumbnails.length === 0 || !mainImage) return;
-        
-        const currentIndex = Array.from(thumbnails).findIndex(thumb => 
-          (thumb as HTMLImageElement).src === (mainImage as HTMLImageElement).src
-        );
-        const newIndex = (currentIndex + direction + thumbnails.length) % thumbnails.length;
-        const targetThumb = thumbnails[newIndex] as HTMLImageElement;
-        
-        if (mainImage instanceof HTMLImageElement && targetThumb instanceof HTMLImageElement) {
-          mainImage.src = targetThumb.src;
-          mainImage.alt = targetThumb.alt;
-          // Track thumbnail navigation
-          trackModalEvent('project_modal_thumbnail_navigate', projectId, projectTitle, {
-            direction: direction > 0 ? 'next' : 'previous',
-            image_index: newIndex,
-            total_images: thumbnails.length
-          });
-          // Focus the thumbnail for accessibility
-          targetThumb.focus();
-        }
-      };
-      
       // Open modal function
       const openModal = () => {
         // Store current focus element
@@ -358,11 +368,13 @@ const {
           (modalContent as HTMLElement).scrollTop = 0;
         }
         
-        // Reset to first image
+        // Reset to first image and reset index
+        currentImageIndex = 0;
         if (mainImage && thumbnails.length > 0) {
           const firstThumb = thumbnails[0] as HTMLImageElement;
           if (mainImage instanceof HTMLImageElement && firstThumb instanceof HTMLImageElement) {
-            mainImage.src = firstThumb.src;
+            // Use the original full-size image URL from data-src
+            mainImage.src = firstThumb.dataset.src || firstThumb.src;
             mainImage.alt = firstThumb.alt;
           }
         }
@@ -380,10 +392,20 @@ const {
       
       // Thumbnail click
       thumbnails.forEach((thumb, index) => {
+        // Ensure thumbnails are focusable for keyboard navigation
+        thumb.setAttribute('tabindex', '0');
+        thumb.setAttribute('role', 'button');
+        thumb.setAttribute('aria-label', `${projectTitle} image ${index + 1} of ${thumbnails.length}`);
+        
         thumb.addEventListener('click', () => {
           if (mainImage instanceof HTMLImageElement && thumb instanceof HTMLImageElement) {
-            mainImage.src = thumb.src;
+            // Use the original full-size image URL from data-src
+            mainImage.src = thumb.dataset.src || thumb.src;
             mainImage.alt = thumb.alt;
+            
+            // Update current index
+            currentImageIndex = index;
+            
             // Track thumbnail click
             trackModalEvent('project_modal_thumbnail_click', projectId, projectTitle, {
               image_index: index,
@@ -393,7 +415,6 @@ const {
         });
         
         // Add keyboard support for thumbnails
-        thumb.setAttribute('tabindex', '0');
         thumb.addEventListener('keydown', (e: Event) => {
           const keyboardEvent = e as KeyboardEvent;
           if (keyboardEvent.key === 'Enter' || keyboardEvent.key === ' ') {

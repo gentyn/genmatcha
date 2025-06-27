@@ -26,3 +26,6 @@ pnpm-debug.log*
 # planning documents
 PROJECT_OUTLINES.md
 job_search_context.pdf
+
+# generated thumbnails
+**/thumbnails/

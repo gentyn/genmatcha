@@ -49,6 +49,9 @@ const images = [
 							className="matcha-image w-full h-64 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
 							style={`animation-delay: ${index * 0.2}s`}
 							data-src={`/images/matcha/${image.filename}`}
+							thumbnail={true}
+							thumbnailContext="gallery"
+							objectFit="cover"
 						/>
 					</div>
 				))}
@@ -85,6 +88,9 @@ const images = [
 							style={`animation-delay: ${index * 0.2}s`}
 							data-src={`/images/matcha/${image.filename}`}
 							context="matcha_gallery"
+							thumbnail={true}
+							thumbnailContext="gallery"
+							objectFit="cover"
 						/>
 					</div>
 				))}
@@ -93,7 +99,9 @@ const images = [
 
 		<!-- Modal for expanded images -->
 		<div id="imageModal" class="fixed inset-0 bg-white/30 dark:bg-gray-900/30 backdrop-blur-md hidden items-center justify-center z-50">
-			<img id="expandedImage" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl" src="" alt="Expanded image">
+			<div class="relative">
+				<img id="expandedImage" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl" src="" alt="Expanded image">
+			</div>
 		</div>
 	</main>
 
@@ -274,17 +282,51 @@ const images = [
 				observer.observe(img);
 			});
 
+			// Gallery navigation variables
+			let currentImageIndex = 0;
+			let allImages: HTMLImageElement[] = [];
+
+			// Function to navigate gallery images
+			const navigateGallery = (direction: number) => {
+				if (allImages.length === 0) return;
+				
+				currentImageIndex = (currentImageIndex + direction + allImages.length) % allImages.length;
+				const targetImg = allImages[currentImageIndex];
+				const modal = document.getElementById('imageModal');
+				const expandedImg = document.getElementById('expandedImage') as HTMLImageElement;
+				
+				if (modal && expandedImg && targetImg) {
+					const imageSrc = targetImg.dataset.src || targetImg.src || '';
+					expandedImg.src = imageSrc;
+					expandedImg.alt = targetImg.alt || 'Expanded image';
+					
+					// Track navigation
+					if (typeof window !== 'undefined' && typeof window.umami !== 'undefined') {
+						window.umami.track('gallery_modal_navigate', {
+							gallery_name: 'matcha_gallery',
+							direction: direction > 0 ? 'next' : 'previous',
+							image_index: currentImageIndex,
+							total_images: allImages.length
+						});
+					}
+				}
+			};
+
 			// Add click handler for image expansion
 			document.addEventListener('click', (e) => {
 				const target = e.target as HTMLElement;
 				const img = target.closest('.progressive-main-image') as HTMLImageElement;
 				
 				if (img) {
-					const imageSrc = img.src || img.dataset.src || '';
-					const imageIndex = Array.from(document.querySelectorAll('.progressive-main-image')).indexOf(img);
+					// Update gallery navigation variables
+					allImages = Array.from(document.querySelectorAll('.progressive-main-image')) as HTMLImageElement[];
+					currentImageIndex = allImages.indexOf(img);
+					
+					// Use the original full-size image URL from data-src, fallback to src
+					const imageSrc = img.dataset.src || img.src || '';
 					
 					// Track image click
-					trackGalleryImageClick(imageSrc, imageIndex);
+					trackGalleryImageClick(imageSrc, currentImageIndex);
 					
 					const modal = document.getElementById('imageModal');
 					const expandedImg = document.getElementById('expandedImage') as HTMLImageElement;
@@ -312,16 +354,27 @@ const images = [
 				});
 			}
 
-			// Close modal with Escape key
+			// Keyboard navigation for modal
 			document.addEventListener('keydown', (e) => {
-				if (e.key === 'Escape') {
-					const modal = document.getElementById('imageModal');
-					if (modal) {
+				const modal = document.getElementById('imageModal');
+				if (!modal || modal.classList.contains('hidden')) return;
+				
+				switch (e.key) {
+					case 'Escape':
+						e.preventDefault();
 						modal.classList.add('hidden');
 						modal.classList.remove('flex');
 						// Track modal close
 						trackGalleryModalClose();
-					}
+						break;
+					case 'ArrowLeft':
+						e.preventDefault();
+						navigateGallery(-1);
+						break;
+					case 'ArrowRight':
+						e.preventDefault();
+						navigateGallery(1);
+						break;
 				}
 			});
 		});

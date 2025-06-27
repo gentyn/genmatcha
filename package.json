@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "generate-thumbnails": "node scripts/generate-thumbnails.js"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^6.3.2",
@@ -14,5 +15,8 @@
     "astro": "^5.8.1",
     "marked": "^15.0.12",
     "tailwindcss": "^4.1.8"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.5"
   }
 }

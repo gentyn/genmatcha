@@ -36,6 +36,57 @@ export function supportsPlaceholderGeneration(src: string): boolean {
 }
 
 /**
+ * Generate thumbnail URL for different contexts
+ * @param originalSrc - The original image source URL
+ * @param context - The context where the thumbnail will be used
+ * @returns Thumbnail URL with appropriate dimensions
+ */
+export function generateThumbnailUrl(originalSrc: string, context: 'card' | 'gallery' | 'modal_thumbnail' | 'headshot' = 'card'): string {
+  // For now, we'll use the original src since Astro's image optimization
+  // will handle the resizing at build time. In a production environment,
+  // you might want to use a CDN or image service for dynamic resizing.
+  
+  // Add a query parameter to indicate the intended use
+  // This can be used by image optimization services or CDNs
+  const separator = originalSrc.includes('?') ? '&' : '?';
+  
+  switch (context) {
+    case 'card':
+      return `${originalSrc}${separator}w=400&h=256&fit=crop`;
+    case 'gallery':
+      return `${originalSrc}${separator}w=300&h=200&fit=crop`;
+    case 'modal_thumbnail':
+      return `${originalSrc}${separator}w=200&h=128&fit=crop`;
+    case 'headshot':
+      return `${originalSrc}${separator}w=192&h=192&fit=crop`;
+    default:
+      return originalSrc;
+  }
+}
+
+/**
+ * Get optimal image dimensions for different contexts
+ * @param context - The context where the image will be used
+ * @returns Object with width and height
+ */
+export function getImageDimensions(context: 'card' | 'gallery' | 'modal_thumbnail' | 'headshot' | 'modal_main'): { width: number; height: number } {
+  switch (context) {
+    case 'card':
+      return { width: 400, height: 256 };
+    case 'gallery':
+      return { width: 300, height: 200 };
+    case 'modal_thumbnail':
+      return { width: 200, height: 128 };
+    case 'headshot':
+      return { width: 192, height: 192 };
+    case 'modal_main':
+      return { width: 1200, height: 800 };
+    default:
+      return { width: 400, height: 256 };
+  }
+}
+
+/**
  * Generate a data URL for a simple colored placeholder
  * @param width - Width in pixels
  * @param height - Height in pixels
@@ -65,22 +116,6 @@ export function preloadImage(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.onload = () => resolve(img);
-    img.onerror = reject;
-    img.src = src;
-  });
-}
-
-/**
- * Get image dimensions from URL or element
- * @param src - Image source URL
- * @returns Promise with image dimensions
- */
-export function getImageDimensions(src: string): Promise<{ width: number; height: number }> {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => {
-      resolve({ width: img.naturalWidth, height: img.naturalHeight });
-    };
     img.onerror = reject;
     img.src = src;
   });

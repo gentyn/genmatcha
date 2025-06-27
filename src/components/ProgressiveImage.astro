@@ -10,6 +10,8 @@ interface Props {
   placeholder?: string;
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
   context?: string; // For analytics tracking
+  thumbnail?: boolean; // Whether to use thumbnail version
+  thumbnailContext?: 'card' | 'gallery' | 'modal_thumbnail' | 'headshot'; // Context for thumbnail sizing
 }
 
 const { 
@@ -22,11 +24,53 @@ const {
   priority = false,
   placeholder = "",
   objectFit = "cover",
-  context = "general"
+  context = "general",
+  thumbnail = false,
+  thumbnailContext = "card"
 } = Astro.props;
 
 // Generate a unique ID for this image
 const imageId = `progressive-image-${Math.random().toString(36).substr(2, 9)}`;
+
+// Generate optimized src for thumbnails
+const optimizedSrc = thumbnail ? generateThumbnailUrl(src, thumbnailContext) : src;
+
+function generateThumbnailUrl(originalSrc: string, context: 'card' | 'gallery' | 'modal_thumbnail' | 'headshot'): string {
+  // First, try to use actual thumbnail files
+  const url = new URL(originalSrc, 'http://localhost');
+  const pathParts = url.pathname.split('/');
+  const fileName = pathParts.pop();
+  const extension = fileName?.split('.').pop();
+  const baseName = fileName?.replace(`.${extension}`, '');
+  
+  if (fileName && baseName && extension) {
+    // Check if thumbnail file exists by constructing the path
+    const thumbnailPath = pathParts.join('/') + '/thumbnails/' + baseName + '_' + context + '.' + extension;
+    
+    // For now, we'll use the thumbnail path. In a real implementation,
+    // you might want to check if the file actually exists
+    if (thumbnailPath.includes('/thumbnails/')) {
+      return thumbnailPath;
+    }
+  }
+  
+  // Fallback to query parameters for image optimization
+  // In production, you might use a CDN or image service that supports these parameters
+  const separator = originalSrc.includes('?') ? '&' : '?';
+  
+  switch (context) {
+    case 'card':
+      return `${originalSrc}${separator}w=600&h=384&fit=crop&q=85&fmt=webp`;
+    case 'gallery':
+      return `${originalSrc}${separator}w=400&h=300&fit=crop&q=85&fmt=webp`;
+    case 'modal_thumbnail':
+      return `${originalSrc}${separator}w=200&h=128&fit=crop&q=80&fmt=webp`;
+    case 'headshot':
+      return `${originalSrc}${separator}w=192&h=192&fit=crop&q=85&fmt=webp`;
+    default:
+      return originalSrc;
+  }
+}
 ---
 
 <div class={`progressive-image-container relative ${className}`} style={style}>
@@ -51,7 +95,7 @@ const imageId = `progressive-image-${Math.random().toString(36).substr(2, 9)}`;
   <!-- Main Image -->
   <img 
     id={imageId}
-    src={src}
+    src={optimizedSrc}
     alt={alt}
     class="progressive-main-image w-full h-full rounded-lg relative z-10 opacity-0 transition-opacity duration-300 cursor-pointer"
     loading={priority ? "eager" : "lazy"}
@@ -59,6 +103,7 @@ const imageId = `progressive-image-${Math.random().toString(36).substr(2, 9)}`;
     height={height}
     data-src={src}
     data-context={context}
+    data-thumbnail={thumbnail}
     style={`object-fit: ${objectFit};`}
   />
 </div>
