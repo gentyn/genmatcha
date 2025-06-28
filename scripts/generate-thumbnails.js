@@ -76,8 +76,8 @@ async function generateThumbnails(imagePath) {
           position: 'center'
         })
         .withMetadata() // Preserve metadata
-        .jpeg({ quality: config.quality })
-        .toFile(thumbnailPath);
+        .webp({ quality: config.quality })
+        .toFile(thumbnailPath.replace(/\.[^.]+$/, '.webp'));
 
       console.log(`Generated ${imageName}_${context} (${config.width}x${config.height})`);
     }

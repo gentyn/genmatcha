@@ -44,7 +44,7 @@ const { block } = Astro.props;
     )}
     <div class="relative">
       <ProgressiveImage
-        src={(block.content as { src: string; alt: string }).src}
+        src={(block.content as { src: string; alt: string }).src} 
         alt={(block.content as { src: string; alt: string }).alt}
         className="w-full"
         style="max-height: 60vh;"

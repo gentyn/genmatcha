@@ -13,7 +13,7 @@ import personalProjects from '../data/personal-projects.json';
       {personalProjects.map((project) => (
         <div class="project-card bg-[#F0F0E8] dark:bg-[#262926] rounded-lg overflow-hidden shadow-lg transition-shadow cursor-pointer relative" data-project-id={project.id}>
           <ProgressiveImage
-            src={project.images[0].src}
+            src={project.images[0].src} 
             alt={project.images[0].alt}
             className="w-full h-64"
             context="project_card"

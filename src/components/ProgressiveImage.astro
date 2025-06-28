@@ -37,15 +37,14 @@ const optimizedSrc = thumbnail ? generateThumbnailUrl(src, thumbnailContext) : s
 
 function generateThumbnailUrl(originalSrc: string, context: 'card' | 'gallery' | 'modal_thumbnail' | 'headshot'): string {
   // First, try to use actual thumbnail files
-  const url = new URL(originalSrc, 'http://localhost');
-  const pathParts = url.pathname.split('/');
+  const pathParts = originalSrc.split('/');
   const fileName = pathParts.pop();
   const extension = fileName?.split('.').pop();
   const baseName = fileName?.replace(`.${extension}`, '');
   
   if (fileName && baseName && extension) {
     // Check if thumbnail file exists by constructing the path
-    const thumbnailPath = pathParts.join('/') + '/thumbnails/' + baseName + '_' + context + '.' + extension;
+    const thumbnailPath = pathParts.join('/') + '/thumbnails/' + baseName + '_' + context + '.webp';
     
     // For now, we'll use the thumbnail path. In a real implementation,
     // you might want to check if the file actually exists
@@ -220,27 +219,49 @@ function generateThumbnailUrl(originalSrc: string, context: 'card' | 'gallery' |
       const imageId = img.id;
       const skeleton = document.querySelector(`[data-skeleton-for="${imageId}"]`) as HTMLElement;
       const placeholder = document.querySelector(`[data-placeholder-for="${imageId}"]`) as HTMLImageElement;
-      const imageSrc = img.src || img.dataset.src || '';
+      const imageSrc = img.dataset.src || img.src || '';
       const context = img.dataset.context || 'general';
       
-      // If image is already loaded, show it immediately
+      console.log('ProgressiveImage loading:', {
+        imageId,
+        thumbnailSrc: img.src,
+        fullSizeSrc: img.dataset.src,
+        context
+      });
+      
+      // Always show the thumbnail first, even if it's cached
       if (img.complete && img.naturalHeight !== 0) {
+        console.log('Thumbnail already loaded, showing immediately');
         this.showImage(img, skeleton, placeholder, imageSrc, context);
-        return;
+      } else {
+        // Load the image
+        img.onload = () => {
+          console.log('Thumbnail loaded:', img.src);
+          this.showImage(img, skeleton, placeholder, imageSrc, context);
+        };
+
+        img.onerror = () => {
+          console.log('Image failed to load:', img.src);
+          this.handleError(img, skeleton, placeholder, imageSrc, context);
+        };
       }
-
-      // Load the image
-      img.onload = () => {
-        this.showImage(img, skeleton, placeholder, imageSrc, context);
-      };
-
-      img.onerror = () => {
-        this.handleError(img, skeleton, placeholder, imageSrc, context);
-      };
-
-      // Trigger load if src is already set
-      if (img.src) {
-        img.dispatchEvent(new Event('load'));
+      
+      // Always try to load the full-size image if we have one
+      if (img.dataset.src && img.dataset.src !== img.src) {
+        console.log('Loading full-size image:', img.dataset.src);
+        const fullSizeImg = new Image();
+        fullSizeImg.onload = () => {
+          console.log('Full-size image loaded, replacing thumbnail');
+          // Replace the thumbnail with the full-size image
+          img.src = fullSizeImg.src;
+          trackImageEvent('image_full_load', imageSrc, context);
+        };
+        fullSizeImg.onerror = () => {
+          console.log('Full-size image failed to load, keeping thumbnail');
+          // If full-size fails, just keep the thumbnail
+          trackImageEvent('image_thumbnail_only', imageSrc, context);
+        };
+        fullSizeImg.src = img.dataset.src;
       }
     }
 

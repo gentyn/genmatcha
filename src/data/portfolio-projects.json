@@ -6,39 +6,39 @@
     "technologies": ["JavaScript", "P5.js", "Raspberry Pi", "Interactive Art", "Hardware Design", "CAD"],
     "images": [
       {
-        "src": "/images/portfolio/projects/interactive_art_installation/cover.jpg",
+        "src": "/images/portfolio/projects/interactive_art_installation/cover.webp",
         "alt": "Completed unit next to example parts"
       },
       {
-        "src": "/images/portfolio/projects/interactive_art_installation/installed_w_spaceport_window.jpg",
+        "src": "/images/portfolio/projects/interactive_art_installation/installed_w_spaceport_window.webp",
         "alt": "CAD model"
       },
       {
-        "src": "/images/portfolio/projects/interactive_art_installation/cad_model.png",
+        "src": "/images/portfolio/projects/interactive_art_installation/cad_model.webp",
         "alt": "CAD model"
       },
       {
-        "src": "/images/portfolio/projects/interactive_art_installation/controls_prototype.jpg",
+        "src": "/images/portfolio/projects/interactive_art_installation/controls_prototype.webp",
         "alt": "Controls prototype"
       },
       {
-        "src": "/images/portfolio/projects/interactive_art_installation/functional_demo.jpg",
+        "src": "/images/portfolio/projects/interactive_art_installation/functional_demo.webp",
         "alt": "Interactive Art Installation functional demo"
       },
       {
-        "src": "/images/portfolio/projects/interactive_art_installation/woodworking_in_progress.jpg",
+        "src": "/images/portfolio/projects/interactive_art_installation/woodworking_in_progress.webp",
         "alt": "Woodworking in progress"
       },
       {
-        "src": "/images/portfolio/projects/interactive_art_installation/fit_test.jpg",
+        "src": "/images/portfolio/projects/interactive_art_installation/fit_test.webp",
         "alt": "Fit test"
       },
       {
-        "src": "/images/portfolio/projects/interactive_art_installation/lvs_hardware_packaging.jpg",
+        "src": "/images/portfolio/projects/interactive_art_installation/lvs_hardware_packaging.webp",
         "alt": "LVS hardware packaging"
       },
       {
-        "src": "/images/portfolio/projects/interactive_art_installation/controller_programming_in_progress.jpg",
+        "src": "/images/portfolio/projects/interactive_art_installation/controller_programming_in_progress.webp",
         "alt": "Controller programming in progress"
       }
     ],
@@ -56,7 +56,7 @@
     "technologies": ["Python", "Test Automation", "IBM DOORS", "RQM", "Avionics Systems", "JavaScript", "HTML/CSS"],
     "images": [
       {
-        "src": "/images/portfolio/projects/boeing/Boeing_787-8_N787BA_cockpit.jpeg",
+        "src": "/images/portfolio/projects/boeing/Boeing_787-8_N787BA_cockpit.webp",
         "alt": "Boeing 787-8 cockpit"
       }
     ],
@@ -64,7 +64,7 @@
       "text": "Image: Wikimedia Commons",
       "license": "Creative Commons Attribution-Share Alike 3.0 GFDL 1.2",
       "author": "Alex Beltyukov",
-      "url": "https://commons.wikimedia.org/wiki/File:Boeing_787-8_N787BA_cockpit.jpg"
+      "url": "https://commons.wikimedia.org/wiki/File:Boeing_787-8_N787BA_cockpit.webp"
     },
     "contentBlocks": [
       {
@@ -80,27 +80,27 @@
     "technologies": ["3D Printing", "Community Management", "Education", "Hardware", "Leadership"],
     "images": [
       {
-        "src": "/images/portfolio/projects/makerspace/makerspace_computer_lab.jpg",
+        "src": "/images/portfolio/projects/makerspace/makerspace_computer_lab.webp",
         "alt": "Makerspace computer lab"
       },
       {
-        "src": "/images/portfolio/projects/makerspace/makerspace_view_benches_and_printers.jpg",
+        "src": "/images/portfolio/projects/makerspace/makerspace_view_benches_and_printers.webp",
         "alt": "Makerspace view of benches and printers"
       },
       {
-        "src": "/images/portfolio/projects/makerspace/makerspace_door_decal_and_logo.jpg",
+        "src": "/images/portfolio/projects/makerspace/makerspace_door_decal_and_logo.webp",
         "alt": "Makerspace door decal and logo"
       },
       {
-        "src": "/images/portfolio/projects/makerspace/vinyl_sticker_cutter_and_material_storage_rack.jpg",
+        "src": "/images/portfolio/projects/makerspace/vinyl_sticker_cutter_and_material_storage_rack.webp",
         "alt": "Vinyl sticker cutter and material storage rack"
       },
       {
-        "src": "/images/portfolio/projects/makerspace/gen_soldering_keyboard.jpg",
+        "src": "/images/portfolio/projects/makerspace/gen_soldering_keyboard.webp",
         "alt": "Gen soldering keyboard"
       },
       {
-        "src": "/images/portfolio/projects/makerspace/proto_club_flyer.png",
+        "src": "/images/portfolio/projects/makerspace/proto_club_flyer.webp",
         "alt": "Proto Club flyer"
       }
     ],
@@ -119,43 +119,43 @@
     "images": [
       
       {
-        "src": "/images/portfolio/projects/parametric_art/cover.jpg",
+        "src": "/images/portfolio/projects/parametric_art/cover.webp",
         "alt": "Parametric art cover photo, Titled Ice Cream Drippy"
       },
       {
-        "src": "/images/portfolio/projects/parametric_art/1.4.0 j.png",
+        "src": "/images/portfolio/projects/parametric_art/1.4.0 j.webp",
         "alt": "Parametric art 1.4.0 j"
       },
       {
-        "src": "/images/portfolio/projects/parametric_art/2.0.2 a.png",
+        "src": "/images/portfolio/projects/parametric_art/2.0.2 a.webp",
         "alt": "Parametric art 2.0.2 a"
       },
       {
-        "src": "/images/portfolio/projects/parametric_art/2.0.2 b.png",
+        "src": "/images/portfolio/projects/parametric_art/2.0.2 b.webp",
         "alt": "Parametric art 2.0.2 b"
       },
       {
-        "src": "/images/portfolio/projects/parametric_art/1.4.0 i.png",
+        "src": "/images/portfolio/projects/parametric_art/1.4.0 i.webp",
         "alt": "Parametric art 1.4.0 i"
       },
       {
-        "src": "/images/portfolio/projects/parametric_art/1.4.0 h.png",
+        "src": "/images/portfolio/projects/parametric_art/1.4.0 h.webp",
         "alt": "Parametric art 1.4.0 h"
       },
       {
-        "src": "/images/portfolio/projects/parametric_art/1.4.0 d.png",
+        "src": "/images/portfolio/projects/parametric_art/1.4.0 d.webp",
         "alt": "Parametric art 1.4.0 d"
       },
       {
-        "src": "/images/portfolio/projects/parametric_art/44.png",
+        "src": "/images/portfolio/projects/parametric_art/44.webp",
         "alt": "Parametric art 44"
       },
       {
-        "src": "/images/portfolio/projects/parametric_art/10.1.0 c.png",
+        "src": "/images/portfolio/projects/parametric_art/10.1.0 c.webp",
         "alt": "Parametric art 10.1.0 c"
       },
       {
-        "src": "/images/portfolio/projects/parametric_art/login-static.png",
+        "src": "/images/portfolio/projects/parametric_art/login-static.webp",
         "alt": "Parametric art login static"
       }
     ],
@@ -173,11 +173,11 @@
     "technologies": ["Linux", "Web Development", "Server Administration", "Networking", "Security"],
     "images": [
       {
-        "src": "/images/portfolio/projects/webservers/first_home_server_being_set_up.jpg",
+        "src": "/images/portfolio/projects/webservers/first_home_server_being_set_up.webp",
         "alt": "First home server being set up"
       },
       {
-        "src": "/images/portfolio/projects/webservers/two_home_servers_in_service.jpg",
+        "src": "/images/portfolio/projects/webservers/two_home_servers_in_service.webp",
         "alt": "Two home servers in service"
       }
     ],
@@ -195,7 +195,7 @@
     "technologies": ["PowerShell", "Automation", "IT Operations", "System Administration", "Government IT"],
     "images": [
       {
-        "src": "/images/portfolio/projects/dnr/Wolf_Minnesota.jpeg",
+        "src": "/images/portfolio/projects/dnr/Wolf_Minnesota.webp",
         "alt": "Wolf in Minnesota"
       }
     ],
@@ -203,7 +203,7 @@
       "text": "Image: Wikimedia Commons",
       "license": "Creative Commons Attribution 2.0",
       "author": "Andy Witchger",
-      "url": "https://commons.wikimedia.org/wiki/File:Wolf_Minnesota.jpg"
+      "url": "https://commons.wikimedia.org/wiki/File:Wolf_Minnesota.webp"
     },
     "contentBlocks": [
       {
@@ -223,7 +223,7 @@
     "technologies": ["Research", "Education", "Academic Technology", "Mentoring", "Collaboration"],
     "images": [
       {
-        "src": "/images/portfolio/projects/uwm/university_laboratory_space.jpg",
+        "src": "/images/portfolio/projects/uwm/university_laboratory_space.webp",
         "alt": "University hydrodynamics laboratory space"
       }
     ],
@@ -241,7 +241,7 @@
     "technologies": ["Student Project", "UML Design", "Database Design", "Agile Development", "Project Management"],
     "images": [
       {
-        "src": "/images/portfolio/projects/TimeAssign/course_management.png",
+        "src": "/images/portfolio/projects/TimeAssign/course_management.webp",
         "alt": "Sprint 3 report"
       }
     ],
