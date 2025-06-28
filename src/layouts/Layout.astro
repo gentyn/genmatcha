@@ -15,17 +15,17 @@ const { title, theme = 'default' } = Astro.props;
     
     <!-- Favicon declarations for Google Search Results -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.webp" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.webp" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.webp" />
     <link rel="icon" type="image/svg+xml" href={theme === 'matcha' ? '/matcha-favicon-square.svg' : '/favicon-square.svg'} />
     
     <!-- Apple Touch Icon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.webp" />
     
     <!-- Android Chrome Icons -->
-    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.webp" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.webp" />
     
     <!-- Web App Manifest -->
     <link rel="manifest" href="/site.webmanifest" />
@@ -95,7 +95,7 @@ const { title, theme = 'default' } = Astro.props;
           </a>
           <div class="flex items-center space-x-2 sm:space-x-4 md:space-x-6">
             <a href="/" class={theme === 'matcha' ? 'text-sm sm:text-base md:text-lg font-cute text-pastel-green hover:text-pink-300 transition-colors whitespace-nowrap' : theme === 'portfolio' ? 'text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors' : 'text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors'}>Home</a>
-            <a href="/personal_projects" class={theme === 'matcha' ? 'text-sm sm:text-base md:text-lg font-cute text-pink-300 hover:text-pastel-green transition-colors whitespace-nowrap' : theme === 'portfolio' ? 'text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors' : 'text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors'}>Projects</a>
+            <a href="/personal_projects" class={theme === 'matcha' ? 'text-sm sm:text-base md:text-lg font-cute text-pink-300 hover:text-pastel-green transition-colors whitespace-nowrap' : theme === 'portfolio' ? 'text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors' : 'text-[#4C4C4C] dark:text-[#B0B0A8] hover:text-[#91B77F] dark:hover:text-[#A1C28F] transition-colors'}>Personal Projects</a>
           </div>
         </div>
       </div>
