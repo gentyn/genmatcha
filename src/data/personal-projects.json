@@ -64,7 +64,7 @@
       {
         "type": "list",
         "content": [
-          "Fork Settings: 115 psi, LSR 4 clicks, HSR 3 clicks, LSC 10 clicks, HSC 5 clicks",
+          "Fork Settings: 125 psi, LSR 4 clicks, HSR 3 clicks, LSC 10 clicks, HSC 5 clicks",
           "Shock Settings: 230 psi, Rebound 4 clicks, Compression 6 clicks",
           "Tire Pressures: 25 psi front, 27 psi rear (tubeless)"
         ]
