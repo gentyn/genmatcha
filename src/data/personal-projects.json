@@ -225,6 +225,96 @@
     ]
   },
   {
+    "id": "dt",
+    "title": "D0M3571QU3 73RR0R1S7 - 1999 Specialized Rockhopper",
+    "description": "I've wanted to build a vintage hardtail into an X-Bike since college, but I never seemed to find a frame big enough to fit me. This fall I found a 21 inch 1999 rockhopper A1 FS Comp in excellent near stock condition, and after riding it a few times, replaced the frame with a 22.5, and replaced most everything else too.",
+    "technologies": ["Mountain Biking", "Vintage", "Hardtail"],
+    "images": [
+      {
+        "src": "/images/personal_projects/dt/dt_glamor_shot.webp",
+        "alt": "D0M3571QU3 73RR0R1S7 at night in Ravenna Park"
+      },
+      {
+        "src": "/images/personal_projects/dt/gen_walking_dt_out.webp",
+        "alt": "Walking DT out of my basement workshop"
+      },
+      {
+        "src": "/images/personal_projects/dt/dt_cockpit_at_speed.webp",
+        "alt": "Cockpit view of DT at speed"
+      },
+      {
+        "src": "/images/personal_projects/dt/gen_having_fun_on_dt.webp",
+        "alt": "Cheesing while riding D0M3571QU3 73RR0R1S7"
+      },
+      {
+        "src": "/images/personal_projects/dt/gen_jumping_speedily_on_dt.webp",
+        "alt": "Whipping by"
+      },
+      {
+        "src": "/images/personal_projects/dt/gen_carrying_leslie_on_dt.webp",
+        "alt": "Carrying Leslie on my handlebars"
+      }
+    ],
+    "contentBlocks": [      
+      {
+      "type": "text",
+      "content": "I've wanted to build a vintage hardtail into an X-Bike since college, but I never seemed to find a frame big enough to fit me. This fall I found a 21 inch 1999 rockhopper A1 FS Comp in excellent near stock condition, and after riding it a few times, replaced the frame with a 22.5, and replaced most everything else too."
+      },
+      {
+        "type": "header",
+        "content": "Components"
+      },
+      {
+        "type": "list",
+        "content": [
+          "Frame: 1999 Specialized Rockhopper, 22.5 inches, A1 6061 Aluminum - No cracks!!",
+          "Tires: Simworks Super Yummy 26 x 2.22",
+          "Dropper Post: PNW Cascade dropper, externally routed, clocked 180 degrees for cleaner cabling along the seat tube",
+          "Stem: Chromag 35mm",
+          "Drivetrain: GX 12 speed",
+          "Fork: Surly Troll"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "heinrich",
+    "title": "Heinrich - Schindelhauer Viktor",
+    "description": "Brakeless aluminum track bike found at the bikeworks warehouse sale for only twenty dollars - frame, front chainring, belt, etc, everything but bars, saddle, and wheelset - A steal!",
+    "technologies": ["Track Bike", "Fixed Gear", "Belt Drive"],
+    "images": [
+      {
+        "src": "/images/personal_projects/heinrich/gen_after_falling_on_bikey.webp",
+        "alt": "Ow I fell again while strapped in awesome"
+      },
+      {
+        "src": "/images/personal_projects/heinrich/gen_after_buying_frame.webp",
+        "alt": "Walking out of the warehouse with my 20 dollar frame!"
+      },
+      {
+        "src": "/images/personal_projects/heinrich/pov_riding_h.webp",
+        "alt": "Riding my new track bike shortly after completing the first build"
+      }
+    ],
+    "contentBlocks": [
+      {
+        "type": "text",
+        "content": "Brakeless aluminum track bike found at the bikeworks warehouse sale for only twenty dollars - frame, front chainring, belt, etc, everything but bars, saddle, and wheelset - A steal! I finished the build in one day and have been crashing happily ever since."
+      },
+      {
+        "type": "header",
+        "content": "Features"
+      },
+      {
+        "type": "list",
+        "content": [
+          "Frame: Schindelhauer Viktor 59 cm",
+          "Drivetrain: Gates CDX Belt drive, 60t chainring"
+        ]
+      }
+    ]
+  },
+  {
     "id": "bike-projects",
     "title": "Bike Projects",
     "description": "Building ramps, trails, and working on bikes is a passion of mine. I love creating spaces and tools that bring the cycling community together.",
@@ -399,6 +489,36 @@
       {
         "type": "text",
         "content": ""
+      }
+    ]
+  },
+  {
+    "id": "freestanding_rack",
+    "title": "Freestanding Bike Rack",
+    "description": "",
+    "technologies": ["Woodworking", "Design", "Bike Storage"],
+    "images": [
+      {
+        "src": "/images/personal_projects/freestanding_rack/rack_render.webp",
+        "alt": "CAD plan for freestanding bike rack"
+      },
+      {
+        "src": "/images/personal_projects/freestanding_rack/rack[_in_situ.webp",
+        "alt": "Rack in situ at my friends apartment"
+      },
+      {
+        "src": "/images/personal_projects/freestanding_rack/gen_hanging_from_rack.webp",
+        "alt": "Durability and balance test!"
+      },
+      {
+        "src": "/images/personal_projects/freestanding_rack/bikes_on_rack.webp",
+        "alt": "Loaded with very attractive bicycles!"
+      }
+    ],
+    "contentBlocks": [
+      {
+        "type": "text",
+        "content": "I designed and built this bike rack for my friends apartment so that she would stop stacking her bikes on top of each other!"
       }
     ]
   },

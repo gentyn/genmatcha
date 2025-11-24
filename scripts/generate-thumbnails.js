@@ -57,17 +57,13 @@ async function generateThumbnails(imagePath) {
 
     // Generate thumbnails for each configuration
     for (const [context, config] of Object.entries(THUMBNAIL_CONFIGS)) {
-      const thumbnailPath = path.join(thumbnailsDir, `${imageName}_${context}${ext}`);
+      const thumbnailPath = path.join(thumbnailsDir, `${imageName}_${context}.webp`);
       
-      // Skip if thumbnail already exists and is newer than source
-      // if (fs.existsSync(thumbnailPath)) {
-      //   const sourceStats = fs.statSync(imagePath);
-      //   const thumbnailStats = fs.statSync(thumbnailPath);
-      //   if (thumbnailStats.mtime > sourceStats.mtime) {
-      //     console.log(`Skipping ${imageName}_${context} (already up to date)`);
-      //     continue;
-      //   }
-      // }
+      // Skip if thumbnail already exists
+      if (fs.existsSync(thumbnailPath)) {
+        console.log(`Skipping ${imageName}_${context} (already exists)`);
+        continue;
+      }
 
       await sharp(imageBuffer)
         .rotate() // Auto-rotate based on EXIF orientation
